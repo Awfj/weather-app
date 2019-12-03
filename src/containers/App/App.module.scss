@@ -1,7 +1,11 @@
-.header {
- border: 1px solid #000;
- display: flex;
- align-items: center;
- justify-content: space-between;
- padding: .5em 15px;
+.root {
+  color: white;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  main {
+    background-color: #3678b5;
+    height: 100%;
+  }
 }
