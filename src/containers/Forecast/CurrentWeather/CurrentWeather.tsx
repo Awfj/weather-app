@@ -14,13 +14,9 @@ const CurrentWeather = ({ data }: Props) => {
 
   return (
     <section className={styles.root}>
-      {city && (
-        <>
-          <h2>{city}</h2>
-          <p className={styles.temperature}>{temperature}</p>
-          <p className={styles.condition}>{condition}</p>
-        </>
-      )}
+      <h2>{city}</h2>
+      <p className={styles.temperature}>{temperature}</p>
+      <p className={styles.condition}>{condition}</p>
     </section>
   );
 };

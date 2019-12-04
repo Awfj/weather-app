@@ -3,7 +3,7 @@ import styles from "./AppHeader.module.scss";
 import SearchIcon from "@material-ui/icons/Search";
 
 type Props = {
-  onGetWeather: (city: string) => Promise<void>;
+  onGetWeather: (city: string) => void;
 };
 
 const AppHeader = ({ onGetWeather }: Props) => {
