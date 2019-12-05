@@ -3,6 +3,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
+import { checkIfExpired, getDefaultCity, removeExpiredData } from "../../utils";
+
 import styles from "./App.module.scss";
 import AppHeader from "../AppHeader/AppHeader";
 import Forecast from "../Forecast/Forecast";
@@ -20,6 +22,7 @@ const App: React.FC = () => {
   const [currentWeather, setCurrentWeather] = React.useState({
     city: "",
     condition: "",
+    country: "",
     temperature: ""
   });
 
@@ -30,56 +33,59 @@ const App: React.FC = () => {
     const data = await response.json();
     const city = data.name;
     const condition = data.weather[0].main;
+    const country = data.sys.country;
     const temperature = String(Math.round(data.main.temp));
+    const requestTime = new Date().getTime();
 
     localStorage.setItem(
-      "currentWeather",
+      `weather_${city.toLowerCase()}`,
       JSON.stringify({
         city,
         condition,
-        temperature
+        country,
+        temperature,
+        requestTime
       })
     );
     setCurrentWeather({
       city,
       condition,
+      country,
       temperature
     });
   };
 
   const getWeather = React.useCallback((city: string) => {
-    let currentWeather = localStorage.getItem("currentWeather");
+    removeExpiredData(city);
+    const currentWeather = localStorage.getItem(`weather_${city}`);
     if (currentWeather) {
-      const { city, condition, temperature } = JSON.parse(currentWeather);
-      setCurrentWeather({
-        city,
-        condition,
-        temperature
-      });
+      const { city, requestTime } = JSON.parse(currentWeather);
+      if (checkIfExpired(requestTime)) {
+        makeRequest(city);
+      } else {
+        const { condition, country, temperature } = JSON.parse(currentWeather);
+        setCurrentWeather({
+          city,
+          condition,
+          country,
+          temperature
+        });
+      }
     } else {
       makeRequest(city);
     }
   }, []);
 
-  const findLocation = async (): Promise<string> => {
-    const response = await fetch(`https://get.geojs.io/v1/ip/geo.json`);
-    const data = await response.json();
-    return data.city;
-  };
-
   const getInitialWeather = React.useCallback(async () => {
-    let city = localStorage.getItem("defaultCity");
-    if (!city) {
-      city = await findLocation();
-      localStorage.setItem("defaultCity", city);
-    }
-    getWeather(city);
+    const defaultCity = await getDefaultCity();
+    removeExpiredData(defaultCity);
+    getWeather(defaultCity);
   }, [getWeather]);
 
   React.useEffect(() => {
     getInitialWeather();
   }, [getInitialWeather]);
-  
+
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>

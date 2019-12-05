@@ -7,11 +7,20 @@ type Props = {
 };
 
 const AppHeader = ({ onGetWeather }: Props) => {
-  const [searchValue, setSearchValue] = React.useState("paris");
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onGetWeather(searchValue);
+    const query = searchQuery.trim().toLowerCase();
+    if (query) {
+      onGetWeather(query);
+      setSearchQuery("");
+    }
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const query = event.currentTarget.value;
+    setSearchQuery(query);
   };
 
   return (
@@ -20,8 +29,8 @@ const AppHeader = ({ onGetWeather }: Props) => {
       <div>
         <form onSubmit={handleSubmit}>
           <input
-            value={searchValue}
-            onChange={event => setSearchValue(event.currentTarget.value)}
+            value={searchQuery}
+            onChange={handleChange}
             placeholder="Search"
             type="search"
           />
