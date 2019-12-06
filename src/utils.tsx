@@ -1,4 +1,4 @@
-import { ICurrentWeather, ICurrentWeatherResponse } from "./types";
+import { ICurrentWeather } from "./types";
 
 export const checkIfExpired = (requestTime: number) => {
   const currentDate = new Date().getTime();
@@ -15,10 +15,8 @@ export const findLocation = async (): Promise<string> => {
 };
 
 export const getCurrentWeather = async (queriedCity: string) => {
-  const OPENWEATHERMAP_KEY = process.env.REACT_APP_OPENWEATHERMAP_KEY;
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${queriedCity}&appid=${OPENWEATHERMAP_KEY}&units=metric`;
-  const response = await fetch(url);
-  const data: ICurrentWeatherResponse = await response.json();
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${queriedCity}`;
+  const data = await makeRequest(url);
 
   const currentWeather: ICurrentWeather = {
     city: data.name,
@@ -27,7 +25,7 @@ export const getCurrentWeather = async (queriedCity: string) => {
     temperature: String(Math.round(data.main.temp)),
     requestTime: new Date().getTime()
   };
-  storeCurrentWeather(queriedCity, currentWeather);
+  storeWeather(queriedCity, currentWeather);
   return currentWeather;
 };
 
@@ -38,6 +36,14 @@ export const getDefaultCity = async () => {
     localStorage.setItem("default_city", defaultCity);
   }
   return defaultCity;
+};
+
+export const makeRequest = async (url: string) => {
+  const OPENWEATHERMAP_KEY = process.env.REACT_APP_OPENWEATHERMAP_KEY;
+  const updatedUrl = `${url}&appid=${OPENWEATHERMAP_KEY}&units=metric`;
+  const response = await fetch(updatedUrl);
+  const data = await response.json();
+  return data;
 };
 
 export const removeExpiredWeather = (city: string) => {
@@ -51,6 +57,6 @@ export const removeExpiredWeather = (city: string) => {
   }
 };
 
-export const storeCurrentWeather = (city: string, data: object) => {
-  localStorage.setItem(`weather_${city}`, JSON.stringify(data));
+export const storeWeather = (city: string, weather: object) => {
+  localStorage.setItem(`weather_${city}`, JSON.stringify(weather));
 };
