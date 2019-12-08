@@ -20,3 +20,7 @@ export interface ICurrentWeatherResponse {
     }
   ];
 }
+
+export interface IGeoLocationResponse {
+  city: string;
+}
