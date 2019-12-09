@@ -1,19 +1,21 @@
 import React from "react";
-import styles from "./AppHeader.module.scss";
+import styles from "./PageHeader.module.scss";
 import SearchIcon from "@material-ui/icons/Search";
 
 type Props = {
-  onGetWeather: (city: string) => void;
+  onGetData: (city: string) => void;
+  title: string;
+  theme: string;
 };
 
-const AppHeader = ({ onGetWeather }: Props) => {
+const PageHeader = ({ onGetData, title, theme }: Props) => {
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const query = searchQuery.trim().toLowerCase();
     if (query) {
-      onGetWeather(query);
+      onGetData(query);
       setSearchQuery("");
     }
   };
@@ -24,8 +26,8 @@ const AppHeader = ({ onGetWeather }: Props) => {
   };
 
   return (
-    <header className={styles.root}>
-      <h1>Weather</h1>
+    <header className={`${styles.root} ${styles[`theme--${theme}`]}`}>
+      <h1>{title}</h1>
       <div>
         <form onSubmit={handleSubmit}>
           <input
@@ -43,4 +45,4 @@ const AppHeader = ({ onGetWeather }: Props) => {
   );
 };
 
-export default AppHeader;
+export default PageHeader;

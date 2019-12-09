@@ -5,7 +5,7 @@ import {
   getDefaultCity,
   removeExpiredWeather
 } from "../utils";
-import { fetchData } from "../reducers/fetchData";
+import fetchData from "../reducers/fetchData";
 import {
   FETCH_INIT,
   FETCH_SUCCESS,
@@ -13,7 +13,8 @@ import {
 } from "../actions/actionTypes";
 import { ICurrentWeather } from "../types";
 
-export const useWeatherApi = () => {
+const useWeatherApi = () => {
+  // console.log('api')
   const [state, dispatch] = React.useReducer(fetchData, {
     currentWeather: null,
     errorMessage: null,
@@ -62,3 +63,5 @@ export const useWeatherApi = () => {
 
   return [state, getWeather] as const;
 };
+
+export default useWeatherApi;

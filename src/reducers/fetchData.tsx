@@ -16,7 +16,7 @@ type Action =
   | { type: "FETCH_SUCCESS"; currentWeather: ICurrentWeather }
   | { type: "FETCH_FAILURE"; errorMessage: string };
 
-export const fetchData = (state: State, action: Action) => {
+const fetchData = (state: State, action: Action) => {
   switch (action.type) {
     case FETCH_INIT: {
       return {
@@ -46,3 +46,6 @@ export const fetchData = (state: State, action: Action) => {
     }
   }
 };
+
+
+export default fetchData;

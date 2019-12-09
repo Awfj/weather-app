@@ -12,7 +12,7 @@ export const checkIfExpired = (requestTime: number) => {
 };
 
 export const findLocation = async () => {
-  const response = await fetch(`https://get.geojs.io/v1/ip/ge.json`);
+  const response = await fetch(`https://get.geojs.io/v1/ip/geo.json`);
   if (!response.ok) return null;
   const data: IGeoLocationResponse = await response.json();
   const city = data.city.toLowerCase();
