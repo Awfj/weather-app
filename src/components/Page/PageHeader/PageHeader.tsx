@@ -5,10 +5,10 @@ import SearchIcon from "@material-ui/icons/Search";
 type Props = {
   onGetData: (city: string) => void;
   title: string;
-  theme: string;
+  theme?: string;
 };
 
-const PageHeader = ({ onGetData, title, theme }: Props) => {
+const PageHeader = ({ onGetData, title, theme = "light" }: Props) => {
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

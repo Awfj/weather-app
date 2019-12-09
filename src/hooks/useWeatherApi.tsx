@@ -2,7 +2,6 @@ import React from "react";
 import {
   checkIfExpired,
   getCurrentWeather,
-  getDefaultCity,
   removeExpiredWeather
 } from "../utils";
 import fetchData from "../reducers/fetchData";
@@ -13,11 +12,9 @@ import {
 } from "../actions/actionTypes";
 import { ICurrentWeather } from "../types";
 
-const useWeatherApi = () => {
-  // console.log('api')
+const useWeatherApi = (location: string) => {
   const [state, dispatch] = React.useReducer(fetchData, {
     currentWeather: null,
-    errorMessage: null,
     isLoading: false
   });
 
@@ -40,26 +37,13 @@ const useWeatherApi = () => {
     if (currentWeather) {
       dispatch({ type: FETCH_SUCCESS, currentWeather });
     } else {
-      const errorMessage = `Requested city can't be found. Please, check if the name 
-      is correct, change service or try again later.`;
-      dispatch({ type: FETCH_FAILURE, errorMessage });
+      dispatch({ type: FETCH_FAILURE });
     }
   };
 
   React.useEffect(() => {
-    const getInitialWeather = async () => {
-      const defaultCity = await getDefaultCity();
-      if (defaultCity) {
-        removeExpiredWeather(defaultCity);
-        getWeather(defaultCity);
-      } else {
-        const errorMessage = `We couldn't find your city automatically,
-         you can still look for it manually.`;
-        dispatch({ type: FETCH_FAILURE, errorMessage });
-      }
-    };
-    getInitialWeather();
-  }, []);
+    getWeather(location);
+  }, [location]);
 
   return [state, getWeather] as const;
 };

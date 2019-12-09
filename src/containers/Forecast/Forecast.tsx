@@ -3,17 +3,22 @@ import React from "react";
 
 import Page from "../../components/Page/Page";
 import PageHeader from "../../components/Page/PageHeader/PageHeader";
-import CurrentWeather from './CurrentWeather/CurrentWeather'
+import CurrentWeather from "./CurrentWeather/CurrentWeather";
+import DataLoader from "../../components/DataLoader/DataLoader";
 import useWeatherApi from "../../hooks/useWeatherApi";
 
-const Forecast = () => {
-  const [
-    { currentWeather, errorMessage, isLoading },
-    getWeather
-  ] = useWeatherApi();
+type Props = {
+  lastLocation: string;
+  onSetLastLocation: (value: React.SetStateAction<string | null>) => void;
+};
+
+const Forecast = ({ lastLocation, onSetLastLocation }: Props) => {
+  const [{ currentWeather, isLoading }, getWeather] = useWeatherApi(
+    lastLocation
+  );
 
   // React.useEffect(() => {
-  //   console.log(currentWeather, errorMessage, isLoading);
+  //   console.log(currentWeather, isLoading);
   // });
   return (
     <Page
@@ -22,12 +27,14 @@ const Forecast = () => {
       }
       theme="dynamic"
     >
-      {isLoading && <p>Loading...</p>}
-      {currentWeather && !errorMessage ? (
-        <CurrentWeather data={currentWeather} />
-      ) : (
-        <p>{errorMessage}</p>
-      )}
+      <DataLoader
+        error={`Requested city can't be found. Please, check if the name is correct,
+        change service or try again later.`}
+        isDataExist={!!currentWeather}
+        isLoading={isLoading}
+      >
+        {currentWeather && <CurrentWeather data={currentWeather} />}
+      </DataLoader>
     </Page>
   );
 };

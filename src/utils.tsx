@@ -35,14 +35,14 @@ export const getCurrentWeather = async (queriedCity: string) => {
   return currentWeather;
 };
 
-export const getDefaultCity = async () => {
-  let defaultCity = localStorage.getItem("default_city");
-  if (!defaultCity) {
-    defaultCity = await findLocation();
-    if (!defaultCity) return null;
-    localStorage.setItem("default_city", defaultCity);
+export const getLaunchLocation = async () => {
+  let launchLocation = localStorage.getItem("launch_location");
+  if (!launchLocation) {
+    launchLocation = await findLocation();
+    if (!launchLocation) return null;
+    localStorage.setItem("launch_location", launchLocation);
   }
-  return defaultCity;
+  return launchLocation;
 };
 
 export const makeRequest = async (url: string) => {

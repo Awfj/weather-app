@@ -1,13 +1,9 @@
 import React from "react";
 import styles from "./CurrentWeather.module.scss";
+import { ICurrentWeather } from "../../../types";
 
 interface Props {
-  data: {
-    city: string;
-    condition: string;
-    country: string;
-    temperature: string;
-  };
+  data: ICurrentWeather;
 }
 
 const CurrentWeather = ({ data }: Props) => {
