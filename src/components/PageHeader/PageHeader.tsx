@@ -28,7 +28,9 @@ const PageHeader = React.memo(
 
     return (
       <header className={`${styles.root} ${styles[`theme--${theme}`]}`}>
-        <h1>{title}</h1>
+        <div>
+          <h1>{title}</h1>
+        </div>
         <div>
           <form onSubmit={handleSubmit}>
             <input

@@ -1,21 +1,33 @@
 .root {
-  // background-color: #15588d;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0.5em 15px;
+  > :first-child {
+    flex-grow: 14;
+  }
+  > :last-child {
+    flex-grow: 1;
+  }
   form {
-    border: 1px solid #000;
     display: flex;
+    padding: 0 0.9em;
+    background-color: #2d6794;
+    border-radius: 5px;
+    box-shadow: 1px 1px 0.5px black;
   }
   input {
-    border: none;
-    min-height: 100%;
+    font-size: 0.9rem;
+    padding: 0.9em 0;
+    width: 100%;
   }
   button {
-    border: none;
-    background-color: #fff;
     padding: 0;
+  }
+  input,
+  button {
+    background-color: transparent;
+    border: none;
+    color: white;
   }
   svg {
     display: block;

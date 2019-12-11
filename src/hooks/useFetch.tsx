@@ -4,7 +4,7 @@ import {
   FETCH_INIT,
   FETCH_FAILURE,
   FETCH_SUCCESS
-} from "../actions/actionTypes";
+} from "../actions";
 
 type State<T> = {
   data: T | null;

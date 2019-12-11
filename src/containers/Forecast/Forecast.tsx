@@ -2,7 +2,7 @@ import React from "react";
 // import styles from "./Forecast.module.scss";
 
 import Page from "../../components/Page/Page";
-import PageHeader from "../../components/Page/PageHeader/PageHeader";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import useWeatherApi from "../../hooks/useWeatherApi";

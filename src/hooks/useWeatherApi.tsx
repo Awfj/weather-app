@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import {
   checkIfExpired,
   getCurrentWeather,
@@ -8,15 +8,15 @@ import {
   FETCH_INIT,
   FETCH_SUCCESS,
   FETCH_FAILURE
-} from "../actions/actionTypes";
+} from "../actions";
 import { ICurrentWeather } from "../types";
 import useFetch from "./useFetch";
 
 const useWeatherApi = (location: string) => {
   const [state, dispatch] = useFetch<ICurrentWeather>();
 
-  const getWeather = useCallback(
-    async (queriedCity: string) => {
+  useEffect(() => {
+    const getWeather = async (queriedCity: string) => {
       dispatch({ type: FETCH_INIT });
       removeExpiredWeather(queriedCity);
       const storedWeather = localStorage.getItem(`weather_${queriedCity}`);
@@ -31,19 +31,14 @@ const useWeatherApi = (location: string) => {
       } else {
         currentWeather = await getCurrentWeather(queriedCity);
       }
-
       if (currentWeather) {
         dispatch({ type: FETCH_SUCCESS, data: currentWeather });
       } else {
         dispatch({ type: FETCH_FAILURE });
       }
-    },
-    [dispatch]
-  );
-
-  useEffect(() => {
+    };
     getWeather(location);
-  }, [location, getWeather]);
+  }, [dispatch, location]);
 
   return [state] as const;
 };
