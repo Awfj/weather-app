@@ -6,40 +6,40 @@ import {
 import { ICurrentWeather } from "../types";
 
 type State = {
-  currentWeather: ICurrentWeather | null;
+  data: ICurrentWeather | string | null;
   isLoading: boolean;
 };
 
 type Action =
   | { type: "FETCH_INIT" }
-  | { type: "FETCH_SUCCESS"; currentWeather: ICurrentWeather }
+  | { type: "FETCH_SUCCESS"; data: ICurrentWeather | string }
   | { type: "FETCH_FAILURE" };
 
-const fetchData = (state: State, action: Action) => {
+function fetchData(state: State, action: Action): State {
   switch (action.type) {
     case FETCH_INIT: {
       return {
         ...state,
-        currentWeather: null,
+        data: null,
         isLoading: true
       };
     }
     case FETCH_SUCCESS: {
-      const { currentWeather } = action;
+      const { data } = action;
       return {
         ...state,
-        currentWeather,
+        data,
         isLoading: false
       };
     }
     case FETCH_FAILURE: {
       return {
         ...state,
-        currentWeather: null,
+        data: null,
         isLoading: false
       };
     }
   }
-};
+}
 
 export default fetchData;

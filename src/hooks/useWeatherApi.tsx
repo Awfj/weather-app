@@ -1,4 +1,4 @@
-import React from "react";
+import { useReducer, useEffect } from "react";
 import {
   checkIfExpired,
   getCurrentWeather,
@@ -13,8 +13,8 @@ import {
 import { ICurrentWeather } from "../types";
 
 const useWeatherApi = (location: string) => {
-  const [state, dispatch] = React.useReducer(fetchData, {
-    currentWeather: null,
+  const [state, dispatch] = useReducer(fetchData, {
+    data: null,
     isLoading: false
   });
 
@@ -35,17 +35,17 @@ const useWeatherApi = (location: string) => {
     }
 
     if (currentWeather) {
-      dispatch({ type: FETCH_SUCCESS, currentWeather });
+      dispatch({ type: FETCH_SUCCESS, data: currentWeather });
     } else {
       dispatch({ type: FETCH_FAILURE });
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getWeather(location);
   }, [location]);
 
-  return [state, getWeather] as const;
+  return [state] as const;
 };
 
 export default useWeatherApi;

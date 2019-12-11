@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
   error: string;
   isDataExist: boolean;
-  isLoading: boolean;
+  isLoading?: boolean;
 };
 
 const DataLoader = ({ children, error, isDataExist, isLoading }: Props) => {

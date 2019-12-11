@@ -6,6 +6,7 @@ import PageHeader from "../../components/Page/PageHeader/PageHeader";
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import useWeatherApi from "../../hooks/useWeatherApi";
+import { ICurrentWeather } from "../../types";
 
 type Props = {
   lastLocation: string;
@@ -13,17 +14,16 @@ type Props = {
 };
 
 const Forecast = ({ lastLocation, onSetLastLocation }: Props) => {
-  const [{ currentWeather, isLoading }, getWeather] = useWeatherApi(
-    lastLocation
-  );
+  const [{ data: currentWeather, isLoading }] = useWeatherApi(lastLocation);
 
-  // React.useEffect(() => {
-  //   console.log(currentWeather, isLoading);
-  // });
   return (
     <Page
       header={
-        <PageHeader onGetData={getWeather} title="Forecast" theme="dynamic" />
+        <PageHeader
+          onSetLastLocation={onSetLastLocation}
+          title="Forecast"
+          theme="dynamic"
+        />
       }
       theme="dynamic"
     >
@@ -33,7 +33,9 @@ const Forecast = ({ lastLocation, onSetLastLocation }: Props) => {
         isDataExist={!!currentWeather}
         isLoading={isLoading}
       >
-        {currentWeather && <CurrentWeather data={currentWeather} />}
+        {currentWeather && (
+          <CurrentWeather data={currentWeather as ICurrentWeather} />
+        )}
       </DataLoader>
     </Page>
   );
