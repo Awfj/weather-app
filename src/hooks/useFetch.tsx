@@ -1,21 +1,29 @@
+import { useReducer, Reducer } from "react";
+
 import {
   FETCH_INIT,
   FETCH_FAILURE,
   FETCH_SUCCESS
 } from "../actions/actionTypes";
-import { ICurrentWeather } from "../types";
 
-type State = {
-  data: ICurrentWeather | string | null;
+type State<T> = {
+  data: T | null;
   isLoading: boolean;
 };
 
-type Action =
+type Action<T> =
   | { type: "FETCH_INIT" }
-  | { type: "FETCH_SUCCESS"; data: ICurrentWeather | string }
+  | { type: "FETCH_SUCCESS"; data: T }
   | { type: "FETCH_FAILURE" };
 
-function fetchData(state: State, action: Action): State {
+function useFetch<T>() {
+  return useReducer<Reducer<State<T>, Action<T>>>(fetchReducer, {
+    data: null,
+    isLoading: false
+  });
+}
+
+function fetchReducer<T>(state: State<T>, action: Action<T>): State<T> {
   switch (action.type) {
     case FETCH_INIT: {
       return {
@@ -42,4 +50,4 @@ function fetchData(state: State, action: Action): State {
   }
 }
 
-export default fetchData;
+export default useFetch;
