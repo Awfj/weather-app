@@ -1,3 +1,23 @@
 .root {
-  
+  display: flex;
+  padding: 0 0.9em;
+  border-radius: 5px;
+  box-shadow: 1px 1px 0.5px black;
+  flex-grow: 1;
+  input {
+    font-size: 0.9rem;
+    padding: 0.9em 0;
+    width: 100%;
+  }
+  button {
+    padding: 0;
+  }
+  input,
+  button {
+    background-color: transparent;
+    border: none;
+  }
+  svg {
+    display: block;
+  }
 }

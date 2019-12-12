@@ -1,48 +1,30 @@
 import React from "react";
+
 import styles from "./PageHeader.module.scss";
-import SearchIcon from "@material-ui/icons/Search";
+import { ITheme } from "../../types";
 
 type Props = {
-  onSetLastLocation: (value: React.SetStateAction<string | null>) => void;
-  title: string;
-  theme?: string;
+  heading: string;
+  theme: ITheme;
+  Search: React.ReactNode;
+  ThemeToggle: React.ReactNode;
 };
 
 const PageHeader = React.memo(
-  ({ onSetLastLocation, title, theme = "light" }: Props) => {
-    const [searchQuery, setSearchQuery] = React.useState("");
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      const query = searchQuery.trim().toLowerCase();
-      if (query) {
-        setSearchQuery("");
-        onSetLastLocation(query);
-      }
-    };
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const query = event.currentTarget.value;
-      setSearchQuery(query);
-    };
-
+  ({ heading, theme, Search, ThemeToggle }: Props) => {
     return (
-      <header className={`${styles.root} ${styles[`theme--${theme}`]}`}>
+      <header
+        style={{
+          backgroundColor: theme.background.header,
+          color: theme.contrastText
+        }}
+        className={styles.root}
+      >
         <div>
-          <h1>{title}</h1>
+          <h1>{heading}</h1>
         </div>
         <div>
-          <form onSubmit={handleSubmit}>
-            <input
-              value={searchQuery}
-              onChange={handleChange}
-              placeholder="Search"
-              type="search"
-            />
-            <button aria-label="search">
-              <SearchIcon />
-            </button>
-          </form>
+          {ThemeToggle} {Search}
         </div>
       </header>
     );

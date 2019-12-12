@@ -1,20 +1,11 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 
 // import styles from "./App.module.scss";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Forecast from "../Forecast/Forecast";
 import { getLaunchLocation } from "../../utils";
-
-const theme = createMuiTheme({
-  props: {
-    MuiButtonBase: {
-      disableRipple: true
-    }
-  }
-});
 
 const App: React.FC = () => {
   const [lastLocation, setLastLocation] = React.useState<string | null>(null);
@@ -31,21 +22,19 @@ const App: React.FC = () => {
 
   return (
     <StylesProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <DataLoader
-          error={`We couldn't find your city automatically,
+      <CssBaseline />
+      <DataLoader
+        error={`We couldn't find your city automatically,
          you can still look for it manually.`}
-          isDataExist={!!lastLocation}
-        >
-          {lastLocation && (
-            <Forecast
-              lastLocation={lastLocation}
-              onSetLastLocation={setLastLocation}
-            />
-          )}
-        </DataLoader>
-      </ThemeProvider>
+        isDataExist={!!lastLocation}
+      >
+        {lastLocation && (
+          <Forecast
+            lastLocation={lastLocation}
+            onSetLastLocation={setLastLocation}
+          />
+        )}
+      </DataLoader>
     </StylesProvider>
   );
 };

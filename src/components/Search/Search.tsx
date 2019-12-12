@@ -1,10 +1,14 @@
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import styles from "./Search.module.scss";
+import { TSetStringOrNull, ITheme } from "../../types";
 
-type Props = {};
+type Props = {
+  onSetLastLocation: TSetStringOrNull;
+  theme: ITheme;
+};
 
-const Search = () => {
+const Search = ({ onSetLastLocation, theme }: Props) => {
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -12,7 +16,7 @@ const Search = () => {
     const query = searchQuery.trim().toLowerCase();
     if (query) {
       setSearchQuery("");
-      // onSetLastLocation(query);
+      onSetLastLocation(query);
     }
   };
 
@@ -22,14 +26,28 @@ const Search = () => {
   };
 
   return (
-    <form className={styles.root} onSubmit={handleSubmit}>
+    <form
+      style={{
+        backgroundColor: theme.background.search
+      }}
+      className={styles.root}
+      onSubmit={handleSubmit}
+    >
       <input
+        style={{
+          color: theme.contrastText
+        }}
         value={searchQuery}
         onChange={handleChange}
         placeholder="Search"
         type="search"
       />
-      <button aria-label="search">
+      <button
+        style={{
+          color: theme.contrastText
+        }}
+        aria-label="search"
+      >
         <SearchIcon />
       </button>
     </form>
