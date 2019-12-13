@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
   customStyles?: object;
   label: string;
-  onClick: any;
+  onClick: () => void;
   type?: "button" | "submit" | "reset";
   variant?: "icon" | "text";
 };

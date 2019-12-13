@@ -1,13 +1,17 @@
 .root {
   display: flex;
-  align-items: center;
   padding: 0.5em 15px;
   > :first-child {
-    flex-grow: 14;
+    flex-grow: 11;
+  }
+  > :nth-child(2) {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 0.5em;
   }
   > :last-child {
-    flex-grow: 1;
     display: flex;
+    flex-grow: 1;
   }
 }
 

@@ -20,12 +20,11 @@ const PageHeader = React.memo(
         }}
         className={styles.root}
       >
-        <div>
+        <div className={styles.startGroup}>
           <h1>{heading}</h1>
         </div>
-        <div>
-          {ThemeToggle} {Search}
-        </div>
+        <div className={styles.middleGroup}>{ThemeToggle}</div>
+        {Search}
       </header>
     );
   }

@@ -1,10 +1,6 @@
 import { useReducer, Reducer } from "react";
 
-import {
-  FETCH_INIT,
-  FETCH_FAILURE,
-  FETCH_SUCCESS
-} from "../actions";
+import { FETCH_INIT, FETCH_FAILURE, FETCH_SUCCESS } from "../actions";
 
 type State<T> = {
   data: T | null;
@@ -12,9 +8,9 @@ type State<T> = {
 };
 
 type Action<T> =
-  | { type: "FETCH_INIT" }
-  | { type: "FETCH_SUCCESS"; data: T }
-  | { type: "FETCH_FAILURE" };
+  | { type: FETCH_INIT }
+  | { type: FETCH_SUCCESS; data: T }
+  | { type: FETCH_FAILURE };
 
 function useFetch<T>() {
   return useReducer<Reducer<State<T>, Action<T>>>(fetchReducer, {

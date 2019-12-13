@@ -5,7 +5,7 @@ import Page from "../../components/Page/Page";
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import useWeatherApi from "../../hooks/useWeatherApi";
-import { ICurrentWeather, TSetStringOrNull } from "../../types";
+import { TSetStringOrNull } from "../../types";
 
 type Props = {
   lastLocation: string;
@@ -24,7 +24,7 @@ const Forecast = ({ lastLocation, onSetLastLocation }: Props) => {
         isLoading={isLoading}
       >
         {currentWeather && (
-          <CurrentWeather data={currentWeather as ICurrentWeather} />
+          <CurrentWeather data={currentWeather} />
         )}
       </DataLoader>
     </Page>
