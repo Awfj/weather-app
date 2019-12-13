@@ -8,13 +8,13 @@ import { TSetStringOrNull, ITheme } from "../../types";
 
 type Props = {
   children: React.ReactNode;
-  onSetLastLocation: TSetStringOrNull;
+  setLastLocation: TSetStringOrNull;
   isThemeDynamic?: boolean;
 };
 
 const Page = ({
   children,
-  onSetLastLocation,
+  setLastLocation,
   isThemeDynamic = false
 }: Props) => {
   const [theme, setTheme] = React.useState<ITheme>(themes.light);
@@ -27,7 +27,7 @@ const Page = ({
         theme={dynamicTheme}
         ThemeToggle={<ThemeToggle theme={theme} onSetTheme={setTheme} />}
         Search={
-          <Search theme={dynamicTheme} onSetLastLocation={onSetLastLocation} />
+          <Search theme={dynamicTheme} setLastLocation={setLastLocation} />
         }
       />
       <main

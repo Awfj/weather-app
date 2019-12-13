@@ -4,11 +4,11 @@ import styles from "./Search.module.scss";
 import { TSetStringOrNull, ITheme } from "../../types";
 
 type Props = {
-  onSetLastLocation: TSetStringOrNull;
+  setLastLocation: TSetStringOrNull;
   theme: ITheme;
 };
 
-const Search = ({ onSetLastLocation, theme }: Props) => {
+const Search = ({ setLastLocation, theme }: Props) => {
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +16,7 @@ const Search = ({ onSetLastLocation, theme }: Props) => {
     const query = searchQuery.trim().toLowerCase();
     if (query) {
       setSearchQuery("");
-      onSetLastLocation(query);
+      setLastLocation(query);
     }
   };
 

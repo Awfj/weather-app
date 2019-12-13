@@ -2,12 +2,13 @@ import { useReducer, Reducer } from "react";
 
 import { FETCH_INIT, FETCH_FAILURE, FETCH_SUCCESS } from "../actions";
 
-type State<T> = {
+export type State<T> = {
   data: T | null;
   isLoading: boolean;
+  isError: boolean;
 };
 
-type Action<T> =
+export type Action<T> =
   | { type: FETCH_INIT }
   | { type: FETCH_SUCCESS; data: T }
   | { type: FETCH_FAILURE };
@@ -15,7 +16,8 @@ type Action<T> =
 function useFetch<T>() {
   return useReducer<Reducer<State<T>, Action<T>>>(fetchReducer, {
     data: null,
-    isLoading: false
+    isLoading: false,
+    isError: false
   });
 }
 
@@ -24,8 +26,9 @@ function fetchReducer<T>(state: State<T>, action: Action<T>): State<T> {
     case FETCH_INIT: {
       return {
         ...state,
-        data: null,
-        isLoading: true
+        // data: null,
+        isLoading: true,
+        isError: false
       };
     }
     case FETCH_SUCCESS: {
@@ -40,7 +43,8 @@ function fetchReducer<T>(state: State<T>, action: Action<T>): State<T> {
       return {
         ...state,
         data: null,
-        isLoading: false
+        isLoading: false,
+        isError: true
       };
     }
   }
