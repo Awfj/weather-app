@@ -31,7 +31,7 @@ export const getCurrentWeather = async (queriedCity: string) => {
     temperature: String(Math.round(data.main.temp)),
     requestTime: new Date().getTime()
   };
-  // storeWeather(queriedCity, currentWeather);
+  storeWeather(queriedCity, currentWeather);
   return currentWeather;
 };
 

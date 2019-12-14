@@ -5,14 +5,12 @@ import Page from "../../components/Page/Page";
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import useWeatherApi from "../../hooks/useWeatherApi";
-// import { getLastLocation } from "../../utils";
 
 type Props = {
   launchLocation: string;
 };
 
 const Forecast = ({ launchLocation }: Props) => {
-  // const location = getLastLocation(launchLocation)
   const [
     { data: currentWeather, isLoading, isError },
     getWeather
@@ -20,7 +18,7 @@ const Forecast = ({ launchLocation }: Props) => {
   console.log(currentWeather, isLoading, isError);
 
   return (
-    <Page getData={getWeather}>
+    <Page getWeather={getWeather}>
       <DataLoader
         isLoading={isLoading}
         isError={isError}

@@ -1,14 +1,14 @@
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import styles from "./Search.module.scss";
-import { ITheme } from "../../types";
+import { ITheme, TGetWeather } from "../../types";
 
 type Props = {
-  getData: any;
+  getWeather: TGetWeather;
   theme: ITheme;
 };
 
-const Search = ({ getData, theme }: Props) => {
+const Search = ({ getWeather, theme }: Props) => {
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +16,7 @@ const Search = ({ getData, theme }: Props) => {
     const query = searchQuery.trim().toLowerCase();
     if (query) {
       setSearchQuery("");
-      getData(query);
+      getWeather(query);
     }
   };
 

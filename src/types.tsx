@@ -38,3 +38,5 @@ export interface ITheme {
 export type TSetStringOrNull = (
   value: React.SetStateAction<string | null>
 ) => void;
+
+export type TGetWeather = (location: string) => Promise<void>;

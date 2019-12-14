@@ -3,32 +3,24 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
 
 // import styles from "./App.module.scss";
-// import DataLoader from "../../components/DataLoader/DataLoader";
+import DataLoader from "../../components/DataLoader/DataLoader";
 import Forecast from "../Forecast/Forecast";
-import { getLaunchLocation } from "../../utils";
+import useGeoLocationApi from "../../hooks/useGeoLocationApi";
 
 const App: React.FC = () => {
-  const [launchLocation, setLaunchLocation] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    (async () => {
-      const launchLocation = await getLaunchLocation();
-      if (launchLocation) {
-        setLaunchLocation(launchLocation);
-      }
-    })();
-  }, []);
+  const [{ data: launchLocation, isLoading, isError }] = useGeoLocationApi();
 
   return (
     <StylesProvider injectFirst>
       <CssBaseline />
-      {/* <DataLoader
+      <DataLoader
+        isLoading={isLoading}
+        isError={isError}
         error={`We couldn't find your city automatically,
          you can still look for it manually.`}
-        isDataExist={!!location}
       >
-      </DataLoader> */}
-      {launchLocation && <Forecast launchLocation={launchLocation} />}
+        {launchLocation && <Forecast launchLocation={launchLocation} />}
+      </DataLoader>
     </StylesProvider>
   );
 };

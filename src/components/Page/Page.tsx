@@ -4,17 +4,17 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import Search from "../../components/Search/Search";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import { themes } from "../../theme";
-import { ITheme } from "../../types";
+import { ITheme, TGetWeather } from "../../types";
 
 type Props = {
   children: React.ReactNode;
-  getData: (location: string) => Promise<void>;
+  getWeather: TGetWeather;
   isThemeDynamic?: boolean;
 };
 
 const Page = ({
   children,
-  getData,
+  getWeather,
   isThemeDynamic = false
 }: Props) => {
   const [theme, setTheme] = React.useState<ITheme>(themes.light);
@@ -27,7 +27,7 @@ const Page = ({
         theme={dynamicTheme}
         ThemeToggle={<ThemeToggle theme={theme} onSetTheme={setTheme} />}
         Search={
-          <Search theme={dynamicTheme} getData={getData} />
+          <Search theme={dynamicTheme} getWeather={getWeather} />
         }
       />
       <main

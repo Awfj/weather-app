@@ -26,7 +26,6 @@ function fetchReducer<T>(state: State<T>, action: Action<T>): State<T> {
     case FETCH_INIT: {
       return {
         ...state,
-        // data: null,
         isLoading: true,
         isError: false
       };
