@@ -5,31 +5,27 @@ import Page from "../../components/Page/Page";
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import useWeatherApi from "../../hooks/useWeatherApi";
-import { ICurrentWeather, TSetStringOrNull } from "../../types";
+// import { getLastLocation } from "../../utils";
 
 type Props = {
-  lastLocation: string;
-  setLastLocation: TSetStringOrNull;
+  launchLocation: string;
 };
 
-const Forecast = ({ lastLocation, setLastLocation }: Props) => {
+const Forecast = ({ launchLocation }: Props) => {
+  // const location = getLastLocation(launchLocation)
   const [
-    currentWeather,
-    setCurrentWeather
-  ] = React.useState<ICurrentWeather | null>(null);
-  // const [{ data, isLoading }] = useWeatherApi(lastLocation);
-  console.log("forecast", currentWeather);
+    { data: currentWeather, isLoading, isError },
+    getWeather
+  ] = useWeatherApi(launchLocation);
+  console.log(currentWeather, isLoading, isError);
 
   return (
-    <Page setLastLocation={setLastLocation}>
+    <Page getData={getWeather}>
       <DataLoader
-        lastLocation={lastLocation}
-        setData={setCurrentWeather}
-        dataHook={useWeatherApi}
+        isLoading={isLoading}
+        isError={isError}
         error={`Requested city can't be found. Please, check if the name is correct,
         change service or try again later.`}
-        // isDataExist={!!currentWeather}
-        // isLoading={isLoading}
       >
         {currentWeather && <CurrentWeather data={currentWeather} />}
       </DataLoader>

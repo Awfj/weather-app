@@ -8,16 +8,15 @@ import Forecast from "../Forecast/Forecast";
 import { getLaunchLocation } from "../../utils";
 
 const App: React.FC = () => {
-  const [lastLocation, setLastLocation] = React.useState<string | null>(null);
+  const [launchLocation, setLaunchLocation] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const getLaunchWeather = async () => {
+    (async () => {
       const launchLocation = await getLaunchLocation();
       if (launchLocation) {
-        setLastLocation(launchLocation);
+        setLaunchLocation(launchLocation);
       }
-    };
-    getLaunchWeather();
+    })();
   }, []);
 
   return (
@@ -26,15 +25,10 @@ const App: React.FC = () => {
       {/* <DataLoader
         error={`We couldn't find your city automatically,
          you can still look for it manually.`}
-        isDataExist={!!lastLocation}
+        isDataExist={!!location}
       >
       </DataLoader> */}
-        {lastLocation && (
-          <Forecast
-            lastLocation={lastLocation}
-            setLastLocation={setLastLocation}
-          />
-        )}
+      {launchLocation && <Forecast launchLocation={launchLocation} />}
     </StylesProvider>
   );
 };

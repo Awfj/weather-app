@@ -1,29 +1,14 @@
 import React from "react";
 import Spinner from "../Spinner/Spinner";
-import { State } from "../../hooks/useFetch";
 
-type Props<T> = {
+type Props = {
   children: React.ReactNode;
   error: string;
-  lastLocation: string;
-  setData: (value: T) => void;
-  dataHook: (location: string) => readonly [State<T>];
+  isLoading: boolean;
+  isError: boolean;
 };
 
-function DataLoader<T>({
-  children,
-  error,
-  setData,
-  dataHook,
-  lastLocation
-}: Props<T>) {
-  const [{ data, isLoading, isError }] = dataHook(lastLocation);
-
-  React.useEffect(() => {
-    if (data) setData(data);
-  }, [data, setData]);
-  // console.log("loader", data, isLoading, isError);
-
+const DataLoader = ({ children, error, isLoading, isError }: Props) => {
   let rendered: React.ReactNode;
   if (isLoading) {
     rendered = <Spinner />;
@@ -36,6 +21,6 @@ function DataLoader<T>({
   }
 
   return <>{rendered}</>;
-}
+};
 
 export default DataLoader;

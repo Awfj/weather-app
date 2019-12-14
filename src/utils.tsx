@@ -35,6 +35,12 @@ export const getCurrentWeather = async (queriedCity: string) => {
   return currentWeather;
 };
 
+export const getLastLocation = (launchLocation: string) => {
+  let lastLocation = sessionStorage.getItem("last_location");
+  if (!lastLocation) lastLocation = launchLocation;
+  return lastLocation;
+};
+
 export const getLaunchLocation = async () => {
   let launchLocation = localStorage.getItem("launch_location");
   if (!launchLocation) {
@@ -42,6 +48,7 @@ export const getLaunchLocation = async () => {
     if (!launchLocation) return null;
     localStorage.setItem("launch_location", launchLocation);
   }
+  sessionStorage.setItem("last_location", launchLocation);
   return launchLocation;
 };
 
