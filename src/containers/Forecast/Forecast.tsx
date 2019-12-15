@@ -15,7 +15,7 @@ const Forecast = ({ launchLocation }: Props) => {
     { data: currentWeather, isLoading, isError },
     getWeather
   ] = useWeatherApi(launchLocation);
-  console.log(currentWeather, isLoading, isError);
+  // console.log(currentWeather, isLoading, isError);
 
   return (
     <Page getWeather={getWeather}>
