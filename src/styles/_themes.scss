@@ -1,0 +1,53 @@
+@import "../../styles/_colors.scss";
+@import "../../styles/_snippets.scss";
+
+@mixin theme($backgroundColor, $foregroundColor) {
+  color: $foregroundColor;
+  header {
+    background-color: lighten($backgroundColor, 5%);
+  }
+  main {
+    background-color: $backgroundColor;
+  }
+  button {
+    color: $foregroundColor;
+    padding: 0 8px;
+    outline: none;
+    border-radius: 5px;
+    @include transparent-border(2px);
+    &:hover {
+      background-color: $grey-color;
+      color: $backgroundColor;
+    }
+    &:focus {
+      box-shadow: 0 0 0 2px $foregroundColor;
+    }
+    &::-moz-focus-inner {
+      border: 0;
+    }
+    &:active {
+      background-color: darken($backgroundColor, 10%);
+    }
+  }
+  form {
+    background-color: lighten($backgroundColor, 15%);
+    @include transparent-border(2px);
+    box-shadow: 0 0 2px $foregroundColor;
+    input {
+      border-radius: 3px;
+      color: $foregroundColor;
+      @include transition(0.1s);
+      &:focus {
+        box-shadow: 0 0 0 2px $foregroundColor;
+      }
+    }
+  }
+}
+
+.light {
+  @include theme($light-theme-background, $light-theme-foreground);
+}
+
+.dark {
+  @include theme($dark-theme-background, $dark-theme-foreground);
+}

@@ -1,11 +1,11 @@
 .root {
   display: flex;
-  padding: 0 0.9em;
+  padding-right: 0.9em;
   border-radius: 5px;
-  box-shadow: 1px 1px 0.5px black;
   input {
     font-size: 0.9rem;
-    padding: 0.9em 0;
+    margin-right: 0.9em;
+    padding: 0.9em;
     width: 100%;
   }
   button {

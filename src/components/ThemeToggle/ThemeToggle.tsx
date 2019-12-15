@@ -1,32 +1,27 @@
 import React from "react";
-import { themes } from "../../theme";
-import { ITheme } from "../../types";
+import { THEMES } from "../../constants";
 import Button from "../Button/Button";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 
 type Props = {
-  onSetTheme: (value: React.SetStateAction<ITheme>) => void;
-  theme: ITheme;
+  setTheme: (value: React.SetStateAction<string>) => void;
+  theme: string;
 };
 
-const ThemeToggle = ({ onSetTheme, theme }: Props) => {
-  const isLightTheme = theme === themes.light;
+const ThemeToggle = ({ setTheme, theme }: Props) => {
+  const isLightTheme = theme === THEMES.LIGHT;
 
   const handleClick = () => {
     if (isLightTheme) {
-      onSetTheme(themes.dark);
+      setTheme(THEMES.DARK);
     } else {
-      onSetTheme(themes.light);
+      setTheme(THEMES.LIGHT);
     }
   };
 
   return (
-    <Button
-      label="Toggle theme"
-      onClick={handleClick}
-      customStyles={{ color: theme.contrastText }}
-    >
+    <Button label="Toggle theme" onClick={handleClick}>
       {isLightTheme ? <Brightness2Icon /> : <WbSunnyIcon />}
     </Button>
   );

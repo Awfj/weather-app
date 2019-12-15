@@ -1,11 +1,11 @@
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import styles from "./Search.module.scss";
-import { ITheme, TGetWeather } from "../../types";
+import { TGetWeather } from "../../types";
 
 type Props = {
   getWeather: TGetWeather;
-  theme: ITheme;
+  theme: string;
 };
 
 const Search = ({ getWeather, theme }: Props) => {
@@ -26,28 +26,14 @@ const Search = ({ getWeather, theme }: Props) => {
   };
 
   return (
-    <form
-      style={{
-        backgroundColor: theme.background.search
-      }}
-      className={styles.root}
-      onSubmit={handleSubmit}
-    >
+    <form className={styles.root} onSubmit={handleSubmit}>
       <input
-        style={{
-          color: theme.contrastText
-        }}
         value={searchQuery}
         onChange={handleChange}
         placeholder="Search"
         type="search"
       />
-      <button
-        style={{
-          color: theme.contrastText
-        }}
-        aria-label="search"
-      >
+      <button aria-label="search">
         <SearchIcon />
       </button>
     </form>

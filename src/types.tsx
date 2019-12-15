@@ -25,15 +25,15 @@ export interface IGeoLocationResponse {
   city: string;
 }
 
-export interface ITheme {
-  contrastText: string;
-  background: {
-    header: string;
-    search: string;
-    body: string;
-    sidebar?: string;
-  };
-}
+// export interface ITheme {
+//   contrastText: string;
+//   background: {
+//     header: string;
+//     search: string;
+//     body: string;
+//     sidebar?: string;
+//   };
+// }
 
 export type TSetStringOrNull = (
   value: React.SetStateAction<string | null>

@@ -4,7 +4,7 @@ import styles from "./Button.module.scss";
 type Props = {
   children: React.ReactNode;
   color?: "default" | "primary" | "secondary";
-  customStyles?: object;
+  inlineStyles?: object;
   label: string;
   onClick: () => void;
   type?: "button" | "submit" | "reset";
@@ -14,7 +14,7 @@ type Props = {
 const Button = ({
   children,
   color = "default",
-  customStyles,
+  inlineStyles,
   label,
   onClick,
   type = "button",
@@ -24,7 +24,7 @@ const Button = ({
     <button
       aria-label={label}
       className={`${styles.root} ${styles[variant]} ${styles[color]}`}
-      style={customStyles}
+      style={inlineStyles}
       onClick={onClick}
       type={type}
     >

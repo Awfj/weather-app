@@ -1,14 +1,4 @@
-@mixin backgroundColor($hover, $active, $focus) {
-  &:hover {
-    background-color: $hover;
-  }
-  &:active {
-    background-color: $active;
-  }
-  &:focus {
-    background-color: $focus;
-  }
-}
+@import "../../styles/_snippets.scss";
 
 .root {
   background-color: transparent;
@@ -17,9 +7,7 @@
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: 500;
-  &:focus {
-    outline: none;
-  }
+  @include transition(0.1s);
 }
 
 // variants
@@ -28,34 +16,7 @@
     display: block;
   }
 }
-
 .text {
   border-radius: 4px;
   padding: 0.6em 1.7em;
-}
-
-// colors
-.default {
-  color: #747474;
-  &:hover {
-    color: #202020;
-  }
-}
-
-.primary {
-  color: #272727;
-  @include backgroundColor(
-    rgba(95, 99, 104, 0.039),
-    rgba(95, 99, 104, 0.161),
-    rgba(95, 99, 104, 0.122)
-  );
-}
-
-.secondary {
-  color: #1a73e8;
-  @include backgroundColor(
-    rgba(66, 133, 244, 0.039),
-    rgba(66, 133, 244, 0.161),
-    rgba(66, 133, 244, 0.122)
-  );
 }
