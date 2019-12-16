@@ -1,17 +1,28 @@
 import React from "react";
 import styles from "./Page.module.scss";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import Button from "../Button/Button";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
+import Search from "../../components/Search/Search";
 import { THEMES } from "../../constants";
-import { TGetWeather } from "../../types";
+import { TSetStringOrNull, TGetForecast } from "../../types";
 
 type Props = {
   children: React.ReactNode;
-  getWeather: TGetWeather;
+  setLastLocation: TSetStringOrNull;
   isThemeDynamic?: boolean;
+  getForecast: TGetForecast;
+  lastLocation: string;
 };
 
-const Page = ({ children, getWeather, isThemeDynamic = false }: Props) => {
+const Page = ({
+  children,
+  setLastLocation,
+  lastLocation,
+  getForecast,
+  isThemeDynamic = false
+}: Props) => {
   const [theme, setTheme] = React.useState(THEMES.LIGHT);
 
   const dynamicTheme = isThemeDynamic ? THEMES.DYNAMIC : theme;
@@ -20,7 +31,14 @@ const Page = ({ children, getWeather, isThemeDynamic = false }: Props) => {
       <PageHeader
         heading="Forecast"
         theme={dynamicTheme}
-        getWeather={getWeather}
+        Refresh={
+          <Button label="Refresh" onClick={() => getForecast(lastLocation)}>
+            <RefreshIcon />
+          </Button>
+        }
+        Search={
+          <Search theme={dynamicTheme} setLastLocation={setLastLocation} />
+        }
         ThemeToggle={<ThemeToggle theme={theme} setTheme={setTheme} />}
       />
       <main>{children}</main>

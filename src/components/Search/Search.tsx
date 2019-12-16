@@ -1,14 +1,15 @@
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
+import { removeExpiredWeather } from "../../utils";
 import styles from "./Search.module.scss";
-import { TGetWeather } from "../../types";
+import { TSetStringOrNull } from "../../types";
 
 type Props = {
-  getWeather: TGetWeather;
+  setLastLocation: TSetStringOrNull;
   theme: string;
 };
 
-const Search = ({ getWeather, theme }: Props) => {
+const Search = ({ setLastLocation, theme }: Props) => {
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -16,7 +17,8 @@ const Search = ({ getWeather, theme }: Props) => {
     const query = searchQuery.trim().toLowerCase();
     if (query) {
       setSearchQuery("");
-      getWeather(query, false);
+      removeExpiredWeather(query);
+      setLastLocation(query);
     }
   };
 

@@ -1,32 +1,26 @@
 import React from "react";
-import Search from "../../components/Search/Search";
-import { TGetWeather } from "../../types";
-import Button from "../Button/Button";
-import RefreshIcon from "@material-ui/icons/Refresh";
-
 import styles from "./PageHeader.module.scss";
 
 type Props = {
   heading: string;
   theme: string;
   ThemeToggle: React.ReactNode;
-  getWeather: TGetWeather;
+  Refresh: React.ReactNode;
+  Search: React.ReactNode;
 };
 
 const PageHeader = React.memo(
-  ({ heading, theme, ThemeToggle, getWeather }: Props) => {
+  ({ heading, theme, Refresh, Search, ThemeToggle }: Props) => {
     return (
       <header className={`${styles.root} ${styles[theme]}`}>
         <div className={styles.startGroup}>
           <h1>{heading}</h1>
         </div>
         <div className={styles.middleGroup}>
-          {/* <Button label='Refresh' onClick={() => getWeather()}>
-            <RefreshIcon />
-          </Button> */}
+          {Refresh}
           {ThemeToggle}
         </div>
-        <Search theme={theme} getWeather={getWeather} />
+        {Search}
       </header>
     );
   }

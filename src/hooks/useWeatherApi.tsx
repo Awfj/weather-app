@@ -1,40 +1,27 @@
 import { useEffect, useCallback } from "react";
-import {
-  checkIfExpired,
-  getCurrentWeather,
-  removeExpiredWeather,
-  getLastLocation
-} from "../utils";
+import { fetchForecast, removeExpiredWeather } from "../utils";
 import { FETCH_INIT, FETCH_SUCCESS, FETCH_FAILURE } from "../actions";
-import { ICurrentWeather } from "../types";
+import { IForecast } from "../types";
 import useFetch from "./useFetch";
 
 const useWeatherApi = (launchLocation: string) => {
-  const [state, dispatch] = useFetch<ICurrentWeather>();
+  const [state, dispatch] = useFetch<IForecast>();
 
-  const getWeather = useCallback(
-    async (location: string, isLaunchLocation: boolean = true) => {
+  const getForecast = useCallback(
+    async (location: string) => {
       dispatch({ type: FETCH_INIT });
-      if (isLaunchLocation) {
-        location = getLastLocation(location);
-      }
-      console.log(isLaunchLocation);
       removeExpiredWeather(location);
-      sessionStorage.setItem("last_location", location);
-      const storedWeather = localStorage.getItem(`weather_${location}`);
-      let currentWeather: ICurrentWeather | null;
-      if (storedWeather) {
-        const { requestTime } = JSON.parse(storedWeather);
-        if (checkIfExpired(requestTime)) {
-          currentWeather = await getCurrentWeather(location);
-        } else {
-          currentWeather = JSON.parse(storedWeather);
-        }
+      const storedForecast = localStorage.getItem(
+        `weather_forecast_${location}`
+      );
+      let forecast: IForecast | null;
+      if (storedForecast) {
+        forecast = JSON.parse(storedForecast);
       } else {
-        currentWeather = await getCurrentWeather(location);
+        forecast = await fetchForecast(location);
       }
-      if (currentWeather) {
-        dispatch({ type: FETCH_SUCCESS, data: currentWeather });
+      if (forecast) {
+        dispatch({ type: FETCH_SUCCESS, data: forecast });
       } else {
         dispatch({ type: FETCH_FAILURE });
       }
@@ -42,10 +29,10 @@ const useWeatherApi = (launchLocation: string) => {
     [dispatch]
   );
   useEffect(() => {
-    getWeather(launchLocation);
-  }, [dispatch, getWeather, launchLocation]);
+    getForecast(launchLocation);
+  }, [dispatch, getForecast, launchLocation]);
 
-  return [state, getWeather] as const;
+  return [state, getForecast] as const;
 };
 
 export default useWeatherApi;

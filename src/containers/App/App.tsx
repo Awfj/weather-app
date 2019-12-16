@@ -9,7 +9,12 @@ import useGeoLocationApi from "../../hooks/useGeoLocationApi";
 
 const App: React.FC = () => {
   const [{ data: launchLocation, isLoading, isError }] = useGeoLocationApi();
+  const [lastLocation, setLastLocation] = React.useState<string | null>(null);
 
+  React.useEffect(() => {
+    if (launchLocation) setLastLocation(launchLocation);
+  }, [launchLocation]);
+  
   return (
     <StylesProvider injectFirst>
       <CssBaseline />
@@ -19,7 +24,12 @@ const App: React.FC = () => {
         error={`We couldn't find your city automatically,
          you can still look for it manually.`}
       >
-        {launchLocation && <Forecast launchLocation={launchLocation} />}
+        {lastLocation && (
+          <Forecast
+            lastLocation={lastLocation}
+            setLastLocation={setLastLocation}
+          />
+        )}
       </DataLoader>
     </StylesProvider>
   );

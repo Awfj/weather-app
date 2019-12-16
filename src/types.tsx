@@ -1,9 +1,13 @@
+export interface IForecast {
+  currentWeather: ICurrentWeather;
+  requestTime: number;
+}
+
 export interface ICurrentWeather {
   city: string;
   country: string;
   condition: string;
   temperature: string;
-  requestTime?: number;
 }
 
 export interface ICurrentWeatherResponse {
@@ -30,7 +34,4 @@ export type TSetStringOrNull = (
   value: React.SetStateAction<string | null>
 ) => void;
 
-export type TGetWeather = (
-  location: string,
-  isLaunchLocation: boolean
-) => Promise<void>;
+export type TGetForecast = (location: string) => Promise<void>;
