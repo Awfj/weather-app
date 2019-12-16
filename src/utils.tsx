@@ -6,8 +6,8 @@ import {
 
 export const checkIfExpired = (requestTime: number) => {
   const currentDate = new Date().getTime();
-  // const EXPIRATION_TIME = 7.2e6;
-  const EXPIRATION_TIME = 10000;
+  const EXPIRATION_TIME = 7.2e6;
+  // const EXPIRATION_TIME = 5000;
   const isExpired = currentDate - requestTime > EXPIRATION_TIME;
   return isExpired;
 };

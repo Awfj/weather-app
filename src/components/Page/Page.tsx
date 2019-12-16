@@ -37,7 +37,12 @@ const Page = ({
           </Button>
         }
         Search={
-          <Search theme={dynamicTheme} setLastLocation={setLastLocation} />
+          <Search
+            theme={dynamicTheme}
+            setLastLocation={setLastLocation}
+            lastLocation={lastLocation}
+            getForecast={getForecast}
+          />
         }
         ThemeToggle={<ThemeToggle theme={theme} setTheme={setTheme} />}
       />

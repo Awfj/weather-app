@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { fetchForecast, removeExpiredWeather } from "../utils";
+import { fetchForecast, checkIfExpired, removeExpiredWeather } from "../utils";
 import { FETCH_INIT, FETCH_SUCCESS, FETCH_FAILURE } from "../actions";
 import { IForecast } from "../types";
 import useFetch from "./useFetch";
@@ -16,7 +16,12 @@ const useWeatherApi = (launchLocation: string) => {
       );
       let forecast: IForecast | null;
       if (storedForecast) {
-        forecast = JSON.parse(storedForecast);
+        const { requestTime } = JSON.parse(storedForecast);
+        if (checkIfExpired(requestTime)) {
+          forecast = await fetchForecast(location);
+        } else {
+          forecast = JSON.parse(storedForecast);
+        }
       } else {
         forecast = await fetchForecast(location);
       }
