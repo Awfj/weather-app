@@ -22,6 +22,7 @@ const Forecast = ({ lastLocation, setLastLocation }: Props) => {
       setLastLocation={setLastLocation}
       getForecast={getForecast}
       lastLocation={lastLocation}
+      isThemeDynamic={true}
     >
       <DataLoader
         isLoading={isLoading}

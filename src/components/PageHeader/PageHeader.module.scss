@@ -8,6 +8,9 @@
     display: flex;
     justify-content: flex-end;
     margin-right: 0.5em;
+    button:not(:last-child) {
+      margin-left: 2px;
+    }
   }
   > :last-child {
     display: flex;

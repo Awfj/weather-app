@@ -17,8 +17,6 @@
     @include transparent-border(2px);
     &:hover {
       background-color: darken($backgroundColor, 10%);
-      // background-color: $grey-color;
-      // color: $backgroundColor;
     }
     &:focus {
       box-shadow: 0 0 0 2px $foregroundColor;
@@ -28,7 +26,6 @@
     }
     &:active {
       background-color: $grey-color;
-      // background-color: darken($backgroundColor, 10%);
     }
   }
   form {
@@ -52,4 +49,8 @@
 
 .dark {
   @include theme($dark-theme-background, $dark-theme-foreground);
+}
+
+.dynamic {
+  @include theme($dynamic-theme-background, $dark-theme-foreground);
 }

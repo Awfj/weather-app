@@ -1,6 +1,7 @@
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import styles from "./Search.module.scss";
+import Button from "../Button/Button";
 import { TSetStringOrNull, TGetForecast } from "../../types";
 
 type Props = {
@@ -44,9 +45,9 @@ const Search = ({
         placeholder="Search"
         type="search"
       />
-      <button aria-label="search">
+      <Button label="search" type="submit">
         <SearchIcon />
-      </button>
+      </Button>
     </form>
   );
 };

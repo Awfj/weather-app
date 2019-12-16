@@ -3,17 +3,15 @@ import styles from "./Button.module.scss";
 
 type Props = {
   children: React.ReactNode;
-  color?: "default" | "primary" | "secondary";
   inlineStyles?: object;
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   type?: "button" | "submit" | "reset";
   variant?: "icon" | "text";
 };
 
 const Button = ({
   children,
-  color = "default",
   inlineStyles,
   label,
   onClick,
@@ -23,7 +21,7 @@ const Button = ({
   return (
     <button
       aria-label={label}
-      className={`${styles.root} ${styles[variant]} ${styles[color]}`}
+      className={`${styles.root} ${styles[variant]}`}
       style={inlineStyles}
       onClick={onClick}
       type={type}

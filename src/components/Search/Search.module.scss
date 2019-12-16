@@ -1,21 +1,18 @@
 .root {
   display: flex;
-  padding-right: 0.9em;
   border-radius: 5px;
   input {
     font-size: 0.9rem;
-    margin-right: 0.9em;
     padding: 0.9em;
-    width: 100%;
-  }
-  button {
-    padding: 0;
-  }
-  input,
-  button {
     background-color: transparent;
     border: none;
+    width: 100%;
   }
+  // input,
+  // button {
+  //   // background-color: transparent;
+  //   border: none;
+  // }
   svg {
     display: block;
   }
