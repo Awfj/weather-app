@@ -9,15 +9,16 @@ import { FETCH_INIT, FETCH_SUCCESS, FETCH_FAILURE } from "../actions";
 import { ICurrentWeather } from "../types";
 import useFetch from "./useFetch";
 
-const useWeatherApi = (lastLocation: string) => {
+const useWeatherApi = (launchLocation: string) => {
   const [state, dispatch] = useFetch<ICurrentWeather>();
 
   const getWeather = useCallback(
-    async (location?: string) => {
+    async (location: string, isLaunchLocation: boolean = true) => {
       dispatch({ type: FETCH_INIT });
-      if (!location) {
-        location = getLastLocation(lastLocation);
+      if (isLaunchLocation) {
+        location = getLastLocation(location);
       }
+      console.log(isLaunchLocation);
       removeExpiredWeather(location);
       sessionStorage.setItem("last_location", location);
       const storedWeather = localStorage.getItem(`weather_${location}`);
@@ -38,11 +39,11 @@ const useWeatherApi = (lastLocation: string) => {
         dispatch({ type: FETCH_FAILURE });
       }
     },
-    [dispatch, lastLocation]
+    [dispatch]
   );
   useEffect(() => {
-    getWeather();
-  }, [dispatch, getWeather]);
+    getWeather(launchLocation);
+  }, [dispatch, getWeather, launchLocation]);
 
   return [state, getWeather] as const;
 };

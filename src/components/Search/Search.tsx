@@ -16,7 +16,7 @@ const Search = ({ getWeather, theme }: Props) => {
     const query = searchQuery.trim().toLowerCase();
     if (query) {
       setSearchQuery("");
-      getWeather(query);
+      getWeather(query, false);
     }
   };
 

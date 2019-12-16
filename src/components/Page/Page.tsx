@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Page.module.scss";
 import PageHeader from "../../components/PageHeader/PageHeader";
-import Search from "../../components/Search/Search";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import { THEMES } from "../../constants";
 import { TGetWeather } from "../../types";
@@ -21,8 +20,8 @@ const Page = ({ children, getWeather, isThemeDynamic = false }: Props) => {
       <PageHeader
         heading="Forecast"
         theme={dynamicTheme}
+        getWeather={getWeather}
         ThemeToggle={<ThemeToggle theme={theme} setTheme={setTheme} />}
-        Search={<Search theme={dynamicTheme} getWeather={getWeather} />}
       />
       <main>{children}</main>
     </div>

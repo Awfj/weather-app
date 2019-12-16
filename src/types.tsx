@@ -25,18 +25,12 @@ export interface IGeoLocationResponse {
   city: string;
 }
 
-// export interface ITheme {
-//   contrastText: string;
-//   background: {
-//     header: string;
-//     search: string;
-//     body: string;
-//     sidebar?: string;
-//   };
-// }
-
+export type TSetString = (value: React.SetStateAction<string>) => void;
 export type TSetStringOrNull = (
   value: React.SetStateAction<string | null>
 ) => void;
 
-export type TGetWeather = (location: string) => Promise<void>;
+export type TGetWeather = (
+  location: string,
+  isLaunchLocation: boolean
+) => Promise<void>;
