@@ -9,21 +9,25 @@ type Props = {
   Search: React.ReactNode;
 };
 
-const PageHeader = React.memo(
-  ({ heading, theme, Refresh, Search, ThemeToggle }: Props) => {
-    return (
-      <header className={`${styles.root} ${styles[theme]}`}>
-        <div className={styles.startGroup}>
-          <h1>{heading}</h1>
-        </div>
-        <div className={styles.middleGroup}>
-          {Refresh}
-          {ThemeToggle}
-        </div>
-        {Search}
-      </header>
-    );
-  }
-);
+const PageHeader = ({
+  heading,
+  theme,
+  Refresh,
+  Search,
+  ThemeToggle
+}: Props) => {
+  return (
+    <header className={`${styles.root} ${styles[theme]}`}>
+      <div className={styles.startGroup}>
+        <h1>{heading}</h1>
+      </div>
+      <div className={styles.middleGroup}>
+        {Refresh}
+        {ThemeToggle}
+      </div>
+      {Search}
+    </header>
+  );
+};
 
 export default PageHeader;

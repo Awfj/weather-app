@@ -3,12 +3,11 @@ import {
   ICurrentWeatherResponse,
   IGeoLocationResponse
 } from "./types";
+import { EXPIRATION_TIMEFRAME } from "./constants";
 
 export const checkIfExpired = (requestTime: number) => {
   const currentDate = new Date().getTime();
-  const EXPIRATION_TIME = 7.2e6;
-  // const EXPIRATION_TIME = 5000;
-  const isExpired = currentDate - requestTime > EXPIRATION_TIME;
+  const isExpired = currentDate - requestTime > EXPIRATION_TIMEFRAME;
   return isExpired;
 };
 
@@ -50,6 +49,14 @@ export const getLaunchLocation = async () => {
   }
   sessionStorage.setItem("last_location", launchLocation);
   return launchLocation;
+};
+
+export const getReadableTime = (milliseconds: number) => {
+  const pad = (num: number) => (num < 10 ? `0${num}` : num);
+  const hours = parseInt(String((milliseconds / 3600000) % 60));
+  const minutes = parseInt(String((milliseconds / 60000) % 60));
+  const seconds = parseInt(String((milliseconds / 1000) % 60));
+  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 };
 
 export const removeExpiredWeather = (city: string) => {

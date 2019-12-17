@@ -3,6 +3,7 @@ import styles from "./Button.module.scss";
 
 type Props = {
   children: React.ReactNode;
+  disabled?: boolean;
   inlineStyles?: object;
   label: string;
   onClick?: () => void;
@@ -12,6 +13,7 @@ type Props = {
 
 const Button = ({
   children,
+  disabled = false,
   inlineStyles,
   label,
   onClick,
@@ -21,6 +23,7 @@ const Button = ({
   return (
     <button
       aria-label={label}
+      disabled={disabled}
       className={`${styles.root} ${styles[variant]}`}
       style={inlineStyles}
       onClick={onClick}

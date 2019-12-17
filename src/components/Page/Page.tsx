@@ -14,6 +14,7 @@ type Props = {
   isThemeDynamic?: boolean;
   getForecast: TGetForecast;
   lastLocation: string;
+  expirationTimeframe: number | null;
 };
 
 const Page = ({
@@ -21,7 +22,8 @@ const Page = ({
   setLastLocation,
   lastLocation,
   getForecast,
-  isThemeDynamic = false
+  isThemeDynamic = false,
+  expirationTimeframe
 }: Props) => {
   const [theme, setTheme] = React.useState(THEMES.LIGHT);
   const dynamicTheme = isThemeDynamic ? THEMES.DYNAMIC : theme;
@@ -34,7 +36,14 @@ const Page = ({
       <PageHeader
         heading="Forecast"
         theme={dynamicTheme}
-        Refresh={<Refresh onClick={refresh} />}
+        Refresh={
+          expirationTimeframe && (
+            <Refresh
+              onClick={refresh}
+              expirationTimeframe={expirationTimeframe}
+            />
+          )
+        }
         Search={
           <Search
             theme={dynamicTheme}

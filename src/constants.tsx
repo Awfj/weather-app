@@ -3,3 +3,6 @@ export const THEMES = {
   DARK: "dark",
   DYNAMIC: "dynamic"
 };
+
+export const EXPIRATION_TIMEFRAME = 10000;
+// export const EXPIRATION_TIMEFRAME = 7.2e6;
