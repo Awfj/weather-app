@@ -51,12 +51,16 @@ export const getLaunchLocation = async () => {
   return launchLocation;
 };
 
-export const getReadableTime = (milliseconds: number) => {
-  const pad = (num: number) => (num < 10 ? `0${num}` : num);
-  const hours = parseInt(String((milliseconds / 3600000) % 60));
-  const minutes = parseInt(String((milliseconds / 60000) % 60));
-  const seconds = parseInt(String((milliseconds / 1000) % 60));
-  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+export const getRemainingTime = (milliseconds: number) => {
+  const hours = Math.floor((milliseconds / 3600000) % 60);
+  const minutes = Math.floor((milliseconds / 60000) % 60);
+  const seconds = Math.floor((milliseconds / 1000) % 60);
+  const fixEnding = (number: number, timeUnit: string) =>
+    `${number} ${number === 1 ? timeUnit : `${timeUnit}s`}`;
+  return `${hours === 0 ? "" : fixEnding(hours, "hour")} ${fixEnding(
+    minutes,
+    "minute"
+  )} ${fixEnding(seconds, "second")}`;
 };
 
 export const removeExpiredWeather = (city: string) => {

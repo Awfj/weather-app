@@ -5,7 +5,9 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import Refresh from "../../components/Refresh/Refresh";
 import Search from "../../components/Search/Search";
-import { THEMES } from "../../constants";
+import Timer from "../../components/Timer/Timer";
+import TimerToggle from "../../components/TimerToggle/TimerToggle";
+import { THEMES, EXPIRATION_TIMEFRAME } from "../../constants";
 import { TSetStringOrNull, TGetForecast } from "../../types";
 
 type Props = {
@@ -14,7 +16,7 @@ type Props = {
   isThemeDynamic?: boolean;
   getForecast: TGetForecast;
   lastLocation: string;
-  expirationTimeframe: number | null;
+  requestTime?: number | null;
 };
 
 const Page = ({
@@ -23,24 +25,26 @@ const Page = ({
   lastLocation,
   getForecast,
   isThemeDynamic = false,
-  expirationTimeframe
+  requestTime
 }: Props) => {
   const [theme, setTheme] = React.useState(THEMES.LIGHT);
+  const [refreshIsDisabled, setRefreshIsDisabled] = React.useState(true);
   const dynamicTheme = isThemeDynamic ? THEMES.DYNAMIC : theme;
+  const [timerIsShown, setTimerIsShown] = React.useState(true);
 
-  const refresh = () => {
-    getForecast(lastLocation);
-  };
   return (
     <div className={`${styles.root} ${styles[dynamicTheme]}`}>
       <PageHeader
         heading="Forecast"
         theme={dynamicTheme}
+        TimerToggle={
+          <TimerToggle onClick={() => setTimerIsShown(!timerIsShown)} />
+        }
         Refresh={
-          expirationTimeframe && (
+          requestTime && (
             <Refresh
-              onClick={refresh}
-              expirationTimeframe={expirationTimeframe}
+              onClick={() => getForecast(lastLocation)}
+              isDisabled={refreshIsDisabled}
             />
           )
         }
@@ -54,7 +58,18 @@ const Page = ({
         }
         ThemeToggle={<ThemeToggle theme={theme} setTheme={setTheme} />}
       />
-      <main>{children}</main>
+      <main>
+        {requestTime && (
+          <Timer
+            expirationTimeframe={
+              EXPIRATION_TIMEFRAME - (new Date().getTime() - requestTime)
+            }
+            setRefreshIsDisabled={setRefreshIsDisabled}
+            timerIsShown={timerIsShown}
+          />
+        )}
+        {children}
+      </main>
     </div>
   );
 };

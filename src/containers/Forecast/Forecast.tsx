@@ -1,12 +1,10 @@
 import React from "react";
-// import styles from "./Forecast.module.scss";
 
 import Page from "../../components/Page/Page";
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import useWeatherApi from "../../hooks/useWeatherApi";
 import { TSetStringOrNull } from "../../types";
-import { EXPIRATION_TIMEFRAME } from "../../constants";
 
 type Props = {
   lastLocation: string;
@@ -24,9 +22,7 @@ const Forecast = ({ lastLocation, setLastLocation }: Props) => {
       getForecast={getForecast}
       lastLocation={lastLocation}
       isThemeDynamic={true}
-      expirationTimeframe={
-        data && EXPIRATION_TIMEFRAME - (new Date().getTime() - data.requestTime)
-      }
+      requestTime={data && data.requestTime}
     >
       <DataLoader
         isLoading={isLoading}

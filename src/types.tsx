@@ -30,6 +30,7 @@ export interface IGeoLocationResponse {
 }
 
 export type TSetString = (value: React.SetStateAction<string>) => void;
+export type TSetBoolean = (value: React.SetStateAction<boolean>) => void;
 export type TSetStringOrNull = (
   value: React.SetStateAction<string | null>
 ) => void;

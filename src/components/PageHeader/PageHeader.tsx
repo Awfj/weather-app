@@ -7,6 +7,7 @@ type Props = {
   ThemeToggle: React.ReactNode;
   Refresh: React.ReactNode;
   Search: React.ReactNode;
+  TimerToggle: React.ReactNode;
 };
 
 const PageHeader = ({
@@ -14,7 +15,8 @@ const PageHeader = ({
   theme,
   Refresh,
   Search,
-  ThemeToggle
+  ThemeToggle,
+  TimerToggle
 }: Props) => {
   return (
     <header className={`${styles.root} ${styles[theme]}`}>
@@ -23,6 +25,7 @@ const PageHeader = ({
       </div>
       <div className={styles.middleGroup}>
         {Refresh}
+        {TimerToggle}
         {ThemeToggle}
       </div>
       {Search}

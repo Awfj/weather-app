@@ -4,41 +4,13 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 
 type Props = {
   onClick: () => void;
-  expirationTimeframe: number;
+  isDisabled: boolean;
 };
 
-const Refresh = ({ onClick, expirationTimeframe }: Props) => {
-  const [isDisabeld, setIsDisabeld] = React.useState(true);
-  const [timer, setTimer] = React.useState(expirationTimeframe);
-
-  // React.useEffect(() => {
-  //   setTimer(expirationTimeframe);
-  //   setIsDisabeld(true);
-  //   console.log("test");
-  // }, [expirationTimeframe]);
-
-  // React.useEffect(() => {
-  //   const timerTimeout = setTimeout(() => {
-  //     // setIsDisabeld(false);
-  //     if (timer > 0) {
-  //       setTimer(timer => timer - 1000);
-  //       // console.log('count')
-  //     } else {
-  //       // setTimer(0);
-  //       setIsDisabeld(false);
-  //       console.log("end");
-  //     }
-  //     console.log("timer");
-  //   }, 1000);
-  //   return () => clearTimeout(timerTimeout);
-  // }, [timer]);
-
-  // console.log(expirationTimeframe, timer);
-
+const Refresh = ({ onClick, isDisabled }: Props) => {
   return (
-    <Button disabled={isDisabeld} label="Refresh" onClick={onClick}>
-      {/* <RefreshIcon /> */}
-      {timer}
+    <Button disabled={isDisabled} label="Refresh" onClick={onClick}>
+      <RefreshIcon />
     </Button>
   );
 };

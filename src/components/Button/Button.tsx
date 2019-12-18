@@ -9,6 +9,7 @@ type Props = {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   variant?: "icon" | "text";
+  customStyles?: any;
 };
 
 const Button = ({
@@ -18,13 +19,17 @@ const Button = ({
   label,
   onClick,
   type = "button",
-  variant = "icon"
+  variant = "icon",
+  customStyles
 }: Props) => {
+  let combinedStyles = `${styles.root} ${styles[variant]}`;
+  if (customStyles) combinedStyles += ` ${customStyles}`;
+  
   return (
     <button
       aria-label={label}
       disabled={disabled}
-      className={`${styles.root} ${styles[variant]}`}
+      className={combinedStyles}
       style={inlineStyles}
       onClick={onClick}
       type={type}
