@@ -59,12 +59,7 @@ export const getRemainingTime = (milliseconds: number) => {
   const hours = Math.floor((milliseconds / 3600000) % 60);
   const minutes = Math.floor((milliseconds / 60000) % 60);
   const seconds = Math.floor((milliseconds / 1000) % 60);
-  const fixEnding = (number: number, timeUnit: string) =>
-    `${number} ${number === 1 ? timeUnit : `${timeUnit}s`}`;
-  return `${hours === 0 ? "" : fixEnding(hours, "hour")} ${fixEnding(
-    minutes,
-    "minute"
-  )} ${fixEnding(seconds, "second")}`;
+  return `${hours}h ${minutes}m ${seconds}s`;
 };
 
 export const removeExpiredWeather = (city: string) => {

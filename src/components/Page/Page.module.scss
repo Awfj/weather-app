@@ -24,9 +24,7 @@ button {
   &:disabled {
     background-color: $grey-color;
     cursor: initial;
-    &:hover {
-      background-color: $grey-color;
-    }
+    pointer-events: none;
   }
 }
 
