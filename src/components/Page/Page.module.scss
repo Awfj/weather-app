@@ -1,4 +1,6 @@
 @import "../../styles/_themes.scss";
+@import "../../styles/_snippets.scss";
+@import "../../styles/_colors.scss";
 
 .root {
   height: 100vh;
@@ -8,5 +10,30 @@
   main {
     padding: 1em 15px 0;
     height: 100%;
+  }
+}
+
+button {
+  padding: 0 8px;
+  outline: none;
+  border-radius: 5px;
+  @include transparent-border(2px);
+  &::-moz-focus-inner {
+    border: 0;
+  }
+  &:disabled {
+    background-color: $grey-color;
+    cursor: initial;
+    &:hover {
+      background-color: $grey-color;
+    }
+  }
+}
+
+form {
+  @include transparent-border(2px);
+  input {
+    border-radius: 3px;
+    @include transition(0.1s);
   }
 }

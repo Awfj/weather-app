@@ -11,18 +11,11 @@
   }
   button {
     color: $foregroundColor;
-    padding: 0 8px;
-    outline: none;
-    border-radius: 5px;
-    @include transparent-border(2px);
     &:hover {
       background-color: darken($backgroundColor, 10%);
     }
     &:focus {
       box-shadow: 0 0 0 2px $foregroundColor;
-    }
-    &::-moz-focus-inner {
-      border: 0;
     }
     &:active {
       background-color: $grey-color;
@@ -30,12 +23,9 @@
   }
   form {
     background-color: lighten($backgroundColor, 15%);
-    @include transparent-border(2px);
     box-shadow: 0 0 2px $foregroundColor;
     input {
-      border-radius: 3px;
       color: $foregroundColor;
-      @include transition(0.1s);
       &:focus {
         box-shadow: 0 0 0 2px $foregroundColor;
       }

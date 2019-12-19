@@ -7,12 +7,13 @@ import PageHeader, {
 
 interface Props extends PageHeaderProps {
   children: React.ReactNode;
+  theme: string;
 }
 
 const Page = ({ children, theme, ...other }: Props) => {
   return (
     <div className={`${styles.root} ${styles[theme]}`}>
-      <PageHeader heading="Forecast" theme={theme} {...other} />
+      <PageHeader heading="Forecast" {...other} />
       <main>{children}</main>
     </div>
   );
