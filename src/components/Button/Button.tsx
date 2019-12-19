@@ -1,16 +1,19 @@
 import React from "react";
 import styles from "./Button.module.scss";
 
-type Props = {
-  children: React.ReactNode;
+export type ButtonProps = {
   disabled?: boolean;
+  onClick?: () => void;
+};
+
+interface Props extends ButtonProps {
+  children: React.ReactNode;
   inlineStyles?: object;
   label: string;
-  onClick?: () => void;
   type?: "button" | "submit" | "reset";
   variant?: "icon" | "text";
   customStyles?: any;
-};
+}
 
 const Button = ({
   children,
@@ -24,7 +27,7 @@ const Button = ({
 }: Props) => {
   let combinedStyles = `${styles.root} ${styles[variant]}`;
   if (customStyles) combinedStyles += ` ${customStyles}`;
-  
+
   return (
     <button
       aria-label={label}

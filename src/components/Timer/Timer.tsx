@@ -6,14 +6,9 @@ import { TSetBoolean } from "../../types";
 type Props = {
   expirationTimeframe: number;
   setRefreshIsDisabled: TSetBoolean;
-  timerIsShown: boolean;
 };
 
-const Timer = ({
-  expirationTimeframe,
-  setRefreshIsDisabled,
-  timerIsShown
-}: Props) => {
+const Timer = ({ expirationTimeframe, setRefreshIsDisabled }: Props) => {
   const [timer, setTimer] = React.useState(expirationTimeframe);
 
   // React.useEffect(() => {
@@ -41,14 +36,12 @@ const Timer = ({
   // console.log(expirationTimeframe, timer);
   return (
     <div className={styles.root}>
-      {timerIsShown && (
-        <p>
-          Refresh{" "}
-          {timer >= 1000
-            ? `will be available in: ${getRemainingTime(timer)}`
-            : "is available!"}
-        </p>
-      )}
+      <p>
+        Refresh{" "}
+        {timer >= 1000
+          ? `will be available in: ${getRemainingTime(timer)}`
+          : "is available!"}
+      </p>
     </div>
   );
 };

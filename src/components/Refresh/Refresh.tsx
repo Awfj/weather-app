@@ -1,15 +1,12 @@
 import React from "react";
-import Button from "../Button/Button";
+import Button, { ButtonProps } from "../Button/Button";
 import RefreshIcon from "@material-ui/icons/Refresh";
 
-type Props = {
-  onClick: () => void;
-  isDisabled: boolean;
-};
+interface Props extends ButtonProps {}
 
-const Refresh = ({ onClick, isDisabled }: Props) => {
+const Refresh = ({ ...other }: Props) => {
   return (
-    <Button disabled={isDisabled} label="Refresh" onClick={onClick}>
+    <Button label="Refresh" {...other}>
       <RefreshIcon />
     </Button>
   );

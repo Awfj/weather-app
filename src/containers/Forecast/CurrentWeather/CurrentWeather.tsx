@@ -4,9 +4,10 @@ import { ICurrentWeather } from "../../../types";
 
 interface Props {
   data: ICurrentWeather;
+  Timer: React.ReactNode;
 }
 
-const CurrentWeather = ({ data }: Props) => {
+const CurrentWeather = ({ data, Timer }: Props) => {
   const { city, condition, country, temperature } = data;
 
   return (
@@ -16,6 +17,7 @@ const CurrentWeather = ({ data }: Props) => {
       </h2>
       <p className={styles.temperature}>{temperature}</p>
       <p className={styles.condition}>{condition}</p>
+      {Timer}
     </section>
   );
 };

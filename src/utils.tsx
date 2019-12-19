@@ -40,6 +40,10 @@ export const fetchForecast = async (queriedCity: string) => {
   return forecast;
 };
 
+export const getExpirationTimeframe = (requestTime: number) => {
+  return EXPIRATION_TIMEFRAME - (new Date().getTime() - requestTime);
+};
+
 export const getLaunchLocation = async () => {
   let launchLocation = localStorage.getItem("launch_location");
   if (!launchLocation) {

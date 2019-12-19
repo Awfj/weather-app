@@ -6,15 +6,17 @@ import { StylesProvider } from "@material-ui/styles";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Forecast from "../Forecast/Forecast";
 import useGeoLocationApi from "../../hooks/useGeoLocationApi";
+import { THEMES } from "../../constants";
 
 const App: React.FC = () => {
   const [{ data: launchLocation, isLoading, isError }] = useGeoLocationApi();
   const [lastLocation, setLastLocation] = React.useState<string | null>(null);
+  const [theme, setTheme] = React.useState(THEMES.LIGHT);
 
   React.useEffect(() => {
     if (launchLocation) setLastLocation(launchLocation);
   }, [launchLocation]);
-  
+
   return (
     <StylesProvider injectFirst>
       <CssBaseline />
@@ -28,6 +30,8 @@ const App: React.FC = () => {
           <Forecast
             lastLocation={lastLocation}
             setLastLocation={setLastLocation}
+            theme={theme}
+            setTheme={setTheme}
           />
         )}
       </DataLoader>
