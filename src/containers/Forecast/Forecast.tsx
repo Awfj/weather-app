@@ -32,29 +32,24 @@ const Forecast = ({
   );
   // console.log(data && data.requestTime, isLoading, isError, lastLocation);
 
+  const refresh = (
+    <Refresh
+      onClick={() => getForecast(lastLocation)}
+      disabled={refreshIsDisabled}
+    />
+  );
+  const themeToggle = <ThemeToggle theme={theme} setTheme={setTheme} />;
+  const toolbar = <Toolbar refresh={refresh} themeToggle={themeToggle} />;
+  const search = (
+    <Search
+      setLastLocation={setLastLocation}
+      lastLocation={lastLocation}
+      getForecast={getForecast}
+    />
+  );
+
   return (
-    <Page
-      theme={theme}
-      toolbar={
-        <Toolbar
-          refresh={
-            <Refresh
-              onClick={() => getForecast(lastLocation)}
-              disabled={refreshIsDisabled}
-            />
-          }
-          themeToggle={<ThemeToggle theme={theme} setTheme={setTheme} />}
-        />
-      }
-      search={
-        <Search
-          theme={theme}
-          setLastLocation={setLastLocation}
-          lastLocation={lastLocation}
-          getForecast={getForecast}
-        />
-      }
-    >
+    <Page theme={theme} toolbar={toolbar} search={search}>
       <DataLoader
         isLoading={isLoading}
         isError={isError}
@@ -64,7 +59,7 @@ const Forecast = ({
         {data && (
           <CurrentWeather
             data={data.currentWeather}
-            Timer={
+            timer={
               <Timer
                 expirationTimeframe={getExpirationTimeframe(data.requestTime)}
                 setRefreshIsDisabled={setRefreshIsDisabled}

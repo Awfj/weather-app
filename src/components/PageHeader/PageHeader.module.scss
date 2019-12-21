@@ -1,12 +1,16 @@
 .root {
   display: flex;
-  padding: 0.5em 15px;
+  padding: 7px 15px;
+  position: relative;
   > :first-child {
     flex-grow: 11;
   }
-  > :last-child {
+  form {
     display: flex;
     flex-grow: 1;
+  }
+  button {
+    border: 1px solid orange;
   }
 }
 

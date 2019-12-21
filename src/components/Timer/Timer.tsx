@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Timer.module.scss";
-import { getRemainingTime } from "../../utils";
+// import { getRemainingTime } from "../../utils";
 import { TSetBoolean } from "../../types";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Timer = ({ expirationTimeframe, setRefreshIsDisabled }: Props) => {
-  const [timer, setTimer] = React.useState(expirationTimeframe);
+  // const [timer, setTimer] = React.useState(expirationTimeframe);
 
   // React.useEffect(() => {
   //   if (expirationTimeframe >= 1000) {
@@ -36,12 +36,12 @@ const Timer = ({ expirationTimeframe, setRefreshIsDisabled }: Props) => {
   // console.log(expirationTimeframe, timer);
   return (
     <div className={styles.root}>
-      <p>
+      {/* <p>
         Refresh{" "}
         {timer >= 1000
           ? `will be available in: ${getRemainingTime(timer)}`
           : "is available!"}
-      </p>
+      </p> */}
     </div>
   );
 };

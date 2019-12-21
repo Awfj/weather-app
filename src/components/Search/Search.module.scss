@@ -1,9 +1,13 @@
 .root {
   display: flex;
   border-radius: 5px;
+  position: absolute;
+  top: 7px;
+  right: 15px;
+  margin-left: .5em;
   input {
     font-size: 0.9rem;
-    padding: 0.9em;
+    padding: .8em;
     margin-right: 4px;
     background-color: transparent;
     border: none;
@@ -11,5 +15,14 @@
   }
   svg {
     display: block;
+  }
+  button {
+    padding: .4em;
+  }
+}
+
+@media (min-width: 768px) {
+  .root {
+    position: static;
   }
 }

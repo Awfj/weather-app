@@ -2,16 +2,13 @@
 
 .root {
   background-color: transparent;
-  border: none;
   cursor: pointer;
-  font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: 500;
   @include transition(0.1s);
 }
 
 // variants
 .icon {
+  padding: .6em;
   svg {
     display: block;
   }
@@ -19,4 +16,7 @@
 .text {
   border-radius: 4px;
   padding: 0.6em 1.7em;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
 }

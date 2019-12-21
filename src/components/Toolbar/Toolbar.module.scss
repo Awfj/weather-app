@@ -1,8 +1,7 @@
 .root {
   display: flex;
   justify-content: flex-end;
-  margin-right: 0.5em;
-  button:not(:last-child) {
+  button {
     margin-right: 4px;
   }
 }

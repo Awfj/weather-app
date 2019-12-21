@@ -10,7 +10,7 @@ import { THEMES } from "../../constants";
 const App: React.FC = () => {
   const [{ data: launchLocation, isLoading, isError }] = useGeoLocationApi();
   const [lastLocation, setLastLocation] = React.useState<string | null>(null);
-  const [theme, setTheme] = React.useState(THEMES.DARK);
+  const [theme, setTheme] = React.useState(THEMES.LIGHT);
 
   React.useEffect(() => {
     if (launchLocation) setLastLocation(launchLocation);
