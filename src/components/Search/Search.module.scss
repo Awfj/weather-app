@@ -4,24 +4,24 @@
   position: absolute;
   top: 7px;
   right: 15px;
-  margin-left: .5em;
+  margin-left: 0.5em;
   input {
-    font-size: 0.9rem;
-    padding: .8em;
-    margin-right: 4px;
     background-color: transparent;
     border: none;
+    font-size: 0.9rem;
+    padding: 0.8em;
     width: 100%;
   }
   svg {
     display: block;
   }
   button {
-    padding: .4em;
+    margin-left: 4px;
+    padding: 0.4em;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
   .root {
     position: static;
   }

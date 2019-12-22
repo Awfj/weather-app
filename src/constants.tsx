@@ -1,7 +1,14 @@
+export const BREAKPOINTS = {
+  XS: 0,
+  SM: 600,
+  MD: 960,
+  LG: 1280,
+  XL: 1920
+};
+
 export const THEMES = {
   LIGHT: "light",
-  DARK: "dark",
-  DYNAMIC: "dynamic"
+  DARK: "dark"
 };
 
 export const EXPIRATION_TIMEFRAME = 10000;

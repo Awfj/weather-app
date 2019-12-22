@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Search.module.scss";
 import { TSetStringOrNull, TGetForecast } from "../../types";
 import { WindowWidthContext } from "../../contexts";
+import { BREAKPOINTS } from "../../constants";
 import SearchButton from "../SearchButton/SearchButton";
 
 type Props = {
@@ -28,11 +29,9 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
         setLastLocation(query);
       }
     }
-    if (windowWidth && windowWidth < 940) {
+    if (windowWidth && windowWidth < BREAKPOINTS.MD && showSearchBtn.current) {
       setSearchIsShown(false);
-      if (showSearchBtn.current) {
-        showSearchBtn.current.focus();
-      }
+      showSearchBtn.current.focus();
     }
   };
 
@@ -41,54 +40,41 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
     setSearchQuery(query);
   };
 
-  const handleBlur = React.useCallback(() => {
-    if (searchIsShown) {
-      setSearchIsShown(false);
-      if (showSearchBtn.current) {
-        showSearchBtn.current.focus();
-      }
-    }
-  }, [searchIsShown]);
-
-  const showSearch = () => {
-    setSearchIsShown(true);
-  };
-
-  const composeSearch = () => {
-    return (
-      <form className={styles.root} onSubmit={handleSubmit}>
-        <input
-          ref={searchFieldRef}
-          value={searchQuery}
-          onChange={handleChange}
-          placeholder="Search"
-          type="search"
-        />
-        <SearchButton label="Search" type="submit" />
-      </form>
-    );
-  };
+  const handleBlur = () => setSearchIsShown(false);
 
   React.useEffect(() => {
-    if (windowWidth && windowWidth < 940) {
-      if (searchFieldRef.current) {
-        searchFieldRef.current.focus();
-        searchFieldRef.current.addEventListener("blur", handleBlur);
-      }
+    if (windowWidth && windowWidth < BREAKPOINTS.MD && searchFieldRef.current) {
+      searchFieldRef.current.focus();
     }
-  }, [searchIsShown, handleBlur, windowWidth]);
+  }, [searchIsShown, windowWidth]);
+
+  const composeSearch = (blur?: () => void) => (
+    <form className={styles.root} onSubmit={handleSubmit}>
+      <input
+        ref={searchFieldRef}
+        value={searchQuery}
+        onChange={handleChange}
+        placeholder="Search"
+        type="search"
+        onBlur={blur}
+      />
+      {windowWidth && windowWidth >= BREAKPOINTS.MD && (
+        <SearchButton label="Search" type="submit" />
+      )}
+    </form>
+  );
 
   return (
     <>
-      {windowWidth && windowWidth > 940 ? (
+      {windowWidth && windowWidth >= BREAKPOINTS.MD ? (
         composeSearch()
       ) : (
         <>
-          {searchIsShown && composeSearch()}
+          {searchIsShown && composeSearch(handleBlur)}
           <SearchButton
             ref={showSearchBtn}
             label="Show search"
-            onClick={showSearch}
+            onClick={() => setSearchIsShown(true)}
           />
         </>
       )}
