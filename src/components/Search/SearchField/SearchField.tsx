@@ -1,27 +1,32 @@
 import React from "react";
-import { TSetString } from "../../../types";
+import { TSetString, TInput } from "../../../types";
 
-type Props = {
-  searchQuery: string;
+type InputProps = {
+  value: string;
+  onBlur?: () => void;
+};
+interface Props extends InputProps {
   setSearchQuery: TSetString;
-  autoFocus?: boolean;
-};
+}
 
-const SearchField = ({ searchQuery, setSearchQuery, autoFocus }: Props) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.currentTarget.value;
-    setSearchQuery(query);
-  };
+const SearchField = React.forwardRef<TInput, Props>(
+  ({ value, setSearchQuery, onBlur }, ref) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const query = event.currentTarget.value;
+      setSearchQuery(query);
+    };
 
-  return (
-    <input
-      value={searchQuery}
-      onChange={handleChange}
-      placeholder="Search"
-      type="search"
-      autoFocus={autoFocus}
-    />
-  );
-};
+    return (
+      <input
+        ref={ref}
+        value={value}
+        onChange={handleChange}
+        placeholder="Search"
+        type="search"
+        onBlur={onBlur}
+      />
+    );
+  }
+);
 
 export default SearchField;

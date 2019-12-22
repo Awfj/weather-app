@@ -1,3 +1,5 @@
+@import "../../styles/_breakpoints.scss";
+
 .root {
   display: flex;
   border-radius: 5px;
@@ -21,7 +23,7 @@
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: $breakpoint_md) {
   .root {
     position: static;
   }

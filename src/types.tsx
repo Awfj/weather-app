@@ -36,3 +36,6 @@ export type TSetStringOrNull = (
 ) => void;
 
 export type TGetForecast = (location: string) => Promise<void>;
+
+export type TButton = HTMLButtonElement;
+export type TInput = HTMLInputElement;

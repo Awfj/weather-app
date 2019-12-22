@@ -4,6 +4,7 @@ import { TSetStringOrNull, TGetForecast } from "../../types";
 import { WindowWidthContext } from "../../contexts";
 import { BREAKPOINTS } from "../../constants";
 import SearchButton from "../SearchButton/SearchButton";
+import SearchField from "./SearchField/SearchField";
 
 type Props = {
   setLastLocation: TSetStringOrNull;
@@ -35,11 +36,6 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.currentTarget.value;
-    setSearchQuery(query);
-  };
-
   const handleBlur = () => setSearchIsShown(false);
 
   React.useEffect(() => {
@@ -48,15 +44,13 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
     }
   }, [searchIsShown, windowWidth]);
 
-  const composeSearch = (blur?: () => void) => (
+  const composeSearch = (onBlur?: () => void) => (
     <form className={styles.root} onSubmit={handleSubmit}>
-      <input
+      <SearchField
         ref={searchFieldRef}
         value={searchQuery}
-        onChange={handleChange}
-        placeholder="Search"
-        type="search"
-        onBlur={blur}
+        onBlur={onBlur}
+        setSearchQuery={setSearchQuery}
       />
       {windowWidth && windowWidth >= BREAKPOINTS.MD && (
         <SearchButton label="Search" type="submit" />

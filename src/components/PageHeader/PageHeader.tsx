@@ -18,7 +18,6 @@ const PageHeader = ({ heading, search, toolbar }: Props) => {
       </div>
       {toolbar}
       {search}
-      <button type="button">Test</button>
     </header>
   );
 };

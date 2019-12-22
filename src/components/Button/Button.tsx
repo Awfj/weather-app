@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Button.module.scss";
+import { TButton } from "../../types";
 
 export type ButtonProps = {
   disabled?: boolean;
@@ -9,14 +10,13 @@ export type ButtonProps = {
   inlineStyles?: object;
 };
 
-export type ButtonRef = HTMLButtonElement;
 interface Props extends ButtonProps {
   children: React.ReactNode;
   label: string;
   customStyles?: any;
 }
 
-const Button = React.forwardRef<ButtonRef, Props>(
+const Button = React.forwardRef<TButton, Props>(
   (
     {
       children,
