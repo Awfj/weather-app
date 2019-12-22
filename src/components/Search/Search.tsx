@@ -15,6 +15,7 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
   const [searchIsShown, setSearchIsShown] = React.useState(false);
   const windowWidth = React.useContext(WindowWidthContext);
   const showSearchBtn = React.useRef<HTMLButtonElement | null>(null);
+  const searchFieldRef = React.useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,24 +41,42 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
     setSearchQuery(query);
   };
 
+  const handleBlur = React.useCallback(() => {
+    if (searchIsShown) {
+      setSearchIsShown(false);
+      if (showSearchBtn.current) {
+        showSearchBtn.current.focus();
+      }
+    }
+  }, [searchIsShown]);
+
   const showSearch = () => {
     setSearchIsShown(true);
   };
 
-  const composeSearch = (autoFocus = false) => {
+  const composeSearch = () => {
     return (
       <form className={styles.root} onSubmit={handleSubmit}>
         <input
+          ref={searchFieldRef}
           value={searchQuery}
           onChange={handleChange}
           placeholder="Search"
           type="search"
-          autoFocus={autoFocus}
         />
         <SearchButton label="Search" type="submit" />
       </form>
     );
   };
+
+  React.useEffect(() => {
+    if (windowWidth && windowWidth < 940) {
+      if (searchFieldRef.current) {
+        searchFieldRef.current.focus();
+        searchFieldRef.current.addEventListener("blur", handleBlur);
+      }
+    }
+  }, [searchIsShown, handleBlur, windowWidth]);
 
   return (
     <>
@@ -65,7 +84,7 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
         composeSearch()
       ) : (
         <>
-          {searchIsShown && composeSearch(true)}
+          {searchIsShown && composeSearch()}
           <SearchButton
             ref={showSearchBtn}
             label="Show search"
