@@ -5,8 +5,8 @@ import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Timer from "../../components/Timer/Timer";
 import Toolbar from "../../components/Toolbar/Toolbar";
-import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
-import Refresh from "../../components/Refresh/Refresh";
+import ThemeToggle from "../../components/ThemeToggleButton/ThemeToggleButton";
+import Refresh from "../../components/RefreshButton/RefreshButton";
 import Search from "../../components/Search/Search";
 
 import useWeatherApi from "../../hooks/useWeatherApi";

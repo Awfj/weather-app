@@ -3,7 +3,7 @@ import styles from "./Search.module.scss";
 import { TSetStringOrNull, TGetForecast } from "../../types";
 import { WindowWidthContext } from "../../contexts";
 import { BREAKPOINTS } from "../../constants";
-import SearchButton from "../SearchButton/SearchButton";
+import SearchButton from "./SearchButton/SearchButton";
 import SearchField from "./SearchField/SearchField";
 
 type Props = {

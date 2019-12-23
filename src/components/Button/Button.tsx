@@ -16,37 +16,37 @@ interface Props extends ButtonProps {
   customStyles?: any;
 }
 
-const Button = React.forwardRef<TButton, Props>(
-  (
-    {
-      children,
-      disabled = false,
-      inlineStyles,
-      label,
-      onClick,
-      type = "button",
-      variant = "icon",
-      customStyles
-    },
-    ref
-  ) => {
-    let combinedStyles = `${styles.root} ${styles[variant]}`;
-    if (customStyles) combinedStyles += ` ${customStyles}`;
+const Button = React.forwardRef<TButton, Props>(function Button(
+  {
+    children,
+    disabled = false,
+    inlineStyles,
+    label,
+    onClick,
+    type = "button",
+    variant = "icon",
+    customStyles,
+    ...other
+  },
+  ref
+) {
+  let combinedStyles = `${styles.root} ${styles[variant]}`;
+  if (customStyles) combinedStyles += ` ${customStyles}`;
 
-    return (
-      <button
-        aria-label={label}
-        disabled={disabled}
-        className={combinedStyles}
-        ref={ref}
-        style={inlineStyles}
-        onClick={onClick}
-        type={type}
-      >
-        {children}
-      </button>
-    );
-  }
-);
+  return (
+    <button
+      aria-label={label}
+      disabled={disabled}
+      className={combinedStyles}
+      ref={ref}
+      style={inlineStyles}
+      onClick={onClick}
+      type={type}
+      {...other}
+    >
+      {children}
+    </button>
+  );
+});
 
 export default Button;

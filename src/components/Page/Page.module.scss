@@ -5,8 +5,8 @@
 .root {
   height: 100vh;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   main {
     padding: 1em 15px 0;
     height: 100%;
@@ -14,12 +14,9 @@
 }
 
 button {
-  outline: none;
-  border-radius: 5px;
-  @include transparent-border(2px);
-  &::-moz-focus-inner {
-    border: 0;
-  }
+  // &::-moz-focus-inner {
+  //   border: 0;
+  // }
   &:disabled {
     background-color: $grey-color;
     cursor: initial;

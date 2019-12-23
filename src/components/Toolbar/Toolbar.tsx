@@ -1,9 +1,9 @@
 import React from "react";
-import styles from './Toolbar.module.scss'
+import styles from "./Toolbar.module.scss";
 
 type Props = {
-  themeToggle: React.ReactNode;
-  refresh: React.ReactNode;
+  themeToggle: React.ReactElement;
+  refresh: React.ReactElement;
 };
 
 const Toolbar = ({ refresh, themeToggle }: Props) => {
