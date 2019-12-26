@@ -16,15 +16,15 @@ import { getExpirationTimeframe } from "../../utils";
 type Props = {
   lastLocation: string;
   setLastLocation: TSetStringOrNull;
-  isLightTheme: boolean;
-  setIsLightTheme: TSetBoolean;
+  isDarkTheme: boolean;
+  setIsDarkTheme: TSetBoolean;
 };
 
 const Forecast = ({
   lastLocation,
   setLastLocation,
-  isLightTheme,
-  setIsLightTheme
+  isDarkTheme,
+  setIsDarkTheme
 }: Props) => {
   const [refreshIsDisabled, setRefreshIsDisabled] = React.useState(true);
   const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
@@ -40,8 +40,8 @@ const Forecast = ({
   );
   const themeToggle = (
     <ThemeToggle
-      isLightTheme={isLightTheme}
-      setIsLightTheme={setIsLightTheme}
+      isDarkTheme={isDarkTheme}
+      setIsDarkTheme={setIsDarkTheme}
     />
   );
   const toolbar = <Toolbar refresh={refresh} themeToggle={themeToggle} />;

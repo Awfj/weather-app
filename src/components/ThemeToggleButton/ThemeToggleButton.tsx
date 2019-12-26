@@ -7,26 +7,28 @@ import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import { TSetBoolean } from "../../types";
 
 type Props = {
-  setIsLightTheme: TSetBoolean;
-  isLightTheme: boolean;
+  isDarkTheme: boolean;
+  setIsDarkTheme: TSetBoolean;
 } & typeof defaultProps;
 const defaultProps = {
   label: "Toggle theme"
 };
 
-const ThemeToggleButton = ({ label, setIsLightTheme, isLightTheme }: Props) => {
+const ThemeToggleButton = ({ label, setIsDarkTheme, isDarkTheme }: Props) => {
   const handleClick = () => {
-    if (isLightTheme) {
-      setIsLightTheme(false);
+    if (isDarkTheme) {
+      setIsDarkTheme(false);
+      localStorage.setItem("launch_theme", "light");
     } else {
-      setIsLightTheme(true);
+      setIsDarkTheme(true);
+      localStorage.setItem("launch_theme", "dark");
     }
   };
 
   return (
     <Tooltip title={label}>
       <IconButton aria-label={label} color="secondary" onClick={handleClick}>
-        {isLightTheme ? <Brightness2Icon /> : <WbSunnyIcon />}
+        {isDarkTheme ? <WbSunnyIcon /> : <Brightness2Icon />}
       </IconButton>
     </Tooltip>
   );

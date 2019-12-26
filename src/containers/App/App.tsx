@@ -7,21 +7,21 @@ import DataLoader from "../../components/DataLoader/DataLoader";
 import Forecast from "../Forecast/Forecast";
 import useGeoLocationApi from "../../hooks/useGeoLocationApi";
 import { lightTheme, darkTheme } from "../../theme";
+import useTheme from "../../hooks/useTheme";
 
 const App: React.FC = () => {
   const [{ data: launchLocation, isLoading, isError }] = useGeoLocationApi();
   const [lastLocation, setLastLocation] = React.useState<string | null>(null);
-  const [isLightTheme, setIsLightTheme] = React.useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useTheme();
 
   React.useEffect(() => {
     if (launchLocation) setLastLocation(launchLocation);
   }, [launchLocation]);
 
-  // console.log(theme.palette.type)
-
+  // console.log('app');
   return (
     <StylesProvider injectFirst>
-      <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
+      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         <CssBaseline />
         <DataLoader
           isLoading={isLoading}
@@ -33,8 +33,8 @@ const App: React.FC = () => {
             <Forecast
               lastLocation={lastLocation}
               setLastLocation={setLastLocation}
-              isLightTheme={isLightTheme}
-              setIsLightTheme={setIsLightTheme}
+              isDarkTheme={isDarkTheme}
+              setIsDarkTheme={setIsDarkTheme}
             />
           )}
         </DataLoader>
