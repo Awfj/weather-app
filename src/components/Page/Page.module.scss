@@ -13,17 +13,6 @@
   }
 }
 
-button {
-  // &::-moz-focus-inner {
-  //   border: 0;
-  // }
-  &:disabled {
-    background-color: $grey-color;
-    cursor: initial;
-    pointer-events: none;
-  }
-}
-
 form {
   @include transparent-border(2px);
   input {

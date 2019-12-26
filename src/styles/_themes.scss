@@ -2,25 +2,6 @@
 @import "../../styles/_snippets.scss";
 
 @mixin theme($backgroundColor, $foregroundColor) {
-  color: $foregroundColor;
-  header {
-    background-color: lighten($backgroundColor, 5%);
-  }
-  main {
-    background-color: $backgroundColor;
-  }
-  button {
-    color: $foregroundColor;
-    &:hover {
-      background-color: darken($backgroundColor, 10%);
-    }
-    &:focus {
-      box-shadow: 0 0 0 2px $foregroundColor;
-    }
-    &:active {
-      background-color: $grey-color;
-    }
-  }
   form {
     background-color: lighten($backgroundColor, 15%);
     box-shadow: 0 0 2px $foregroundColor;

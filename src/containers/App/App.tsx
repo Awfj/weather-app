@@ -1,26 +1,27 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core";
 import { StylesProvider } from "@material-ui/styles";
+import { ThemeProvider } from "@material-ui/core/styles";
 
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Forecast from "../Forecast/Forecast";
 import useGeoLocationApi from "../../hooks/useGeoLocationApi";
-import { THEMES } from "../../constants";
-import theme from "../../theme";
+import { lightTheme, darkTheme } from "../../theme";
 
 const App: React.FC = () => {
   const [{ data: launchLocation, isLoading, isError }] = useGeoLocationApi();
   const [lastLocation, setLastLocation] = React.useState<string | null>(null);
-  const [customTheme, setTheme] = React.useState(THEMES.LIGHT);
+  const [isLightTheme, setIsLightTheme] = React.useState(true);
 
   React.useEffect(() => {
     if (launchLocation) setLastLocation(launchLocation);
   }, [launchLocation]);
 
+  // console.log(theme.palette.type)
+
   return (
     <StylesProvider injectFirst>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
         <CssBaseline />
         <DataLoader
           isLoading={isLoading}
@@ -32,8 +33,8 @@ const App: React.FC = () => {
             <Forecast
               lastLocation={lastLocation}
               setLastLocation={setLastLocation}
-              theme={customTheme}
-              setTheme={setTheme}
+              isLightTheme={isLightTheme}
+              setIsLightTheme={setIsLightTheme}
             />
           )}
         </DataLoader>

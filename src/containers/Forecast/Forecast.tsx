@@ -10,21 +10,21 @@ import Refresh from "../../components/RefreshButton/RefreshButton";
 import Search from "../../components/Search/Search";
 
 import useWeatherApi from "../../hooks/useWeatherApi";
-import { TSetStringOrNull, TSetString } from "../../types";
+import { TSetStringOrNull, TSetBoolean } from "../../types";
 import { getExpirationTimeframe } from "../../utils";
 
 type Props = {
   lastLocation: string;
   setLastLocation: TSetStringOrNull;
-  theme: string;
-  setTheme: TSetString;
+  isLightTheme: boolean;
+  setIsLightTheme: TSetBoolean;
 };
 
 const Forecast = ({
   lastLocation,
   setLastLocation,
-  theme,
-  setTheme
+  isLightTheme,
+  setIsLightTheme
 }: Props) => {
   const [refreshIsDisabled, setRefreshIsDisabled] = React.useState(true);
   const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
@@ -38,7 +38,12 @@ const Forecast = ({
       disabled={refreshIsDisabled}
     />
   );
-  const themeToggle = <ThemeToggle theme={theme} setTheme={setTheme} />;
+  const themeToggle = (
+    <ThemeToggle
+      isLightTheme={isLightTheme}
+      setIsLightTheme={setIsLightTheme}
+    />
+  );
   const toolbar = <Toolbar refresh={refresh} themeToggle={themeToggle} />;
   const search = (
     <Search
@@ -49,7 +54,7 @@ const Forecast = ({
   );
 
   return (
-    <Page theme={theme} toolbar={toolbar} search={search}>
+    <Page toolbar={toolbar} search={search}>
       <DataLoader
         isLoading={isLoading}
         isError={isError}

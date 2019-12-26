@@ -15,7 +15,7 @@ const RefreshButton = ({ label, ...other }: Props) => {
   return (
     <Tooltip title={label}>
       <span>
-        <IconButton aria-label={label} {...other}>
+        <IconButton aria-label={label} color="secondary" {...other}>
           <RefreshIcon />
         </IconButton>
       </span>

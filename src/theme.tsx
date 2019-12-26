@@ -1,28 +1,46 @@
 import { createMuiTheme } from "@material-ui/core";
+import grey from "@material-ui/core/colors/grey";
 
-const theme = createMuiTheme({
+const baseTheme = {
   props: {
     MuiButtonBase: {
       disableRipple: true
     }
-  }
-});
-
-theme.overrides = {
-  MuiIconButton: {
-    root: {
-      borderRadius: "5px",
-      padding: '0.4em'
-    }
   },
-  MuiTooltip: {
-    tooltip: {
-      backgroundColor: 'black',
-      border: '1px solid grey',
-      borderRadius: '0',
-      fontSize: '0.8rem'
+  overrides: {
+    MuiIconButton: {
+      root: {
+        border: "1px solid",
+        borderRadius: "5px",
+        padding: "0.4em"
+      }
+    },
+    MuiTooltip: {
+      tooltip: {
+        backgroundColor: "black",
+        border: "1px solid grey",
+        borderRadius: "0",
+        fontSize: "0.8rem"
+      }
+    },
+    MuiTouchRipple: {
+      child: {
+        borderRadius: "5px"
+      }
     }
   }
 };
 
-export default theme;
+export const lightTheme = createMuiTheme({
+  ...baseTheme,
+  palette: {
+    secondary: grey
+  }
+});
+
+export const darkTheme = createMuiTheme({
+  ...baseTheme,
+  palette: {
+    type: "dark"
+  }
+});
