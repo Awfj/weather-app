@@ -26,7 +26,7 @@ const ThemeToggleButton = ({ label, setIsDarkTheme, isDarkTheme }: Props) => {
   };
 
   return (
-    <Tooltip title={label}>
+    <Tooltip title={label} interactive>
       <IconButton aria-label={label} color="secondary" onClick={handleClick}>
         {isDarkTheme ? <WbSunnyIcon /> : <Brightness2Icon />}
       </IconButton>

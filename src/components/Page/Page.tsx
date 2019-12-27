@@ -25,6 +25,16 @@ const useStyles = makeStyles(theme => ({
     },
     "& main": {
       backgroundColor: theme.palette.background.default
+    },
+    "& form": {
+      boxShadow: `0 0 0 1px ${theme.palette.secondary.dark}`,
+      // border: "1px solid",
+      "& input": {
+        color: theme.palette.text.primary,
+        "&:focus": {
+          boxShadow: `0 0 0 2px ${theme.palette.secondary.dark}`
+        }
+      }
     }
   }
 }));
