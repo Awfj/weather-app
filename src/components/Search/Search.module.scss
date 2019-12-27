@@ -2,7 +2,6 @@
 
 .root {
   display: flex;
-  border-radius: 5px;
   position: absolute;
   top: 7px;
   right: 15px;
@@ -18,7 +17,7 @@
     display: block;
   }
   button {
-    margin-left: 4px;
+    margin-left: 6px;
     padding: 0.3em;
   }
 }

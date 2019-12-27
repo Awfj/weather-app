@@ -15,24 +15,28 @@ type Props = {
 const useStyles = makeStyles(theme => ({
   root: {
     "& button": {
+      "&:hover": {
+        backgroundColor: theme.palette.action.hover
+      },
       "&:focus": {
-        boxShadow: `0 0 0 2px ${theme.palette.secondary.dark}`
+        boxShadow: `0 0 0 2px ${theme.palette.action.active}`
       },
       "&:active": {
-        backgroundColor: theme.palette.secondary.dark,
-        // color: theme.palette.secondary.contrastText
+        backgroundColor: theme.palette.action.active,
+        color: theme.palette.primary.main
       }
     },
     "& main": {
       backgroundColor: theme.palette.background.default
     },
     "& form": {
-      boxShadow: `0 0 0 1px ${theme.palette.secondary.dark}`,
-      // border: "1px solid",
+      boxShadow: `0 0 0 1px ${theme.palette.primary.contrastText}`,
       "& input": {
-        color: theme.palette.text.primary,
+        color: theme.palette.primary.contrastText
+      },
+      "& input, & button": {
         "&:focus": {
-          boxShadow: `0 0 0 2px ${theme.palette.secondary.dark}`
+          boxShadow: `0 0 0 3px ${theme.palette.action.active}`
         }
       }
     }

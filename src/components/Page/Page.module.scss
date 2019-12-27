@@ -15,7 +15,6 @@
 form {
   @include transparent-border(2px);
   input {
-    border-radius: 3px;
     @include transition(0.1s);
   }
 }

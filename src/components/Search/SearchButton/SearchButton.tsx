@@ -14,7 +14,7 @@ const SearchButton = React.forwardRef<TButton, Props>(
   ({ label, ...other }, ref) => {
     return (
       <Tooltip title={label}>
-        <IconButton aria-label={label} color="secondary" ref={ref} {...other}>
+        <IconButton aria-label={label} color="inherit" ref={ref} {...other}>
           <SearchIcon />
         </IconButton>
       </Tooltip>

@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Forecast from "../Forecast/Forecast";
 import useGeoLocationApi from "../../hooks/useGeoLocationApi";
-import { lightTheme, darkTheme, dynamicTheme } from "../../theme";
+import { lightTheme, darkTheme } from "../../theme";
 import useTheme from "../../hooks/useTheme";
 
 const App: React.FC = () => {
@@ -30,14 +30,12 @@ const App: React.FC = () => {
          you can still look for it manually.`}
         >
           {lastLocation && (
-            <ThemeProvider theme={dynamicTheme}>
               <Forecast
                 lastLocation={lastLocation}
                 setLastLocation={setLastLocation}
                 isDarkTheme={isDarkTheme}
                 setIsDarkTheme={setIsDarkTheme}
               />
-            </ThemeProvider>
           )}
         </DataLoader>
       </ThemeProvider>
