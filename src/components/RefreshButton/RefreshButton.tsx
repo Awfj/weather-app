@@ -7,6 +7,7 @@ type Props = {
   onClick: () => void;
   disabled: boolean;
 } & typeof defaultProps;
+
 const defaultProps = {
   label: "Refresh"
 };
@@ -22,6 +23,6 @@ const RefreshButton = ({ label, ...other }: Props) => {
     </Tooltip>
   );
 };
-RefreshButton.defaultProps = defaultProps;
 
+RefreshButton.defaultProps = defaultProps;
 export default RefreshButton;

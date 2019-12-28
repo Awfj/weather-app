@@ -1,3 +1,8 @@
+export enum EThemes {
+  Light = "light",
+  Dark = "dark"
+}
+
 export interface IForecast {
   currentWeather: ICurrentWeather;
   requestTime: number;
