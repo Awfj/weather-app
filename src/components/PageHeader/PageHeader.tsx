@@ -1,5 +1,4 @@
 import React from "react";
-// import styles from "./PageHeader.module.scss";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,12 +13,6 @@ export type PageHeaderProps = {
 type Props = {
   heading: string;
 } & PageHeaderProps;
-
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     backgroundColor: theme.palette.background.paper
-//   }
-// }));
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,13 +43,6 @@ const PageHeader = ({ heading, search, toolbar }: Props) => {
         </Toolbar>
       </AppBar>
     </div>
-    // <header className={`${styles.root} ${classes.root}`}>
-    // <div className={styles.startGroup}>
-    //   <h1>{heading}</h1>
-    // </div>
-    // {toolbar}
-    // {search}
-    // </header>
   );
 };
 

@@ -19,20 +19,17 @@ const baseTheme = {
     },
     MuiTooltip: {
       tooltip: {
-        borderRadius: "0",
         fontSize: "0.8rem"
-      }
-    },
-    MuiTouchRipple: {
-      child: {
-        borderRadius: "5px"
       }
     }
   },
   typography: {
     h1: {
-      fontSize: '2rem'
+      fontSize: "2rem"
     }
+  },
+  shape: {
+    borderRadius: 0
   }
 };
 
@@ -45,7 +42,7 @@ export const lightTheme = createMuiTheme({
       hover: "rgba(0, 0, 0, 0.13)"
     },
     primary: {
-      main: grey[100]
+      main: grey[200]
     }
   }
 });

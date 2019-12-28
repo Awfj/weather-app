@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./Search.module.scss";
 import { TSetStringOrNull, TGetForecast } from "../../types";
 import { WindowWidthContext } from "../../contexts";
 import { BREAKPOINTS } from "../../constants";
 import SearchButton from "./SearchButton/SearchButton";
 import SearchField from "./SearchField/SearchField";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 type Props = {
   setLastLocation: TSetStringOrNull;
@@ -12,12 +12,45 @@ type Props = {
   lastLocation: string;
 };
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      backgroundColor: theme.palette.primary.light,
+      display: "flex",
+      marginLeft: "0.5em",
+      position: "absolute",
+      top: "10px",
+      right: "15px",
+      zIndex: 1,
+      [theme.breakpoints.up("md")]: {
+        position: "static",
+        zIndex: "auto"
+      },
+      "& input": {
+        backgroundColor: "transparent",
+        border: "none",
+        fontSize: "0.9rem",
+        padding: "0.8em",
+        width: "100%"
+      },
+      "& button": {
+        marginLeft: "6px",
+        padding: "0.3em"
+      },
+      "& svg": {
+        display: "block"
+      }
+    }
+  })
+);
+
 const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [searchIsShown, setSearchIsShown] = React.useState(false);
   const windowWidth = React.useContext(WindowWidthContext);
   const showSearchBtn = React.useRef<HTMLButtonElement | null>(null);
   const searchFieldRef = React.useRef<HTMLInputElement | null>(null);
+  const classes = useStyles();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,7 +78,7 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
   }, [searchIsShown, windowWidth]);
 
   const composeSearch = (onBlur?: () => void) => (
-    <form className={styles.root} onSubmit={handleSubmit}>
+    <form className={classes.root} onSubmit={handleSubmit}>
       <SearchField
         ref={searchFieldRef}
         value={searchQuery}
