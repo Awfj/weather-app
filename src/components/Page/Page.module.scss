@@ -2,19 +2,19 @@
 @import "../../styles/_colors.scss";
 
 .root {
-  height: 100vh;
-  position: relative;
+  // height: 100vh;
+  // position: relative;
   // display: flex;
   // flex-direction: column;
-  main {
-    padding: 1em 15px 0;
-    height: 100%;
-  }
+  // main {
+  //   padding: 1em 15px 0;
+  //   // height: 100%;
+  // }
 }
 
-form {
-  @include transparent-border(2px);
-  input {
-    @include transition(0.1s);
-  }
-}
+// form {
+//   @include transparent-border(2px);
+//   input {
+//     @include transition(0.1s);
+//   }
+// }

@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import SidebarToggle from "../SidebarToggle/SidebarToggle";
+import DrawerToggle from "../DrawerToggle/DrawerToggle";
 
 export type PageHeaderProps = {
   toolbar?: React.ReactNode;
@@ -12,37 +12,35 @@ export type PageHeaderProps = {
 
 type Props = {
   heading: string;
+  toggleDrawer: () => void;
 } & PageHeaderProps;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1
-    },
-    sidebarButton: {
-      marginRight: theme.spacing(2)
+      backgroundColor: theme.palette.background.paper, 
+      zIndex: theme.zIndex.drawer + 1,
     },
     title: {
       flexGrow: 1
-    }
+    },
+    
   })
 );
 
-const PageHeader = ({ heading, search, toolbar }: Props) => {
+const PageHeader = ({ heading, search, toolbar, toggleDrawer }: Props) => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <AppBar position="sticky">
-        <Toolbar>
-          <SidebarToggle className={classes.sidebarButton} />
-          <Typography variant="h1" className={classes.title}>
-            {heading}
-          </Typography>
-          {toolbar}
-          {search}
-        </Toolbar>
-      </AppBar>
-    </div>
+    <AppBar position="static" className={classes.root}>
+      <Toolbar disableGutters>
+        <DrawerToggle onClick={toggleDrawer} />
+        <Typography variant="h1" className={classes.title}>
+          {heading}
+        </Typography>
+        {toolbar}
+        {search}
+      </Toolbar>
+    </AppBar>
   );
 };
 
