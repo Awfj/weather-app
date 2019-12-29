@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignSelf: "stretch",
       display: "flex",
       marginRight: theme.spacing(2),
-      width: theme.customProperties.mixins.drawer.minWidth
+      width: theme.spacing(7)
     },
     MuiIconButton: {
       border: "none",

@@ -18,21 +18,30 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      backgroundColor: theme.palette.background.paper, 
-      zIndex: theme.zIndex.drawer + 1,
+      backgroundColor: theme.palette.background.paper,
+      zIndex: theme.zIndex.drawer + 1
+    },
+    toolbar: {
+      paddingRight: theme.spacing(2),
+      [theme.breakpoints.down("xs")]: {
+        minHeight: theme.spacing(7)
+      }
     },
     title: {
       flexGrow: 1
-    },
-    
+    }
   })
 );
 
 const PageHeader = ({ heading, search, toolbar, toggleDrawer }: Props) => {
   const classes = useStyles();
   return (
-    <AppBar position="static" className={classes.root}>
-      <Toolbar disableGutters>
+    <AppBar className={classes.root}>
+      <Toolbar
+        disableGutters
+        variant="dense"
+        classes={{ root: classes.toolbar }}
+      >
         <DrawerToggle onClick={toggleDrawer} />
         <Typography variant="h1" className={classes.title}>
           {heading}

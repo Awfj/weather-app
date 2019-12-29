@@ -15,7 +15,7 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // display: "flex",
+      display: "flex",
       "& button": {
         "&:hover": {
           backgroundColor: theme.palette.action.hover
@@ -29,9 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
         }
       },
       "& main": {
-        // backgroundColor: theme.palette.primary.main,
         flexGrow: 1,
-        padding: theme.spacing(3),
+        padding: theme.spacing(7, 3),
+        [theme.breakpoints.up("sm")]: {
+          paddingTop: theme.spacing(8)
+        }
       },
       "& form": {
         boxShadow: `0 0 0 1px ${theme.palette.primary.contrastText}`,

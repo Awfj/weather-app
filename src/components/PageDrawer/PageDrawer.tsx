@@ -13,22 +13,31 @@ type Props = {
   isDrawerOpen: boolean;
 };
 
-const DRAWER_WIDTH = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // width: DRAWER_WIDTH,
       flexShrink: 0,
       whiteSpace: "nowrap"
     },
     isOpen: {
-      width: DRAWER_WIDTH
+      transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen
+      }),
+      width: 240
     },
     isClosed: {
-      width: theme.spacing(7) + 1
+      transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      }),
+      width: theme.spacing(7)
     },
     MuiPaper: {
-      top: theme.mixins.toolbar.minHeight
+      top: theme.spacing(7),
+      [theme.breakpoints.up("sm")]: {
+        top: theme.spacing(8)
+      }
     }
   })
 );
@@ -40,8 +49,8 @@ const PageDrawer = ({ isDrawerOpen }: Props) => {
       variant="permanent"
       open={isDrawerOpen}
       className={clsx(classes.root, {
-        // [classes.isOpen]: isDrawerOpen,
-        // [classes.isClosed]: !isDrawerOpen
+        [classes.isOpen]: isDrawerOpen,
+        [classes.isClosed]: !isDrawerOpen
       })}
       classes={{
         paper: clsx(classes.MuiPaper, {

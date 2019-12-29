@@ -1,4 +1,4 @@
-import createCustomTheme from "./styles/createCustomTheme";
+import { createMuiTheme } from '@material-ui/core/styles';
 import grey from "@material-ui/core/colors/grey";
 // import red from "@material-ui/core/colors/red";
 
@@ -10,11 +10,6 @@ const baseTheme = {
     },
     MuiButtonBase: {
       disableRipple: true
-    }
-  },
-  mixins: {
-    toolbar: {
-      minHeight: 53
     }
   },
   overrides: {
@@ -35,6 +30,11 @@ const baseTheme = {
         paddingTop: 0
       }
     },
+    MuiToolbar: {
+      dense: {
+        minHeight: 64
+      }
+    },
     MuiTooltip: {
       tooltip: {
         fontSize: "0.8rem"
@@ -51,7 +51,7 @@ const baseTheme = {
   }
 };
 
-export const lightTheme = createCustomTheme({
+export const lightTheme = createMuiTheme({
   ...baseTheme,
   palette: {
     ...baseTheme.pallete,
@@ -68,16 +68,13 @@ export const lightTheme = createCustomTheme({
   }
 });
 
-export const darkTheme = createCustomTheme({
+export const darkTheme = createMuiTheme({
   ...baseTheme,
   palette: {
     ...baseTheme.pallete,
     action: {
       active: "rgba(255, 255, 255, 0.8)",
       hover: "rgba(255, 255, 255, 0.3)"
-    },
-    background: {
-      // default: grey[900]
     },
     primary: {
       main: grey[900]
