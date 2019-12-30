@@ -22,8 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(2),
       width: drawerIconWidth
     },
-    MuiIconButton: {
-      border: "none",
+    button: {
       width: "100%"
     }
   })
@@ -37,7 +36,7 @@ const SidebarToggle = ({ label, ...other }: Props) => {
       <IconButton
         aria-label={label}
         color="inherit"
-        classes={{ root: classes.MuiIconButton }}
+        classes={{ root: classes.button }}
         {...other}
       >
         <MenuIcon />

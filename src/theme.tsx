@@ -1,7 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
 // import red from "@material-ui/core/colors/red";
-import { LIST_ITEM_GUTTER_LENGTH, TOOLBAR_HEIGHT } from "./constants";
+import { LIST_ITEM_GUTTER_LENGTH, TOOLBAR_HEIGHT, ICON_BUTTON_FONT_SIZE } from "./constants";
 
 const baseTheme = {
   pallete: {},
@@ -21,9 +21,9 @@ const baseTheme = {
     },
     MuiIconButton: {
       root: {
-        border: "1px solid",
         borderRadius: "0",
-        padding: "0.4em"
+        fontSize: ICON_BUTTON_FONT_SIZE,
+        padding: "0.5em"
       }
     },
     MuiListItem: {
@@ -64,7 +64,8 @@ export const lightTheme = createMuiTheme({
     ...baseTheme.pallete,
     action: {
       active: "rgba(0, 0, 0, 0.5)",
-      hover: "rgba(0, 0, 0, 0.13)"
+      hover: "rgba(0, 0, 0, 0.13)",
+      selected: "rgba(0, 0, 0, 0.16)"
     },
     background: {
       default: grey[200]

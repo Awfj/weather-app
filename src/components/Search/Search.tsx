@@ -5,6 +5,7 @@ import { BREAKPOINTS } from "../../constants";
 import SearchButton from "./SearchButton/SearchButton";
 import SearchField from "./SearchField/SearchField";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { ICON_BUTTON_FONT_SIZE } from "../../constants";
 
 type Props = {
   setLastLocation: TSetStringOrNull;
@@ -19,23 +20,25 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       marginLeft: "0.5em",
       position: "absolute",
-      top: "10px",
+      top: "50%",
+      transform: "translateY(-50%)",
       right: "15px",
       zIndex: 1,
       [theme.breakpoints.up("md")]: {
         position: "static",
+        transform: 'none',
         zIndex: "auto"
       },
       "& input": {
         backgroundColor: "transparent",
         border: "none",
         fontSize: "0.9rem",
-        padding: "0.8em",
+        padding: "1em 0.8em",
         width: "100%"
       },
       "& button": {
-        marginLeft: "6px",
-        padding: "0.3em"
+        marginLeft: "3px",
+        fontSize: `calc(${ICON_BUTTON_FONT_SIZE} - 0.1rem)`
       },
       "& svg": {
         display: "block"

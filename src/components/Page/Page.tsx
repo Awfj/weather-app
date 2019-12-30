@@ -7,7 +7,7 @@ import PageHeader, {
   PageHeaderProps
 } from "../../components/PageHeader/PageHeader";
 import PageDrawer from "../../components/PageDrawer/PageDrawer";
-import {TOOLBAR_HEIGHT, toolbarHeightMin} from '../../constants'
+import { TOOLBAR_HEIGHT, toolbarHeightMin } from "../../constants";
 
 type Props = {
   children: React.ReactNode;
@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: "flex",
       "& button": {
+        "&:focus": {
+          backgroundColor: theme.palette.action.selected
+        },
         "&:hover": {
           backgroundColor: theme.palette.action.hover
-        },
-        "&:focus": {
-          boxShadow: `0 0 0 2px ${theme.palette.action.active}`
         },
         "&:active": {
           backgroundColor: theme.palette.action.active,
@@ -40,11 +40,9 @@ const useStyles = makeStyles((theme: Theme) =>
       "& form": {
         boxShadow: `0 0 0 1px ${theme.palette.primary.contrastText}`,
         "& input": {
-          color: theme.palette.primary.contrastText
-        },
-        "& input, & button": {
+          color: theme.palette.primary.contrastText,
           "&:focus": {
-            boxShadow: `0 0 0 3px ${theme.palette.action.active}`
+            boxShadow: `0 0 0 .2rem ${theme.palette.action.active}`
           }
         }
       }

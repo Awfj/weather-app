@@ -39,7 +39,10 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowX: "hidden",
       width: drawerIconWidth
     },
-    MuiPaper: {
+    icon: {
+      color: theme.palette.primary.contrastText
+    },
+    paper: {
       top: toolbarHeightMin,
       [theme.breakpoints.up("sm")]: {
         top: TOOLBAR_HEIGHT
@@ -59,7 +62,7 @@ const PageDrawer = ({ isDrawerOpen }: Props) => {
         [classes.isClosed]: !isDrawerOpen
       })}
       classes={{
-        paper: clsx(classes.MuiPaper, {
+        paper: clsx(classes.paper, {
           [classes.isOpen]: isDrawerOpen,
           [classes.isClosed]: !isDrawerOpen
         })
@@ -68,7 +71,7 @@ const PageDrawer = ({ isDrawerOpen }: Props) => {
       <List disablePadding>
         {["Forecast", "Maps"].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>
+            <ListItemIcon classes={{ root: classes.icon }}>
               {index % 2 === 0 ? <HomeOutlinedIcon /> : <TrackChangesIcon />}
             </ListItemIcon>
             <ListItemText primary={text} />
