@@ -8,6 +8,11 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+import {
+  TOOLBAR_HEIGHT,
+  toolbarHeightMin,
+  drawerIconWidth
+} from "../../constants";
 
 type Props = {
   isDrawerOpen: boolean;
@@ -24,19 +29,20 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       }),
-      width: 240
+      width: "13rem"
     },
     isClosed: {
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       }),
-      width: theme.spacing(7)
+      overflowX: "hidden",
+      width: drawerIconWidth
     },
     MuiPaper: {
-      top: theme.spacing(7),
+      top: toolbarHeightMin,
       [theme.breakpoints.up("sm")]: {
-        top: theme.spacing(8)
+        top: TOOLBAR_HEIGHT
       }
     }
   })
@@ -59,8 +65,8 @@ const PageDrawer = ({ isDrawerOpen }: Props) => {
         })
       }}
     >
-      <List>
-        {["Foreact", "Maps"].map((text, index) => (
+      <List disablePadding>
+        {["Forecast", "Maps"].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <HomeOutlinedIcon /> : <TrackChangesIcon />}

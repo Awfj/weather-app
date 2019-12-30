@@ -7,6 +7,7 @@ import PageHeader, {
   PageHeaderProps
 } from "../../components/PageHeader/PageHeader";
 import PageDrawer from "../../components/PageDrawer/PageDrawer";
+import {TOOLBAR_HEIGHT, toolbarHeightMin} from '../../constants'
 
 type Props = {
   children: React.ReactNode;
@@ -30,9 +31,10 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       "& main": {
         flexGrow: 1,
-        padding: theme.spacing(7, 3),
+        marginTop: toolbarHeightMin,
+        padding: theme.spacing(0, 3),
         [theme.breakpoints.up("sm")]: {
-          paddingTop: theme.spacing(8)
+          marginTop: TOOLBAR_HEIGHT
         }
       },
       "& form": {

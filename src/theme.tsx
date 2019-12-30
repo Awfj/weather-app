@@ -1,6 +1,7 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
 // import red from "@material-ui/core/colors/red";
+import { LIST_ITEM_GUTTER_LENGTH, TOOLBAR_HEIGHT } from "./constants";
 
 const baseTheme = {
   pallete: {},
@@ -25,14 +26,20 @@ const baseTheme = {
         padding: "0.4em"
       }
     },
-    MuiList: {
-      padding: {
-        paddingTop: 0
+    MuiListItem: {
+      gutters: {
+        paddingLeft: LIST_ITEM_GUTTER_LENGTH,
+        paddingRight: LIST_ITEM_GUTTER_LENGTH
+      }
+    },
+    MuiListItemIcon: {
+      root: {
+        minWidth: "3rem"
       }
     },
     MuiToolbar: {
       dense: {
-        minHeight: 64
+        minHeight: TOOLBAR_HEIGHT
       }
     },
     MuiTooltip: {

@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import DrawerToggle from "../DrawerToggle/DrawerToggle";
+import { toolbarHeightMin } from "../../constants";
 
 export type PageHeaderProps = {
   toolbar?: React.ReactNode;
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbar: {
       paddingRight: theme.spacing(2),
       [theme.breakpoints.down("xs")]: {
-        minHeight: theme.spacing(7)
+        minHeight: toolbarHeightMin
       }
     },
     title: {

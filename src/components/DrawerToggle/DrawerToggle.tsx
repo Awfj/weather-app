@@ -1,8 +1,8 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { drawerIconWidth } from "../../constants";
 
 type Props = {
   className?: string;
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignSelf: "stretch",
       display: "flex",
       marginRight: theme.spacing(2),
-      width: theme.spacing(7)
+      width: drawerIconWidth
     },
     MuiIconButton: {
       border: "none",
@@ -34,16 +34,14 @@ const SidebarToggle = ({ label, ...other }: Props) => {
 
   return (
     <div className={classes.root}>
-      <Tooltip title={label}>
-        <IconButton
-          aria-label={label}
-          color="inherit"
-          classes={{ root: classes.MuiIconButton }}
-          {...other}
-        >
-          <MenuIcon />
-        </IconButton>
-      </Tooltip>
+      <IconButton
+        aria-label={label}
+        color="inherit"
+        classes={{ root: classes.MuiIconButton }}
+        {...other}
+      >
+        <MenuIcon />
+      </IconButton>
     </div>
   );
 };
