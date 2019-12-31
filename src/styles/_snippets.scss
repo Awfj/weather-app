@@ -1,6 +1,0 @@
-@mixin transition($duration) {
-  transition: all $duration ease-in-out;
-}
-@mixin transparent-border($width) {
-  border: $width solid transparent;
-}

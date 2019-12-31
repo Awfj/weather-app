@@ -4,7 +4,7 @@ import Page from "../../components/Page/Page";
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Timer from "../../components/Timer/Timer";
-import Toolbar from "../../components/Toolbar/Toolbar";
+import Toolbar from "../../components/ToolbarButtons/ToolbarButtons";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import Refresh from "../../components/RefreshButton/RefreshButton";
 import Search from "../../components/Search/Search";
@@ -39,12 +39,11 @@ const Forecast = ({
     />
   );
   const themeToggle = (
-    <ThemeToggle
-      isDarkTheme={isDarkTheme}
-      setIsDarkTheme={setIsDarkTheme}
-    />
+    <ThemeToggle isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
   );
-  const toolbar = <Toolbar refresh={refresh} themeToggle={themeToggle} />;
+  const toolbarButtons = (
+    <Toolbar refresh={refresh} themeToggle={themeToggle} />
+  );
   const search = (
     <Search
       setLastLocation={setLastLocation}
@@ -54,7 +53,7 @@ const Forecast = ({
   );
 
   return (
-    <Page toolbar={toolbar} search={search}>
+    <Page toolbarButtons={toolbarButtons} search={search}>
       <DataLoader
         isLoading={isLoading}
         isError={isError}

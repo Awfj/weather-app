@@ -1,7 +1,13 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
 // import red from "@material-ui/core/colors/red";
-import { LIST_ITEM_GUTTER_LENGTH, TOOLBAR_HEIGHT, ICON_BUTTON_FONT_SIZE } from "./constants";
+import {
+  LIST_ITEM_GUTTER_LENGTH,
+  TOOLBAR_HEIGHT,
+  ICON_BUTTON_FONT_SIZE,
+  SVG_ICON_FONT_SIZE,
+  listItemIconMinWidth
+} from "./constants";
 
 const baseTheme = {
   pallete: {},
@@ -34,7 +40,12 @@ const baseTheme = {
     },
     MuiListItemIcon: {
       root: {
-        minWidth: "3rem"
+        minWidth: listItemIconMinWidth
+      }
+    },
+    MuiSvgIcon: {
+      root: {
+        fontSize: SVG_ICON_FONT_SIZE
       }
     },
     MuiToolbar: {
