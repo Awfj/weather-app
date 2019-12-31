@@ -1,8 +1,8 @@
 import React from "react";
 import { TSetStringOrNull, TGetForecast } from "../../types";
 import { WindowWidthContext } from "../../contexts";
-import SearchButton from "./SearchButton/SearchButton";
-import SearchField from "./SearchField/SearchField";
+import SearchButton from "../SearchButton/SearchButton";
+import SearchField from "../SearchField/SearchField";
 import {
   createStyles,
   makeStyles,

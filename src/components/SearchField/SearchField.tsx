@@ -1,5 +1,5 @@
 import React from "react";
-import { TSetString, TInput } from "../../../types";
+import { TSetString, TInput } from "../../types";
 
 type InputProps = {
   value: string;

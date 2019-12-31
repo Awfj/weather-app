@@ -5,10 +5,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import DrawerToggle from "../DrawerToggle/DrawerToggle";
 import { toolbarHeightMin } from "../../constants";
+import { capitalizeFirstChar } from "../../utils";
 
 export type PageHeaderProps = {
   toolbarButtons?: React.ReactNode;
-  search: React.ReactNode;
+  search?: React.ReactNode;
 };
 
 type Props = {
@@ -50,7 +51,7 @@ const PageHeader = ({
       >
         <DrawerToggle onClick={toggleDrawer} />
         <Typography variant="h1" className={classes.title}>
-          {heading}
+          {capitalizeFirstChar(heading)}
         </Typography>
         {toolbarButtons}
         {search}

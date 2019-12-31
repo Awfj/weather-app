@@ -1,7 +1,7 @@
 import React from "react";
 
 import Page from "../../components/Page/Page";
-import CurrentWeather from "./CurrentWeather/CurrentWeather";
+import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Timer from "../../components/Timer/Timer";
 import Toolbar from "../../components/ToolbarButtons/ToolbarButtons";
@@ -12,6 +12,7 @@ import Search from "../../components/Search/Search";
 import useWeatherApi from "../../hooks/useWeatherApi";
 import { TSetStringOrNull, TSetBoolean } from "../../types";
 import { getExpirationTimeframe } from "../../utils";
+import { APP_STRUCTURE } from "../../constants";
 
 type Props = {
   lastLocation: string;
@@ -53,7 +54,11 @@ const Forecast = ({
   );
 
   return (
-    <Page toolbarButtons={toolbarButtons} search={search}>
+    <Page
+      toolbarButtons={toolbarButtons}
+      search={search}
+      heading={APP_STRUCTURE.FORECAST}
+    >
       <DataLoader
         isLoading={isLoading}
         isError={isError}

@@ -5,12 +5,13 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import PageHeader, {
   PageHeaderProps
-} from "../../components/PageHeader/PageHeader";
-import PageDrawer from "../../components/PageDrawer/PageDrawer";
+} from "../PageHeader/PageHeader";
+import PageDrawer from "../PageDrawer/PageDrawer";
 import { TOOLBAR_HEIGHT, toolbarHeightMin } from "../../constants";
 
 type Props = {
   children: React.ReactNode;
+  heading: string;
 } & PageHeaderProps;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Page = ({ children, ...other }: Props) => {
+const Page = ({ children, heading, ...other }: Props) => {
   const classes = useStyles();
   const windowWidth = useWindowWidth();
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -60,7 +61,7 @@ const Page = ({ children, ...other }: Props) => {
     <WindowWidthContext.Provider value={windowWidth}>
       <div className={classes.root}>
         <PageHeader
-          heading="Forecast"
+          heading={heading}
           {...other}
           toggleDrawer={() => setIsDrawerOpen(!isDrawerOpen)}
         />

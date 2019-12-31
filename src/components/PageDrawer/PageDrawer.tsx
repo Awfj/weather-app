@@ -3,16 +3,17 @@ import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+
+import ListItemLink from "../ListItemLink/ListItemLink";
 import {
   TOOLBAR_HEIGHT,
   toolbarHeightMin,
-  drawerIconWidth
+  drawerIconWidth,
+  APP_STRUCTURE
 } from "../../constants";
+import { capitalizeFirstChar } from "../../utils";
 
 type Props = {
   isDrawerOpen: boolean;
@@ -53,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const PageDrawer = ({ isDrawerOpen }: Props) => {
   const classes = useStyles();
+
   return (
     <Drawer
       variant="permanent"
@@ -69,14 +71,24 @@ const PageDrawer = ({ isDrawerOpen }: Props) => {
       }}
     >
       <List disablePadding>
-        {["Forecast", "Maps"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon classes={{ root: classes.icon }}>
-              {index % 2 === 0 ? <HomeOutlinedIcon /> : <TrackChangesIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItemLink
+          icon={<HomeOutlinedIcon />}
+          primary={capitalizeFirstChar(APP_STRUCTURE.FORECAST)}
+          to={APP_STRUCTURE.FORECAST}
+        />
+        <ListItemLink
+          icon={<StarBorderIcon />}
+          primary={capitalizeFirstChar(APP_STRUCTURE.FAVORITES)}
+          to={APP_STRUCTURE.FAVORITES}
+        />
+        {/* {["Forecast", "Maps"].map((text, index) => (
+          // <ListItem button key={text}>
+          //   <ListItemIcon classes={{ root: classes.icon }}>
+          //     {index % 2 === 0 ? <HomeOutlinedIcon /> : <TrackChangesIcon />}
+          //   </ListItemIcon>
+          //   <ListItemText primary={text} />
+          // </ListItem>
+        ))} */}
       </List>
     </Drawer>
   );
