@@ -7,16 +7,6 @@ import DrawerToggle from "../DrawerToggle/DrawerToggle";
 import { toolbarHeightMin } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
 
-export type PageHeaderProps = {
-  toolbarButtons?: React.ReactNode;
-  search?: React.ReactNode;
-};
-
-type Props = {
-  heading: string;
-  toggleDrawer: () => void;
-} & PageHeaderProps;
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -34,6 +24,16 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
+
+export type PageHeaderProps = {
+  toolbarButtons?: React.ReactNode;
+  search?: React.ReactNode;
+};
+
+type Props = {
+  heading: string;
+  toggleDrawer: () => void;
+} & PageHeaderProps;
 
 const PageHeader = ({
   heading,

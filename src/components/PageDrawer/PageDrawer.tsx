@@ -22,6 +22,7 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      width: "13rem",
       flexShrink: 0,
       whiteSpace: "nowrap"
     },

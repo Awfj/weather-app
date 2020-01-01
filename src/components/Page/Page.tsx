@@ -3,16 +3,10 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import { WindowWidthContext } from "../../contexts";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import PageHeader, {
-  PageHeaderProps
-} from "../PageHeader/PageHeader";
+import PageHeader, { PageHeaderProps } from "../PageHeader/PageHeader";
 import PageDrawer from "../PageDrawer/PageDrawer";
 import { TOOLBAR_HEIGHT, toolbarHeightMin } from "../../constants";
-
-type Props = {
-  children: React.ReactNode;
-  heading: string;
-} & PageHeaderProps;
+import { TSetBoolean } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,10 +45,26 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Page = ({ children, heading, ...other }: Props) => {
+export type PageProps = {
+  isDrawerOpen: boolean;
+  setIsDrawerOpen: TSetBoolean;
+};
+
+type Props = {
+  children: React.ReactNode;
+  heading: string;
+} & PageHeaderProps &
+  PageProps;
+
+const Page = ({
+  children,
+  isDrawerOpen,
+  setIsDrawerOpen,
+  heading,
+  ...other
+}: Props) => {
   const classes = useStyles();
   const windowWidth = useWindowWidth();
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
   // console.log("page");
   return (

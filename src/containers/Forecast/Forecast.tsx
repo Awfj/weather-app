@@ -1,6 +1,6 @@
 import React from "react";
 
-import Page from "../../components/Page/Page";
+import Page, { PageProps } from "../../components/Page/Page";
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Timer from "../../components/Timer/Timer";
@@ -19,13 +19,15 @@ type Props = {
   setLastLocation: TSetStringOrNull;
   isDarkTheme: boolean;
   setIsDarkTheme: TSetBoolean;
-};
+} & PageProps;
 
 const Forecast = ({
   lastLocation,
   setLastLocation,
   isDarkTheme,
-  setIsDarkTheme
+  setIsDarkTheme,
+  isDrawerOpen,
+  setIsDrawerOpen
 }: Props) => {
   const [refreshIsDisabled, setRefreshIsDisabled] = React.useState(true);
   const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
@@ -58,6 +60,8 @@ const Forecast = ({
       toolbarButtons={toolbarButtons}
       search={search}
       heading={APP_STRUCTURE.FORECAST}
+      isDrawerOpen={isDrawerOpen}
+      setIsDrawerOpen={setIsDrawerOpen}
     >
       <DataLoader
         isLoading={isLoading}
