@@ -1,5 +1,5 @@
 import React from "react";
-import { TSetStringOrNull, TGetForecast } from "../../types";
+import { TGetForecast } from "../../types";
 import { WindowWidthContext } from "../../contexts";
 import SearchButton from "../SearchButton/SearchButton";
 import SearchField from "../SearchField/SearchField";
@@ -10,12 +10,8 @@ import {
   Theme
 } from "@material-ui/core/styles";
 import { ICON_BUTTON_FONT_SIZE } from "../../constants";
-
-type Props = {
-  setLastLocation: TSetStringOrNull;
-  getForecast: TGetForecast;
-  lastLocation: string;
-};
+import { SET_LAST_LOCATION } from "../../actions";
+import { useCtx } from "../../containers/App/App";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,7 +47,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
+type Props = {
+  getForecast: TGetForecast;
+  lastLocation: string;
+};
+
+const Search = ({ lastLocation, getForecast }: Props) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [searchIsShown, setSearchIsShown] = React.useState(false);
   const windowWidth = React.useContext(WindowWidthContext);
@@ -59,6 +60,9 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
   const searchFieldRef = React.useRef<HTMLInputElement | null>(null);
   const theme = useTheme();
   const classes = useStyles();
+
+  // const dispatch = React.useContext(SettingsDispatch)!;
+  const dispatch = useCtx();
 
   const breakpointMD = theme.breakpoints.values.md;
 
@@ -70,7 +74,7 @@ const Search = ({ setLastLocation, lastLocation, getForecast }: Props) => {
       if (query === lastLocation) {
         getForecast(query);
       } else {
-        setLastLocation(query);
+        dispatch({ type: SET_LAST_LOCATION, lastLocation: query });
       }
     }
     if (windowWidth && windowWidth < breakpointMD && showSearchBtn.current) {

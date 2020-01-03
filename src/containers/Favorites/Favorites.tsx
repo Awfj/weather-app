@@ -5,11 +5,11 @@ import { APP_STRUCTURE } from "../../constants";
 
 type Props = {} & PageProps;
 
-const Favorites = ({ isDrawerOpen, setIsDrawerOpen }: Props) => {
+const Favorites = ({ isDrawerOpen, toggleDrawer }: Props) => {
   return (
     <Page
       isDrawerOpen={isDrawerOpen}
-      setIsDrawerOpen={setIsDrawerOpen}
+      toggleDrawer={toggleDrawer}
       heading={APP_STRUCTURE.FAVORITES}
     >
       <p>favorites</p>

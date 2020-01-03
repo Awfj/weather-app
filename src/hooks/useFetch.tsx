@@ -1,5 +1,4 @@
 import { useReducer, Reducer } from "react";
-
 import { FETCH_INIT, FETCH_FAILURE, FETCH_SUCCESS } from "../actions";
 
 export type State<T> = {
@@ -14,14 +13,14 @@ export type Action<T> =
   | { type: FETCH_FAILURE };
 
 function useFetch<T>() {
-  return useReducer<Reducer<State<T>, Action<T>>>(fetchReducer, {
+  return useReducer<Reducer<State<T>, Action<T>>>(reducer, {
     data: null,
     isLoading: false,
     isError: false
   });
 }
 
-function fetchReducer<T>(state: State<T>, action: Action<T>): State<T> {
+function reducer<T>(state: State<T>, action: Action<T>): State<T> {
   switch (action.type) {
     case FETCH_INIT: {
       return {
@@ -45,6 +44,9 @@ function fetchReducer<T>(state: State<T>, action: Action<T>): State<T> {
         isLoading: false,
         isError: true
       };
+    }
+    default: {
+      return state;
     }
   }
 }

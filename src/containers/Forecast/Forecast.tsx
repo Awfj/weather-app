@@ -10,24 +10,22 @@ import Refresh from "../../components/RefreshButton/RefreshButton";
 import Search from "../../components/Search/Search";
 
 import useWeatherApi from "../../hooks/useWeatherApi";
-import { TSetStringOrNull, TSetBoolean } from "../../types";
+import { TSetBoolean } from "../../types";
 import { getExpirationTimeframe } from "../../utils";
 import { APP_STRUCTURE } from "../../constants";
 
 type Props = {
   lastLocation: string;
-  setLastLocation: TSetStringOrNull;
   isDarkTheme: boolean;
   setIsDarkTheme: TSetBoolean;
 } & PageProps;
 
 const Forecast = ({
   lastLocation,
-  setLastLocation,
   isDarkTheme,
   setIsDarkTheme,
   isDrawerOpen,
-  setIsDrawerOpen
+  toggleDrawer
 }: Props) => {
   const [refreshIsDisabled, setRefreshIsDisabled] = React.useState(true);
   const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
@@ -49,7 +47,6 @@ const Forecast = ({
   );
   const search = (
     <Search
-      setLastLocation={setLastLocation}
       lastLocation={lastLocation}
       getForecast={getForecast}
     />
@@ -61,7 +58,7 @@ const Forecast = ({
       search={search}
       heading={APP_STRUCTURE.FORECAST}
       isDrawerOpen={isDrawerOpen}
-      setIsDrawerOpen={setIsDrawerOpen}
+      toggleDrawer={toggleDrawer}
     >
       <DataLoader
         isLoading={isLoading}

@@ -6,7 +6,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import PageHeader, { PageHeaderProps } from "../PageHeader/PageHeader";
 import PageDrawer from "../PageDrawer/PageDrawer";
 import { TOOLBAR_HEIGHT, toolbarHeightMin } from "../../constants";
-import { TSetBoolean } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type PageProps = {
   isDrawerOpen: boolean;
-  setIsDrawerOpen: TSetBoolean;
+  toggleDrawer: () => void;
 };
 
 type Props = {
@@ -59,7 +58,7 @@ type Props = {
 const Page = ({
   children,
   isDrawerOpen,
-  setIsDrawerOpen,
+  toggleDrawer,
   heading,
   ...other
 }: Props) => {
@@ -72,8 +71,8 @@ const Page = ({
       <div className={classes.root}>
         <PageHeader
           heading={heading}
+          toggleDrawer={toggleDrawer}
           {...other}
-          toggleDrawer={() => setIsDrawerOpen(!isDrawerOpen)}
         />
         <PageDrawer isDrawerOpen={isDrawerOpen} />
         <main>{children}</main>
