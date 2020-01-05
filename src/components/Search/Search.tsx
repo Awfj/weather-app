@@ -1,6 +1,12 @@
-import React from "react";
+import React, {
+  useState,
+  useRef,
+  useContext,
+  useEffect,
+  FormEvent
+} from "react";
 import { TGetForecast } from "../../types";
-import { WindowWidthContext } from "../../contexts";
+import { WindowWidth, SettingsDispatch } from "../../contexts";
 import SearchButton from "../SearchButton/SearchButton";
 import SearchField from "../SearchField/SearchField";
 import {
@@ -11,7 +17,6 @@ import {
 } from "@material-ui/core/styles";
 import { ICON_BUTTON_FONT_SIZE } from "../../constants";
 import { SET_LAST_LOCATION } from "../../actions";
-import { useCtx } from "../../containers/App/App";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,20 +58,18 @@ type Props = {
 };
 
 const Search = ({ lastLocation, getForecast }: Props) => {
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [searchIsShown, setSearchIsShown] = React.useState(false);
-  const windowWidth = React.useContext(WindowWidthContext);
-  const showSearchBtn = React.useRef<HTMLButtonElement | null>(null);
-  const searchFieldRef = React.useRef<HTMLInputElement | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchIsShown, setSearchIsShown] = useState(false);
+  const windowWidth = useContext(WindowWidth);
+  const showSearchBtn = useRef<HTMLButtonElement | null>(null);
+  const searchFieldRef = useRef<HTMLInputElement | null>(null);
   const theme = useTheme();
   const classes = useStyles();
-
-  // const dispatch = React.useContext(SettingsDispatch)!;
-  const dispatch = useCtx();
+  const dispatchSettings = useContext(SettingsDispatch);
 
   const breakpointMD = theme.breakpoints.values.md;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const query = searchQuery.trim().toLowerCase();
     if (query) {
@@ -74,10 +77,10 @@ const Search = ({ lastLocation, getForecast }: Props) => {
       if (query === lastLocation) {
         getForecast(query);
       } else {
-        dispatch({ type: SET_LAST_LOCATION, lastLocation: query });
+        dispatchSettings({ type: SET_LAST_LOCATION, lastLocation: query });
       }
     }
-    if (windowWidth && windowWidth < breakpointMD && showSearchBtn.current) {
+    if (windowWidth < breakpointMD && showSearchBtn.current) {
       setSearchIsShown(false);
       showSearchBtn.current.focus();
     }
@@ -85,8 +88,8 @@ const Search = ({ lastLocation, getForecast }: Props) => {
 
   const handleBlur = () => setSearchIsShown(false);
 
-  React.useEffect(() => {
-    if (windowWidth && windowWidth < breakpointMD && searchFieldRef.current) {
+  useEffect(() => {
+    if (windowWidth < breakpointMD && searchFieldRef.current) {
       searchFieldRef.current.focus();
     }
   }, [breakpointMD, searchIsShown, windowWidth]);
@@ -99,7 +102,7 @@ const Search = ({ lastLocation, getForecast }: Props) => {
         onBlur={onBlur}
         setSearchQuery={setSearchQuery}
       />
-      {windowWidth && windowWidth >= breakpointMD && (
+      {windowWidth >= breakpointMD && (
         <SearchButton label="Search" type="submit" />
       )}
     </form>
@@ -107,7 +110,7 @@ const Search = ({ lastLocation, getForecast }: Props) => {
 
   return (
     <>
-      {windowWidth && windowWidth >= breakpointMD ? (
+      {windowWidth >= breakpointMD ? (
         composeSearch()
       ) : (
         <>

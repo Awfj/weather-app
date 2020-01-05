@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import { TOGGLE_DRAWER, SET_LAST_LOCATION } from "../actions";
 
 export type State = {
@@ -15,6 +15,21 @@ const useSettings = () => {
     isDrawerOpen: false,
     lastLocation: null
   });
+
+  const { isDrawerOpen } = state;
+
+  useEffect(() => {
+    const storedDrawerState = localStorage.getItem("is_drawer_open");
+    if (storedDrawerState) {
+      const settings: boolean = JSON.parse(storedDrawerState);
+      if (settings !== isDrawerOpen) {
+        dispatch({ type: TOGGLE_DRAWER });
+      }
+    } else {
+      localStorage.setItem("is_drawer_open", JSON.stringify(isDrawerOpen));
+    }
+  }, [isDrawerOpen]);
+
   return [state, dispatch] as const;
 };
 

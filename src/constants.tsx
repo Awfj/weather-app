@@ -7,6 +7,10 @@ export const APP_STRUCTURE = {
   SETTINGS: 'settings'
 };
 
+export const STORAGE_KEYS = {
+  DRAWER_STATE: 'isDrawerOpen'
+}
+
 // Styles -------------------------------------
 export const LIST_ITEM_GUTTER_LENGTH = "1rem";
 export const SVG_ICON_FONT_SIZE = "1.5rem";

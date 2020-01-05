@@ -1,11 +1,13 @@
-import React from "react";
-import useWindowWidth from "../../hooks/useWindowWidth";
-import { WindowWidthContext } from "../../contexts";
+import React, { useContext } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import PageHeader, { PageHeaderProps } from "../PageHeader/PageHeader";
 import PageDrawer from "../PageDrawer/PageDrawer";
+
+import useWindowWidth from "../../hooks/useWindowWidth";
+import { WindowWidth, SettingsDispatch } from "../../contexts";
 import { TOOLBAR_HEIGHT, toolbarHeightMin } from "../../constants";
+import { TOGGLE_DRAWER } from "../../actions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +48,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type PageProps = {
   isDrawerOpen: boolean;
-  toggleDrawer: () => void;
 };
 
 type Props = {
@@ -55,29 +56,25 @@ type Props = {
 } & PageHeaderProps &
   PageProps;
 
-const Page = ({
-  children,
-  isDrawerOpen,
-  toggleDrawer,
-  heading,
-  ...other
-}: Props) => {
+const Page = ({ children, isDrawerOpen, heading, ...other }: Props) => {
   const classes = useStyles();
   const windowWidth = useWindowWidth();
+  const dispatchSettings = useContext(SettingsDispatch);
+
+  const toggleDrawer = () => {
+    dispatchSettings({ type: TOGGLE_DRAWER });
+    localStorage.setItem("is_drawer_open", JSON.stringify(!isDrawerOpen));
+  };
 
   // console.log("page");
   return (
-    <WindowWidthContext.Provider value={windowWidth}>
+    <WindowWidth.Provider value={windowWidth}>
       <div className={classes.root}>
-        <PageHeader
-          heading={heading}
-          toggleDrawer={toggleDrawer}
-          {...other}
-        />
+        <PageHeader heading={heading} toggleDrawer={toggleDrawer} {...other} />
         <PageDrawer isDrawerOpen={isDrawerOpen} />
         <main>{children}</main>
       </div>
-    </WindowWidthContext.Provider>
+    </WindowWidth.Provider>
   );
 };
 

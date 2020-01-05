@@ -24,8 +24,7 @@ const Forecast = ({
   lastLocation,
   isDarkTheme,
   setIsDarkTheme,
-  isDrawerOpen,
-  toggleDrawer
+  isDrawerOpen
 }: Props) => {
   const [refreshIsDisabled, setRefreshIsDisabled] = React.useState(true);
   const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
@@ -46,10 +45,7 @@ const Forecast = ({
     <Toolbar refresh={refresh} themeToggle={themeToggle} />
   );
   const search = (
-    <Search
-      lastLocation={lastLocation}
-      getForecast={getForecast}
-    />
+    <Search lastLocation={lastLocation} getForecast={getForecast} />
   );
 
   return (
@@ -58,7 +54,6 @@ const Forecast = ({
       search={search}
       heading={APP_STRUCTURE.FORECAST}
       isDrawerOpen={isDrawerOpen}
-      toggleDrawer={toggleDrawer}
     >
       <DataLoader
         isLoading={isLoading}

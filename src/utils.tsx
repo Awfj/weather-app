@@ -66,6 +66,7 @@ export const getRemainingTime = (milliseconds: number) => {
   return `${hours}h ${minutes}m ${seconds}s`;
 };
 
+// use hasOwnProperty for object
 export const removeExpiredWeather = (city: string) => {
   for (let key in localStorage) {
     if (key.includes("weather") && !key.includes(city)) {
