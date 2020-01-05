@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -7,19 +8,22 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Forecast from "../Forecast/Forecast";
 import Favorites from "../Favorites/Favorites";
+
 import { lightTheme, darkTheme } from "../../theme";
 import { DEFAULT_ROUTE_SLICE, APP_STRUCTURE } from "../../constants";
 import useGeoLocationApi from "../../hooks/useGeoLocationApi";
-import useTheme from "../../hooks/useTheme";
 import useSettings from "../../hooks/useSettings";
 import { SettingsDispatch } from "../../contexts";
 
 const App: React.FC = () => {
-  const [isDarkTheme, setIsDarkTheme] = useTheme();
-  const [{ isDrawerOpen, lastLocation }, dispatchSettings] = useSettings();
+  const [
+    { isDrawerOpen, isDarkTheme, lastLocation },
+    dispatchSettings
+  ] = useSettings();
   const [{ isLoading, isError }] = useGeoLocationApi(dispatchSettings);
 
   // console.log("app", lastLocation, isDrawerOpen);
+  console.log(isDarkTheme);
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
@@ -38,7 +42,6 @@ const App: React.FC = () => {
                     lastLocation={lastLocation}
                     isDrawerOpen={isDrawerOpen}
                     isDarkTheme={isDarkTheme}
-                    setIsDarkTheme={setIsDarkTheme}
                   />
                 )}
               </Route>

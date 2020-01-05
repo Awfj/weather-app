@@ -1,21 +1,28 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-const useTheme = () => {
+import { TOGGLE_THEME } from "../actions";
+import { TDispatchSettings } from "../types";
+
+const useTheme = (dispatch: TDispatchSettings, isDarkTheme: boolean) => {
   const prefersDarkTheme = useMediaQuery("(prefers-color-scheme: dark)", {
     noSsr: true
   });
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   useEffect(() => {
     let launchTheme = localStorage.getItem("launch_theme");
-    if (!launchTheme) {
-      setIsDarkTheme(prefersDarkTheme);
+    if (launchTheme) {
+      if (isDarkTheme !== (launchTheme === "dark")) {
+        dispatch({ type: TOGGLE_THEME });
+      }
+    } else {
+      if (isDarkTheme !== prefersDarkTheme) {
+        dispatch({ type: TOGGLE_THEME });
+      }
       launchTheme = prefersDarkTheme ? "dark" : "light";
       localStorage.setItem("launch_theme", launchTheme);
     }
-  }, [prefersDarkTheme]);
-  return [isDarkTheme, setIsDarkTheme] as const;
+  }, [dispatch, isDarkTheme, prefersDarkTheme]);
 };
 
 export default useTheme;

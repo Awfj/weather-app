@@ -1,3 +1,6 @@
+import { Dispatch } from "react";
+import { Action as SettingsAction } from "./hooks/useSettings";
+
 export enum EThemes {
   Light = "light",
   Dark = "dark"
@@ -44,3 +47,4 @@ export type TGetForecast = (location: string) => Promise<void>;
 
 export type TButton = HTMLButtonElement;
 export type TInput = HTMLInputElement;
+export type TDispatchSettings = Dispatch<SettingsAction>;

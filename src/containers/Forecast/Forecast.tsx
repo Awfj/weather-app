@@ -10,22 +10,15 @@ import Refresh from "../../components/RefreshButton/RefreshButton";
 import Search from "../../components/Search/Search";
 
 import useWeatherApi from "../../hooks/useWeatherApi";
-import { TSetBoolean } from "../../types";
 import { getExpirationTimeframe } from "../../utils";
 import { APP_STRUCTURE } from "../../constants";
 
 type Props = {
   lastLocation: string;
   isDarkTheme: boolean;
-  setIsDarkTheme: TSetBoolean;
 } & PageProps;
 
-const Forecast = ({
-  lastLocation,
-  isDarkTheme,
-  setIsDarkTheme,
-  isDrawerOpen
-}: Props) => {
+const Forecast = ({ lastLocation, isDarkTheme, isDrawerOpen }: Props) => {
   const [refreshIsDisabled, setRefreshIsDisabled] = React.useState(true);
   const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
     lastLocation
@@ -37,9 +30,7 @@ const Forecast = ({
       disabled={refreshIsDisabled}
     />
   );
-  const themeToggle = (
-    <ThemeToggle isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme} />
-  );
+  const themeToggle = <ThemeToggle isDarkTheme={isDarkTheme} />;
   const toolbarButtons = (
     <Toolbar refresh={refresh} themeToggle={themeToggle} />
   );
@@ -47,7 +38,7 @@ const Forecast = ({
     <Search lastLocation={lastLocation} getForecast={getForecast} />
   );
 
-  console.log(data && data.requestTime, isLoading, isError, lastLocation);
+  // console.log(data && data.requestTime, isLoading, isError, lastLocation);
   return (
     <Page
       toolbarButtons={toolbarButtons}
