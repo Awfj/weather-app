@@ -30,7 +30,6 @@ const Forecast = ({
   const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
     lastLocation
   );
-  // console.log(data && data.requestTime, isLoading, isError, lastLocation);
 
   const refresh = (
     <Refresh
@@ -48,6 +47,7 @@ const Forecast = ({
     <Search lastLocation={lastLocation} getForecast={getForecast} />
   );
 
+  console.log(data && data.requestTime, isLoading, isError, lastLocation);
   return (
     <Page
       toolbarButtons={toolbarButtons}

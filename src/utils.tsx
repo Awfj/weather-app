@@ -49,12 +49,9 @@ export const getExpirationTimeframe = (requestTime: number) => {
 };
 
 export const getLaunchLocation = async () => {
-  let launchLocation = localStorage.getItem("launch_location");
-  if (!launchLocation) {
-    launchLocation = await fetchLocation();
-    if (!launchLocation) return null;
-    localStorage.setItem("launch_location", launchLocation);
-  }
+  const launchLocation = await fetchLocation();
+  if (!launchLocation) return null;
+  localStorage.setItem("launch_location", launchLocation);
   sessionStorage.setItem("last_location", launchLocation);
   return launchLocation;
 };

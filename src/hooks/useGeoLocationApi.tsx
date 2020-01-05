@@ -1,22 +1,41 @@
-import { useEffect } from "react";
-import { FETCH_INIT, FETCH_SUCCESS, FETCH_FAILURE } from "../actions";
+import { useEffect, Dispatch } from "react";
+import {
+  FETCH_INIT,
+  FETCH_SUCCESS,
+  FETCH_FAILURE,
+  SET_LAST_LOCATION
+} from "../actions";
 import useFetch from "./useFetch";
 import { getLaunchLocation } from "../utils";
+import { Action as SettingsAction } from "../hooks/useSettings";
 
-const useGeoLocationApi = () => {
-  const [state, dispatch] = useFetch<string>();
+const useGeoLocationApi = (dispatchSettings: Dispatch<SettingsAction>) => {
+  const [state, dispatchFetch] = useFetch<string>();
+  // console.log(state)
 
   useEffect(() => {
     (async () => {
-      dispatch({ type: FETCH_INIT });
-      const launchLocation = await getLaunchLocation();
+      let launchLocation = localStorage.getItem("launch_location");
       if (launchLocation) {
-        dispatch({ type: FETCH_SUCCESS, data: launchLocation });
+        dispatchSettings({
+          type: SET_LAST_LOCATION,
+          lastLocation: launchLocation
+        });
       } else {
-        dispatch({ type: FETCH_FAILURE });
+        dispatchFetch({ type: FETCH_INIT });
+        launchLocation = await getLaunchLocation();
+        if (launchLocation) {
+          dispatchSettings({
+            type: SET_LAST_LOCATION,
+            lastLocation: launchLocation
+          });
+          dispatchFetch({ type: FETCH_SUCCESS, data: launchLocation });
+        } else {
+          dispatchFetch({ type: FETCH_FAILURE });
+        }
       }
     })();
-  }, [dispatch]);
+  }, [dispatchFetch, dispatchSettings]);
   return [state] as const;
 };
 
