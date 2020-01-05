@@ -6,27 +6,26 @@ import Brightness2Icon from "@material-ui/icons/Brightness2";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 
 import { EThemes } from "../../types";
-import { SettingsDispatch } from "../../contexts";
+import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
 import { TOGGLE_THEME } from "../../actions";
 
-type Props = {
-  isDarkTheme: boolean;
-} & typeof defaultProps;
+type Props = {} & typeof defaultProps;
 
 const defaultProps = {
   label: "Toggle theme"
 };
 
-const ThemeToggle = ({ label, isDarkTheme }: Props) => {
-  const dispatchSettings = useContext(SettingsDispatch);
+const ThemeToggle = ({ label }: Props) => {
+  const dispatchSettings = useContext(SettingsDispatchCtx);
+  const { isDarkTheme } = useContext(SettingsCtx);
 
   const handleClick = () => {
-    dispatchSettings({ type: TOGGLE_THEME });
     if (isDarkTheme) {
       localStorage.setItem("launch_theme", EThemes.Light);
     } else {
       localStorage.setItem("launch_theme", EThemes.Dark);
     }
+    dispatchSettings({ type: TOGGLE_THEME });
   };
 
   return (

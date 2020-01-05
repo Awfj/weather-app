@@ -13,20 +13,16 @@ import { lightTheme, darkTheme } from "../../theme";
 import { DEFAULT_ROUTE_SLICE, APP_STRUCTURE } from "../../constants";
 import useGeoLocationApi from "../../hooks/useGeoLocationApi";
 import useSettings from "../../hooks/useSettings";
-import { SettingsDispatch } from "../../contexts";
+import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
 
 const App: React.FC = () => {
-  const [
-    { isDrawerOpen, isDarkTheme, lastLocation },
-    dispatchSettings
-  ] = useSettings();
+  const [settings, dispatchSettings] = useSettings();
   const [{ isLoading, isError }] = useGeoLocationApi(dispatchSettings);
 
   // console.log("app", lastLocation, isDrawerOpen);
-  console.log(isDarkTheme);
   return (
     <StylesProvider injectFirst>
-      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+      <ThemeProvider theme={settings.isDarkTheme ? darkTheme : lightTheme}>
         <CssBaseline />
         <DataLoader
           isLoading={isLoading}
@@ -35,25 +31,27 @@ const App: React.FC = () => {
          you can still look for it manually.`}
         >
           <Switch>
-            <SettingsDispatch.Provider value={dispatchSettings}>
-              <Route path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.FORECAST}`}>
-                {lastLocation && (
-                  <Forecast
-                    lastLocation={lastLocation}
-                    isDrawerOpen={isDrawerOpen}
-                    isDarkTheme={isDarkTheme}
-                  />
-                )}
-              </Route>
-              <Route path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.FAVORITES}`}>
-                <Favorites isDrawerOpen={isDrawerOpen} />
-              </Route>
-              <Route path={`${DEFAULT_ROUTE_SLICE}/`}>
-                <Redirect
-                  to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.FORECAST}`}
-                />
-              </Route>
-            </SettingsDispatch.Provider>
+            <SettingsDispatchCtx.Provider value={dispatchSettings}>
+              {settings.lastLocation && (
+                <SettingsCtx.Provider value={settings}>
+                  <Route
+                    path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
+                  >
+                    <Forecast lastLocation={settings.lastLocation} />
+                  </Route>
+                  <Route
+                    path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}
+                  >
+                    <Favorites />
+                  </Route>
+                  <Route path={`${DEFAULT_ROUTE_SLICE}/`}>
+                    <Redirect
+                      to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
+                    />
+                  </Route>
+                </SettingsCtx.Provider>
+              )}
+            </SettingsDispatchCtx.Provider>
           </Switch>
         </DataLoader>
       </ThemeProvider>

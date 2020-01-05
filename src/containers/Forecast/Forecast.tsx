@@ -1,51 +1,31 @@
 import React from "react";
 
-import Page, { PageProps } from "../../components/Page/Page";
+import Page from "../../components/Page/Page";
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Timer from "../../components/Timer/Timer";
-import Toolbar from "../../components/ToolbarButtons/ToolbarButtons";
-import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
-import Refresh from "../../components/RefreshButton/RefreshButton";
 import Search from "../../components/Search/Search";
 
 import useWeatherApi from "../../hooks/useWeatherApi";
 import { getExpirationTimeframe } from "../../utils";
 import { APP_STRUCTURE } from "../../constants";
+import useRefresh from "../../hooks/useRefresh";
 
-type Props = {
-  lastLocation: string;
-  isDarkTheme: boolean;
-} & PageProps;
+type Props = { lastLocation: string };
 
-const Forecast = ({ lastLocation, isDarkTheme, isDrawerOpen }: Props) => {
-  const [refreshIsDisabled, setRefreshIsDisabled] = React.useState(true);
+const Forecast = ({ lastLocation }: Props) => {
   const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
     lastLocation
   );
 
-  const refresh = (
-    <Refresh
-      onClick={() => getForecast(lastLocation)}
-      disabled={refreshIsDisabled}
-    />
+  const [refresh, setRefreshIsDisabled] = useRefresh(() =>
+    getForecast(lastLocation)
   );
-  const themeToggle = <ThemeToggle isDarkTheme={isDarkTheme} />;
-  const toolbarButtons = (
-    <Toolbar refresh={refresh} themeToggle={themeToggle} />
-  );
-  const search = (
-    <Search lastLocation={lastLocation} getForecast={getForecast} />
-  );
+  const search = <Search lastLocation={lastLocation} getData={getForecast} />;
 
   // console.log(data && data.requestTime, isLoading, isError, lastLocation);
   return (
-    <Page
-      toolbarButtons={toolbarButtons}
-      search={search}
-      heading={APP_STRUCTURE.FORECAST}
-      isDrawerOpen={isDrawerOpen}
-    >
+    <Page refresh={refresh} search={search} heading={APP_STRUCTURE.forecast}>
       <DataLoader
         isLoading={isLoading}
         isError={isError}

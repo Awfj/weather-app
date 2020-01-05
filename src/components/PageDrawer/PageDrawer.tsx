@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -14,10 +14,9 @@ import {
   APP_STRUCTURE
 } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
+import { SettingsCtx } from "../../contexts";
 
-type Props = {
-  isDrawerOpen: boolean;
-};
+type Props = {};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,8 +52,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const PageDrawer = ({ isDrawerOpen }: Props) => {
+const PageDrawer = () => {
   const classes = useStyles();
+  const { isDrawerOpen } = useContext(SettingsCtx);
 
   return (
     <Drawer
@@ -74,13 +74,13 @@ const PageDrawer = ({ isDrawerOpen }: Props) => {
       <List disablePadding>
         <ListItemLink
           icon={<HomeOutlinedIcon />}
-          primary={capitalizeFirstChar(APP_STRUCTURE.FORECAST)}
-          to={APP_STRUCTURE.FORECAST}
+          primary={capitalizeFirstChar(APP_STRUCTURE.forecast)}
+          to={APP_STRUCTURE.forecast}
         />
         <ListItemLink
           icon={<StarBorderIcon />}
-          primary={capitalizeFirstChar(APP_STRUCTURE.FAVORITES)}
-          to={APP_STRUCTURE.FAVORITES}
+          primary={capitalizeFirstChar(APP_STRUCTURE.favorites)}
+          to={APP_STRUCTURE.favorites}
         />
         {/* {["Forecast", "Maps"].map((text, index) => (
           // <ListItem button key={text}>

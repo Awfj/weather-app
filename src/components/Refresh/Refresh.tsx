@@ -12,7 +12,7 @@ const defaultProps = {
   label: "Refresh"
 };
 
-const RefreshButton = ({ label, ...other }: Props) => {
+const Refresh = ({ label, ...other }: Props) => {
   return (
     <Tooltip title={label}>
       <span>
@@ -24,5 +24,5 @@ const RefreshButton = ({ label, ...other }: Props) => {
   );
 };
 
-RefreshButton.defaultProps = defaultProps;
-export default RefreshButton;
+Refresh.defaultProps = defaultProps;
+export default Refresh;

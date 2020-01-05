@@ -5,8 +5,8 @@ import React, {
   useEffect,
   FormEvent
 } from "react";
-import { TGetForecast } from "../../types";
-import { WindowWidth, SettingsDispatch } from "../../contexts";
+import { TGetData } from "../../types";
+import { WindowWidthCtx, SettingsDispatchCtx } from "../../contexts";
 import SearchButton from "../SearchButton/SearchButton";
 import SearchField from "../SearchField/SearchField";
 import {
@@ -53,19 +53,19 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
-  getForecast: TGetForecast;
+  getData: TGetData;
   lastLocation: string;
 };
 
-const Search = ({ lastLocation, getForecast }: Props) => {
+const Search = ({ lastLocation, getData }: Props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchIsShown, setSearchIsShown] = useState(false);
-  const windowWidth = useContext(WindowWidth);
+  const windowWidth = useContext(WindowWidthCtx);
   const showSearchBtn = useRef<HTMLButtonElement | null>(null);
   const searchFieldRef = useRef<HTMLInputElement | null>(null);
   const theme = useTheme();
   const classes = useStyles();
-  const dispatchSettings = useContext(SettingsDispatch);
+  const dispatchSettings = useContext(SettingsDispatchCtx);
 
   const breakpointMD = theme.breakpoints.values.md;
 
@@ -75,7 +75,7 @@ const Search = ({ lastLocation, getForecast }: Props) => {
     if (query) {
       setSearchQuery("");
       if (query === lastLocation) {
-        getForecast(query);
+        getData(query);
       } else {
         dispatchSettings({ type: SET_LAST_LOCATION, lastLocation: query });
       }

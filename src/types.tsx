@@ -37,13 +37,19 @@ export interface IGeoLocationResponse {
   city: string;
 }
 
+export type ISettings = {
+  isDarkTheme: boolean;
+  isDrawerOpen: boolean;
+  lastLocation: string | null;
+};
+
 export type TSetString = (value: React.SetStateAction<string>) => void;
 export type TSetBoolean = (value: React.SetStateAction<boolean>) => void;
 export type TSetStringOrNull = (
   value: React.SetStateAction<string | null>
 ) => void;
 
-export type TGetForecast = (location: string) => Promise<void>;
+export type TGetData = (value: string) => Promise<void>;
 
 export type TButton = HTMLButtonElement;
 export type TInput = HTMLInputElement;

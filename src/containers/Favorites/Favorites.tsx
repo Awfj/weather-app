@@ -1,16 +1,13 @@
 import React from "react";
 
-import Page, { PageProps } from "../../components/Page/Page";
+import Page from "../../components/Page/Page";
 import { APP_STRUCTURE } from "../../constants";
 
-type Props = {} & PageProps;
+type Props = {};
 
-const Favorites = ({ isDrawerOpen }: Props) => {
+const Favorites = () => {
   return (
-    <Page
-      isDrawerOpen={isDrawerOpen}
-      heading={APP_STRUCTURE.FAVORITES}
-    >
+    <Page heading={APP_STRUCTURE.favorites}>
       <p>favorites</p>
     </Page>
   );

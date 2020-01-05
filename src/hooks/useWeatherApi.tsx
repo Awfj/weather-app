@@ -4,7 +4,7 @@ import { FETCH_INIT, FETCH_SUCCESS, FETCH_FAILURE } from "../actions";
 import { IForecast } from "../types";
 import useFetch from "./useFetch";
 
-const useWeatherApi = (launchLocation: string) => {
+const useWeatherApi = (lastLocation: string) => {
   const [state, dispatch] = useFetch<IForecast>();
 
   const getForecast = useCallback(
@@ -34,8 +34,8 @@ const useWeatherApi = (launchLocation: string) => {
     [dispatch]
   );
   useEffect(() => {
-    getForecast(launchLocation);
-  }, [dispatch, getForecast, launchLocation]);
+    getForecast(lastLocation);
+  }, [dispatch, getForecast, lastLocation]);
 
   return [state, getForecast] as const;
 };

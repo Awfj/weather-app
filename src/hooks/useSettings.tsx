@@ -3,12 +3,8 @@ import { useReducer } from "react";
 import { TOGGLE_DRAWER, TOGGLE_THEME, SET_LAST_LOCATION } from "../actions";
 import useTheme from "../hooks/useTheme";
 import useDrawer from "../hooks/useDrawer";
-
-export type State = {
-  isDrawerOpen: boolean;
-  isDarkTheme: boolean;
-  lastLocation: string | null;
-};
+import { ISettings } from "../types";
+import { INITIAL_SETTINGS } from "../constants";
 
 export type Action =
   | { type: TOGGLE_DRAWER }
@@ -16,11 +12,7 @@ export type Action =
   | { type: SET_LAST_LOCATION; lastLocation: string };
 
 const useSettings = () => {
-  const [state, dispatch] = useReducer(reducer, {
-    isDrawerOpen: false,
-    isDarkTheme: false,
-    lastLocation: null
-  });
+  const [state, dispatch] = useReducer(reducer, INITIAL_SETTINGS);
   const { isDrawerOpen, isDarkTheme } = state;
 
   useTheme(dispatch, isDarkTheme);
@@ -29,7 +21,7 @@ const useSettings = () => {
   return [state, dispatch] as const;
 };
 
-function reducer(state: State, action: Action): State {
+function reducer(state: ISettings, action: Action): ISettings {
   switch (action.type) {
     case TOGGLE_DRAWER: {
       return {

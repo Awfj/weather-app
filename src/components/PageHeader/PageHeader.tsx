@@ -1,9 +1,13 @@
 import React from "react";
+
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+
 import DrawerToggle from "../DrawerToggle/DrawerToggle";
+import ToolbarButtons from "../../components/ToolbarButtons/ToolbarButtons";
+
 import { toolbarHeightMin } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
 
@@ -26,22 +30,17 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type PageHeaderProps = {
-  toolbarButtons?: React.ReactNode;
-  search?: React.ReactNode;
+  refresh?: JSX.Element;
+  search?: JSX.Element;
 };
 
 type Props = {
   heading: string;
-  toggleDrawer: () => void;
 } & PageHeaderProps;
 
-const PageHeader = ({
-  heading,
-  search,
-  toolbarButtons,
-  toggleDrawer
-}: Props) => {
+const PageHeader = ({ heading, refresh, search }: Props) => {
   const classes = useStyles();
+
   return (
     <AppBar className={classes.root}>
       <Toolbar
@@ -49,11 +48,11 @@ const PageHeader = ({
         variant="dense"
         classes={{ root: classes.toolbar }}
       >
-        <DrawerToggle onClick={toggleDrawer} />
+        <DrawerToggle />
         <Typography variant="h1" className={classes.title}>
           {capitalizeFirstChar(heading)}
         </Typography>
-        {toolbarButtons}
+        <ToolbarButtons refresh={refresh} />
         {search}
       </Toolbar>
     </AppBar>

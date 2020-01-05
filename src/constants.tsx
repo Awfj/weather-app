@@ -1,15 +1,23 @@
+import { ISettings } from "./types";
+
 // export const EXPIRATION_TIMEFRAME = 10000;
 export const EXPIRATION_TIMEFRAME = 7.2e6;
 export const DEFAULT_ROUTE_SLICE = "/weather-app";
 export const APP_STRUCTURE = {
-  FORECAST: "forecast",
-  FAVORITES: "favorites",
-  SETTINGS: 'settings'
+  forecast: "forecast",
+  favorites: "favorites",
+  settings: "settings"
 };
 
 export const STORAGE_KEYS = {
-  DRAWER_STATE: 'isDrawerOpen'
-}
+  isDrawerOpen: "isDrawerOpen"
+};
+
+export const INITIAL_SETTINGS: ISettings = {
+  isDarkTheme: false,
+  isDrawerOpen: false,
+  lastLocation: null
+};
 
 // Styles -------------------------------------
 export const LIST_ITEM_GUTTER_LENGTH = "1rem";

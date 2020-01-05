@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+
 import { drawerIconWidth } from "../../constants";
+import { TOGGLE_DRAWER } from "../../actions";
+import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
 
 type Props = {
   className?: string;
-  onClick: () => void;
 } & typeof defaultProps;
 
 const defaultProps = {
@@ -30,6 +33,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SidebarToggle = ({ label, ...other }: Props) => {
   const classes = useStyles();
+  const dispatchSettings = useContext(SettingsDispatchCtx);
+  const { isDrawerOpen } = useContext(SettingsCtx);
+
+  const toggleDrawer = () => {
+    dispatchSettings({ type: TOGGLE_DRAWER });
+    localStorage.setItem("is_drawer_open", JSON.stringify(!isDrawerOpen));
+  };
 
   return (
     <div className={classes.root}>
@@ -37,6 +47,7 @@ const SidebarToggle = ({ label, ...other }: Props) => {
         aria-label={label}
         color="inherit"
         classes={{ root: classes.button }}
+        onClick={toggleDrawer}
         {...other}
       >
         <MenuIcon />

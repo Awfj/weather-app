@@ -1,7 +1,10 @@
 import { createContext, Dispatch } from "react";
-import { Action as SettingsAction } from "./hooks/useSettings";
 
-export const SettingsDispatch = createContext<Dispatch<SettingsAction>>(
+import { Action as SettingsAction } from "./hooks/useSettings";
+import { INITIAL_SETTINGS } from "./constants";
+
+export const SettingsDispatchCtx = createContext<Dispatch<SettingsAction>>(
   () => {}
 );
-export const WindowWidth = createContext(0);
+export const SettingsCtx = createContext(INITIAL_SETTINGS);
+export const WindowWidthCtx = createContext(0);
