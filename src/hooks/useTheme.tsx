@@ -3,26 +3,26 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { TOGGLE_THEME } from "../actions";
 import { TDispatchSettings } from "../types";
+import { LOCAL_STORAGE } from "../constants";
 
-const useTheme = (dispatch: TDispatchSettings, isDarkTheme: boolean) => {
+const useTheme = (dispatch: TDispatchSettings, isThemeDark: boolean) => {
   const prefersDarkTheme = useMediaQuery("(prefers-color-scheme: dark)", {
     noSsr: true
   });
 
   useEffect(() => {
-    let launchTheme = localStorage.getItem("launch_theme");
-    if (launchTheme) {
-      if (isDarkTheme !== (launchTheme === "dark")) {
+    let storedTheme = localStorage.getItem(LOCAL_STORAGE.isThemeDark);
+    if (storedTheme) {
+      if (isThemeDark !== JSON.parse(storedTheme)) {
         dispatch({ type: TOGGLE_THEME });
       }
     } else {
-      if (isDarkTheme !== prefersDarkTheme) {
+      if (isThemeDark !== prefersDarkTheme) {
         dispatch({ type: TOGGLE_THEME });
       }
-      launchTheme = prefersDarkTheme ? "dark" : "light";
-      localStorage.setItem("launch_theme", launchTheme);
+      localStorage.setItem(LOCAL_STORAGE.isThemeDark, String(prefersDarkTheme));
     }
-  }, [dispatch, isDarkTheme, prefersDarkTheme]);
+  }, [dispatch, isThemeDark, prefersDarkTheme]);
 };
 
 export default useTheme;

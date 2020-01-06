@@ -4,7 +4,7 @@ import { TOGGLE_DRAWER, TOGGLE_THEME, SET_LAST_LOCATION } from "../actions";
 import useTheme from "../hooks/useTheme";
 import useDrawer from "../hooks/useDrawer";
 import { ISettings } from "../types";
-import { INITIAL_SETTINGS } from "../constants";
+import { INITIAL_SETTINGS, LOCAL_STORAGE } from "../constants";
 
 export type Action =
   | { type: TOGGLE_DRAWER }
@@ -13,9 +13,9 @@ export type Action =
 
 const useSettings = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_SETTINGS);
-  const { isDrawerOpen, isDarkTheme } = state;
+  const { isDrawerOpen, isThemeDark } = state;
 
-  useTheme(dispatch, isDarkTheme);
+  useTheme(dispatch, isThemeDark);
   useDrawer(dispatch, isDrawerOpen);
 
   return [state, dispatch] as const;
@@ -24,15 +24,19 @@ const useSettings = () => {
 function reducer(state: ISettings, action: Action): ISettings {
   switch (action.type) {
     case TOGGLE_DRAWER: {
+      const { isDrawerOpen } = state;
+      localStorage.setItem(LOCAL_STORAGE.isDrawerOpen, String(!isDrawerOpen));
       return {
         ...state,
-        isDrawerOpen: !state.isDrawerOpen
+        isDrawerOpen: !isDrawerOpen
       };
     }
     case TOGGLE_THEME: {
+      const { isThemeDark } = state;
+      localStorage.setItem(LOCAL_STORAGE.isThemeDark, String(!isThemeDark));
       return {
         ...state,
-        isDarkTheme: !state.isDarkTheme
+        isThemeDark: !isThemeDark
       };
     }
     case SET_LAST_LOCATION: {

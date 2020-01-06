@@ -9,13 +9,14 @@ export const APP_STRUCTURE = {
   settings: "settings"
 };
 
-export const STORAGE_KEYS = {
-  isDrawerOpen: "isDrawerOpen"
+export const LOCAL_STORAGE = {
+  isDrawerOpen: "isDrawerOpen",
+  isThemeDark: "isThemeDark",
 };
 
 export const INITIAL_SETTINGS: ISettings = {
-  isDarkTheme: false,
   isDrawerOpen: false,
+  isThemeDark: false,
   lastLocation: null
 };
 

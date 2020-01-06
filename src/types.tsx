@@ -38,8 +38,8 @@ export interface IGeoLocationResponse {
 }
 
 export type ISettings = {
-  isDarkTheme: boolean;
   isDrawerOpen: boolean;
+  isThemeDark: boolean;
   lastLocation: string | null;
 };
 

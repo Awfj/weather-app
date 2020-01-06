@@ -5,7 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 
-import { EThemes } from "../../types";
 import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
 import { TOGGLE_THEME } from "../../actions";
 
@@ -17,21 +16,13 @@ const defaultProps = {
 
 const ThemeToggle = ({ label }: Props) => {
   const dispatchSettings = useContext(SettingsDispatchCtx);
-  const { isDarkTheme } = useContext(SettingsCtx);
+  const { isThemeDark } = useContext(SettingsCtx);
 
-  const handleClick = () => {
-    if (isDarkTheme) {
-      localStorage.setItem("launch_theme", EThemes.Light);
-    } else {
-      localStorage.setItem("launch_theme", EThemes.Dark);
-    }
-    dispatchSettings({ type: TOGGLE_THEME });
-  };
-
+  const handleClick = () => dispatchSettings({ type: TOGGLE_THEME });
   return (
     <Tooltip title={label}>
       <IconButton aria-label={label} color="inherit" onClick={handleClick}>
-        {isDarkTheme ? <WbSunnyIcon /> : <Brightness2Icon />}
+        {isThemeDark ? <WbSunnyIcon /> : <Brightness2Icon />}
       </IconButton>
     </Tooltip>
   );

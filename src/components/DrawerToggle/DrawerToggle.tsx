@@ -6,7 +6,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import { drawerIconWidth } from "../../constants";
 import { TOGGLE_DRAWER } from "../../actions";
-import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
+import { SettingsDispatchCtx } from "../../contexts";
 
 type Props = {
   className?: string;
@@ -34,11 +34,9 @@ const useStyles = makeStyles((theme: Theme) =>
 const SidebarToggle = ({ label, ...other }: Props) => {
   const classes = useStyles();
   const dispatchSettings = useContext(SettingsDispatchCtx);
-  const { isDrawerOpen } = useContext(SettingsCtx);
 
   const toggleDrawer = () => {
     dispatchSettings({ type: TOGGLE_DRAWER });
-    localStorage.setItem("is_drawer_open", JSON.stringify(!isDrawerOpen));
   };
 
   return (
