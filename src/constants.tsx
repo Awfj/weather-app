@@ -11,7 +11,7 @@ export const APP_STRUCTURE = {
 
 export const LOCAL_STORAGE = {
   isDrawerOpen: "isDrawerOpen",
-  isThemeDark: "isThemeDark",
+  isThemeDark: "isThemeDark"
 };
 
 export const INITIAL_SETTINGS: ISettings = {
@@ -21,8 +21,9 @@ export const INITIAL_SETTINGS: ISettings = {
 };
 
 // Styles -------------------------------------
-export const LIST_ITEM_GUTTER_LENGTH = "1rem";
+export const LIST_ITEM_GUTTER_SIZE = "1rem";
 export const SVG_ICON_FONT_SIZE = "1.5rem";
+export const ACTIVE_LINK_BORDER_SIZE = "0.375rem";
 
 // should be larger than anything in toolbar
 export const TOOLBAR_HEIGHT = "4rem";
@@ -30,6 +31,7 @@ export const TOOLBAR_HEIGHT = "4rem";
 export const SCALING_FACTOR = "8px";
 export const ICON_BUTTON_FONT_SIZE = "1.5rem";
 
-export const drawerIconWidth = `calc(${LIST_ITEM_GUTTER_LENGTH} * 2 + ${SVG_ICON_FONT_SIZE})`;
+export const drawerIconWidth = `calc(${LIST_ITEM_GUTTER_SIZE} * 2 + ${SVG_ICON_FONT_SIZE})`;
 export const toolbarHeightMin = `calc(${TOOLBAR_HEIGHT} - ${SCALING_FACTOR})`;
 export const listItemIconMinWidth = `calc(${SVG_ICON_FONT_SIZE} * 2)`;
+export const listItemLeftGutterSize = `calc(${LIST_ITEM_GUTTER_SIZE} - ${ACTIVE_LINK_BORDER_SIZE})`;

@@ -1,8 +1,4 @@
-import {
-  IForecast,
-  ICurrentWeatherResponse,
-  IGeoLocationResponse
-} from "./types";
+import { IForecast, ICurrentWeatherData, IGeoLocationData } from "./types";
 import { EXPIRATION_TIMEFRAME } from "./constants";
 
 export const capitalizeFirstChar = (string: string) => {
@@ -18,7 +14,7 @@ export const checkIfExpired = (requestTime: number) => {
 export const fetchLocation = async () => {
   const response = await fetch(`https://get.geojs.io/v1/ip/geo.json`);
   if (!response.ok) return null;
-  const data: IGeoLocationResponse = await response.json();
+  const data: IGeoLocationData = await response.json();
   const city = data.city.toLowerCase();
   return city;
 };
@@ -29,7 +25,7 @@ export const fetchForecast = async (queriedCity: string) => {
   const updatedUrl = `${url}&appid=${OPENWEATHERMAP_KEY}&units=metric`;
   const response = await fetch(updatedUrl);
   if (!response.ok) return null;
-  const data: ICurrentWeatherResponse = await response.json();
+  const data: ICurrentWeatherData = await response.json();
 
   const forecast: IForecast = {
     currentWeather: {

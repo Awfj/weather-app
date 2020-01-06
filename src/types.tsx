@@ -1,11 +1,6 @@
 import { Dispatch } from "react";
 import { Action as SettingsAction } from "./hooks/useSettings";
 
-export enum EThemes {
-  Light = "light",
-  Dark = "dark"
-}
-
 export interface IForecast {
   currentWeather: ICurrentWeather;
   requestTime: number;
@@ -18,7 +13,7 @@ export interface ICurrentWeather {
   temperature: string;
 }
 
-export interface ICurrentWeatherResponse {
+export interface ICurrentWeatherData {
   main: {
     temp: number;
   };
@@ -33,7 +28,7 @@ export interface ICurrentWeatherResponse {
   ];
 }
 
-export interface IGeoLocationResponse {
+export interface IGeoLocationData {
   city: string;
 }
 

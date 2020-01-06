@@ -1,16 +1,21 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
-// import red from "@material-ui/core/colors/red";
+import blue from "@material-ui/core/colors/blue";
 import {
-  LIST_ITEM_GUTTER_LENGTH,
+  LIST_ITEM_GUTTER_SIZE,
   TOOLBAR_HEIGHT,
   ICON_BUTTON_FONT_SIZE,
   SVG_ICON_FONT_SIZE,
-  listItemIconMinWidth
+  listItemIconMinWidth,
+  listItemLeftGutterSize
 } from "./constants";
 
 const baseTheme = {
-  pallete: {},
+  pallete: {
+    secondary: {
+      main: blue[800]
+    }
+  },
   props: {
     MuiAppBar: {
       elevation: 0
@@ -34,8 +39,8 @@ const baseTheme = {
     },
     MuiListItem: {
       gutters: {
-        paddingLeft: LIST_ITEM_GUTTER_LENGTH,
-        paddingRight: LIST_ITEM_GUTTER_LENGTH
+        paddingLeft: listItemLeftGutterSize,
+        paddingRight: LIST_ITEM_GUTTER_SIZE
       }
     },
     MuiListItemIcon: {

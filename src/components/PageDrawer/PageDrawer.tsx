@@ -16,8 +16,6 @@ import {
 import { capitalizeFirstChar } from "../../utils";
 import { SettingsCtx } from "../../contexts";
 
-type Props = {};
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {

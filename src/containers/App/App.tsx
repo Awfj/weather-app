@@ -20,7 +20,6 @@ const App: React.FC = () => {
   const [{ isLoading, isError }] = useGeoLocationApi(dispatchSettings);
 
   // console.log("app", lastLocation, isDrawerOpen);
-  console.log(settings.isThemeDark)
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={settings.isThemeDark ? darkTheme : lightTheme}>

@@ -6,7 +6,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
 import DrawerToggle from "../DrawerToggle/DrawerToggle";
-import ToolbarButtons from "../../components/ToolbarButtons/ToolbarButtons";
+import ToolbarButtons, {
+  ToolbarButtonsProps
+} from "../../components/ToolbarButtons/ToolbarButtons";
 
 import { toolbarHeightMin } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
@@ -30,9 +32,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type PageHeaderProps = {
-  refresh?: JSX.Element;
   search?: JSX.Element;
-};
+} & ToolbarButtonsProps;
 
 type Props = {
   heading: string;
