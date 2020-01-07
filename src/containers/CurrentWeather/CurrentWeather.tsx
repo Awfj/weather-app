@@ -1,22 +1,91 @@
 import React from "react";
-import styles from "./CurrentWeather.module.scss";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import IconButton from "@material-ui/core/IconButton";
 import { ICurrentWeather } from "../../types";
 
-interface Props {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      border: "1px solid #000",
+      margin: "1em auto 0",
+      textAlign: "center",
+      maxWidth: "450px"
+    },
+    temperature: {
+      fontSize: "5rem",
+      fontWeight: "lighter"
+      // "&:after": {
+      //   content: "\00b0",
+      //   fontSize: ".7em",
+      //   verticalAlign: "top"
+      // }
+    },
+    condition: {
+      fontSize: "1.5rem",
+      fontWeight: "lighter"
+    },
+    group: {
+      display: "flex",
+      justifyContent: "center",
+      border: "1px solid blue",
+      "& ul": {
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        marginTop: theme.spacing(2)
+      },
+      "& li:not(:last-child)": {
+        marginRight: "1em"
+      }
+    },
+    buttons: {
+      display: "flex",
+      flexDirection: "column",
+      marginLeft: "1em",
+      "& button": {
+        border: "1px solid orange",
+        fontSize: "1.2rem",
+        padding: "0.3em"
+      }
+    }
+  })
+);
+
+type Props = {
   data: ICurrentWeather;
   timer: React.ReactNode;
-}
+};
 
 const CurrentWeather = ({ data, timer }: Props) => {
-  const { city, condition, country, temperature } = data;
-
+  const classes = useStyles();
+  console.log(data);
   return (
-    <section className={styles.root}>
+    <section className={classes.root}>
       <h2>
-        {city}, {country}
+        {data.city}, {data.country}
       </h2>
-      <p className={styles.temperature}>{temperature}</p>
-      <p className={styles.condition}>{condition}</p>
+      <div className={classes.group}>
+        <div>
+          <p className={classes.temperature}>{data.temperature}</p>
+          <p className={classes.condition}>{data.condition}</p>
+          <ul>
+            <li>Cloudiness: {data.cloudiness}%</li>
+            <li>Wind: {data.windSpeed} m/s</li>
+            <li>Visibility: {data.visibility} km</li>
+            <li>Pressure: {data.pressure} mb</li>
+            <li>Humidity: {data.humidity}%</li>
+          </ul>
+        </div>
+        {/* <div className={classes.buttons}>
+          <IconButton aria-label="Convert to celsius" color="inherit">
+            C
+          </IconButton>
+          <IconButton aria-label="Convert to fahrenheit" color="inherit">
+            F
+          </IconButton>
+        </div> */}
+      </div>
+
       {timer}
     </section>
   );

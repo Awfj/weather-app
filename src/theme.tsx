@@ -7,7 +7,8 @@ import {
   ICON_BUTTON_FONT_SIZE,
   SVG_ICON_FONT_SIZE,
   listItemIconMinWidth,
-  listItemLeftGutterSize
+  listItemLeftGutterSize,
+  SCALING_FACTOR
 } from "./constants";
 
 const baseTheme = {
@@ -69,6 +70,7 @@ const baseTheme = {
       fontSize: "2rem"
     }
   },
+  spacing: (factor: number) => `${SCALING_FACTOR * factor}rem`,
   shape: {
     borderRadius: 0
   }
@@ -83,9 +85,9 @@ export const lightTheme = createMuiTheme({
       hover: "rgba(0, 0, 0, 0.13)",
       selected: "rgba(0, 0, 0, 0.16)"
     },
-    background: {
-      default: grey[200]
-    },
+    // background: {
+    //   default: grey[200]
+    // },
     primary: {
       main: grey[50]
     }

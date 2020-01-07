@@ -10,22 +10,36 @@ export interface ICurrentWeather {
   city: string;
   country: string;
   condition: string;
-  temperature: string;
+  temperature: number;
+  cloudiness: number;
+  windSpeed: number;
+  visibility: number;
+  pressure: number;
+  humidity: number;
 }
 
 export interface ICurrentWeatherData {
   main: {
     temp: number;
+    humidity: number;
+    pressure: number;
+  };
+  clouds: {
+    all: number;
   };
   name: string;
   sys: {
     country: string;
   };
+  visibility: number;
   weather: [
     {
       main: string;
     }
   ];
+  wind: {
+    speed: number;
+  };
 }
 
 export interface IGeoLocationData {

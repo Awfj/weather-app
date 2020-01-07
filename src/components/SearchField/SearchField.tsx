@@ -5,9 +5,9 @@ type InputProps = {
   value: string;
   onBlur?: () => void;
 };
-interface Props extends InputProps {
+type Props = {
   setSearchQuery: TSetString;
-}
+} & InputProps;
 
 const SearchField = React.forwardRef<TInput, Props>(
   ({ value, setSearchQuery, onBlur }, ref) => {

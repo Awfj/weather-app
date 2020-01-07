@@ -3,12 +3,16 @@ import React from "react";
 import Page from "../../components/Page/Page";
 import { APP_STRUCTURE } from "../../constants";
 
-type Props = {};
+type Props = {
+  launchLocation: string;
+};
 
-const Favorites = () => {
+const Favorites = ({ launchLocation }: Props) => {
+  console.log(launchLocation);
   return (
     <Page heading={APP_STRUCTURE.favorites}>
-      <p>favorites</p>
+      <h2>Launch Location</h2>
+      {launchLocation}
     </Page>
   );
 };

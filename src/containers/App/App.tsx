@@ -17,9 +17,12 @@ import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
 
 const App: React.FC = () => {
   const [settings, dispatchSettings] = useSettings();
-  const [{ isLoading, isError }] = useGeoLocationApi(dispatchSettings);
+  const { data: launchLocation, isLoading, isError } = useGeoLocationApi(
+    dispatchSettings
+  );
 
   // console.log("app", lastLocation, isDrawerOpen);
+  // console.log(launchLocation)
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={settings.isThemeDark ? darkTheme : lightTheme}>
@@ -32,25 +35,27 @@ const App: React.FC = () => {
         >
           <Switch>
             <SettingsDispatchCtx.Provider value={dispatchSettings}>
-              {settings.lastLocation && (
-                <SettingsCtx.Provider value={settings}>
+              <SettingsCtx.Provider value={settings}>
+                {settings.lastLocation && (
                   <Route
                     path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
                   >
                     <Forecast lastLocation={settings.lastLocation} />
                   </Route>
+                )}
+                {launchLocation && (
                   <Route
                     path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}
                   >
-                    <Favorites />
+                    <Favorites launchLocation={launchLocation} />
                   </Route>
-                  <Route path={`${DEFAULT_ROUTE_SLICE}/`}>
-                    <Redirect
-                      to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
-                    />
-                  </Route>
-                </SettingsCtx.Provider>
-              )}
+                )}
+                <Route path={`${DEFAULT_ROUTE_SLICE}/`}>
+                  <Redirect
+                    to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
+                  />
+                </Route>
+              </SettingsCtx.Provider>
             </SettingsDispatchCtx.Provider>
           </Switch>
         </DataLoader>
