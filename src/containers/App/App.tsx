@@ -22,7 +22,6 @@ const App: React.FC = () => {
   );
 
   // console.log("app", lastLocation, isDrawerOpen);
-  // console.log(launchLocation)
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={settings.isThemeDark ? darkTheme : lightTheme}>
@@ -52,7 +51,7 @@ const App: React.FC = () => {
                 )}
                 <Route path={`${DEFAULT_ROUTE_SLICE}/`}>
                   <Redirect
-                    to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
+                    to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}
                   />
                 </Route>
               </SettingsCtx.Provider>

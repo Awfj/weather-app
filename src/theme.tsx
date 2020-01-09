@@ -68,6 +68,13 @@ const baseTheme = {
   typography: {
     h1: {
       fontSize: "2rem"
+    },
+    h2: {
+      fontSize: "2rem"
+    },
+    h3: {
+      fontSize: "1.5rem",
+      fontWeight: 300
     }
   },
   spacing: (factor: number) => `${SCALING_FACTOR * factor}rem`,

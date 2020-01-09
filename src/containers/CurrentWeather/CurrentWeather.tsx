@@ -1,44 +1,52 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
+// import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+
+import Temperature from "../../components/Temperature/Temperature";
 import { ICurrentWeather } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       border: "1px solid #000",
-      margin: "1em auto 0",
+      margin: "0 auto",
       textAlign: "center",
-      maxWidth: "450px"
-    },
-    temperature: {
-      fontSize: "5rem",
-      fontWeight: "lighter"
-      // "&:after": {
-      //   content: "\00b0",
-      //   fontSize: ".7em",
-      //   verticalAlign: "top"
-      // }
-    },
-    condition: {
-      fontSize: "1.5rem",
-      fontWeight: "lighter"
-    },
-    group: {
-      display: "flex",
-      justifyContent: "center",
-      border: "1px solid blue",
+      maxWidth: "450px",
+      "& p": {
+        fontWeight: "lighter"
+      },
+      "& > div": {
+        display: "flex",
+        justifyContent: "center",
+        "& > p": {
+          fontSize: "5rem",
+          lineHeight: "0.85em"
+        },
+        "& > p:first-child": {
+          letterSpacing: "0px",
+          // paddingRight: theme.spacing(2.5),
+          paddingRight: theme.spacing(7.5),
+          "& span": {
+            fontSize: "0.7em",
+            lineHeight: "0.9em"
+          }
+        }
+      },
+      "& > p": {
+        fontSize: "1.5rem"
+      },
       "& ul": {
         display: "flex",
         justifyContent: "center",
         flexWrap: "wrap",
-        marginTop: theme.spacing(2)
-      },
-      "& li:not(:last-child)": {
-        marginRight: "1em"
+        marginTop: theme.spacing(1),
+        "& li:not(:last-child)": {
+          marginRight: "1em"
+        }
       }
     },
-    buttons: {
+    scales: {
       display: "flex",
       flexDirection: "column",
       marginLeft: "1em",
@@ -58,33 +66,30 @@ type Props = {
 
 const CurrentWeather = ({ data, timer }: Props) => {
   const classes = useStyles();
-  console.log(data);
   return (
     <section className={classes.root}>
-      <h2>
+      <Typography variant="h2">
         {data.city}, {data.country}
-      </h2>
-      <div className={classes.group}>
-        <div>
-          <p className={classes.temperature}>{data.temperature}</p>
-          <p className={classes.condition}>{data.condition}</p>
-          <ul>
-            <li>Cloudiness: {data.cloudiness}%</li>
-            <li>Wind: {data.windSpeed} m/s</li>
-            <li>Visibility: {data.visibility} km</li>
-            <li>Pressure: {data.pressure} mb</li>
-            <li>Humidity: {data.humidity}%</li>
-          </ul>
-        </div>
-        {/* <div className={classes.buttons}>
-          <IconButton aria-label="Convert to celsius" color="inherit">
-            C
-          </IconButton>
-          <IconButton aria-label="Convert to fahrenheit" color="inherit">
-            F
-          </IconButton>
-        </div> */}
+      </Typography>
+      <div>
+        <Temperature temperature={data.temperature}>C</Temperature>
+        {/* <div className={classes.scales}>
+              <IconButton aria-label="Convert to celsius" color="inherit">
+                C
+              </IconButton>
+              <IconButton aria-label="Convert to fahrenheit" color="inherit">
+                F
+              </IconButton>
+            </div> */}
       </div>
+      <p>{data.condition}</p>
+      <ul>
+        <li>Cloudiness: {data.cloudiness}%</li>
+        <li>Wind: {data.windSpeed} m/s</li>
+        <li>Visibility: {data.visibility} km</li>
+        <li>Pressure: {data.pressure} mb</li>
+        <li>Humidity: {data.humidity}%</li>
+      </ul>
 
       {timer}
     </section>

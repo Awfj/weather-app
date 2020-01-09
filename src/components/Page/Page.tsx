@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import PageHeader, { PageHeaderProps } from "../PageHeader/PageHeader";
@@ -25,9 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
         }
       },
       "& main": {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
         flexGrow: 1,
         marginTop: toolbarHeightMin,
-        padding: theme.spacing(0, 3),
+        padding: theme.spacing(3),
         [theme.breakpoints.up("sm")]: {
           marginTop: TOOLBAR_HEIGHT
         }
@@ -40,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
             boxShadow: `0 0 0 .2rem ${theme.palette.action.active}`
           }
         }
+      },
+      "& h2": {
+        marginBottom: theme.spacing(2)
       }
     }
   })
@@ -47,17 +54,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   children: React.ReactNode;
+  className?: string;
   heading: string;
 } & PageHeaderProps;
 
-const Page = ({ children, ...other }: Props) => {
+const Page = ({ children, className, ...other }: Props) => {
   const classes = useStyles();
   const windowWidth = useWindowWidth();
 
   // console.log("page");
   return (
     <WindowWidthCtx.Provider value={windowWidth}>
-      <div className={classes.root}>
+      <div className={clsx(classes.root, className)}>
         <PageHeader {...other} />
         <PageDrawer />
         <main>{children}</main>
