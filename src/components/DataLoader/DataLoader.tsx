@@ -3,15 +3,22 @@ import Spinner from "../Spinner/Spinner";
 
 type Props = {
   children: React.ReactNode;
+  spinnerStyles?: string;
   error: string;
   isLoading: boolean;
   isError: boolean;
 };
 
-const DataLoader = ({ children, error, isLoading, isError }: Props) => {
+const DataLoader = ({
+  children,
+  error,
+  spinnerStyles,
+  isLoading,
+  isError
+}: Props) => {
   let rendered: React.ReactNode;
   if (isLoading) {
-    rendered = <Spinner />;
+    rendered = <Spinner className={spinnerStyles} />;
   } else {
     if (isError) {
       rendered = <p>{error}</p>;
