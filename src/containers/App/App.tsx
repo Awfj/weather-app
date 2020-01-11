@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
@@ -49,11 +49,11 @@ const App: React.FC = () => {
                     <Favorites launchLocation={launchLocation} />
                   </Route>
                 )}
-                <Route path={`${DEFAULT_ROUTE_SLICE}/`}>
+                {/* <Route path={`${DEFAULT_ROUTE_SLICE}/`}>
                   <Redirect
-                    to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}
+                    to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
                   />
-                </Route>
+                </Route> */}
               </SettingsCtx.Provider>
             </SettingsDispatchCtx.Provider>
           </Switch>

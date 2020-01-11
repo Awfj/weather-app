@@ -10,10 +10,16 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: theme.palette.secondary.main,
+      border: "0.25rem solid transparent",
       color: theme.palette.secondary.contrastText,
       padding: theme.spacing(1),
       minHeight: "7.5rem",
-      minWidth: "13rem"
+      minWidth: "13rem",
+      transition: 'all 0.1s ease-in-out',
+      "&:hover": {
+        border: "0.25rem solid white",
+        outline: `0.15rem solid ${theme.palette.grey[500]}`
+      }
     },
     group: {
       display: "flex",
@@ -42,8 +48,11 @@ const WeatherBox = ({ location }: Props) => {
   const classes = useStyles();
   const [{ data, isLoading, isError }] = useWeatherApi(location);
 
+  const test = () => {
+    console.log("test");
+  };
   return (
-    <section className={classes.root}>
+    <section className={classes.root} onContextMenu={test}>
       {data && (
         <DataLoader
           spinnerStyles={classes.spinner}

@@ -1,5 +1,6 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,17 +16,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type ToolbarButtonsProps = {
   refresh?: JSX.Element;
-  themeToggle?: JSX.Element;
 };
 
 type Props = {} & ToolbarButtonsProps;
 
-const ToolbarButtons = ({ refresh, themeToggle }: Props) => {
+const ToolbarButtons = ({ refresh }: Props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       {refresh}
-      {themeToggle}
+      <ThemeToggle />
     </div>
   );
 };

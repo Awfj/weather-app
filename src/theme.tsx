@@ -92,9 +92,9 @@ export const lightTheme = createMuiTheme({
       hover: "rgba(0, 0, 0, 0.13)",
       selected: "rgba(0, 0, 0, 0.16)"
     },
-    // background: {
-    //   default: grey[200]
-    // },
+    background: {
+      default: grey[100]
+    },
     primary: {
       main: grey[50]
     }
