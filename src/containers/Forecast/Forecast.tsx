@@ -16,7 +16,6 @@ const Forecast = ({ lastLocation }: Props) => {
   const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
     lastLocation
   );
-
   const [refresh, setRefreshIsDisabled] = useRefresh(() =>
     getForecast(lastLocation)
   );
@@ -24,11 +23,7 @@ const Forecast = ({ lastLocation }: Props) => {
 
   // console.log(data && data.requestTime, isLoading, isError, lastLocation);
   return (
-    <Page
-      refresh={refresh}
-      search={search}
-      heading={APP_STRUCTURE.forecast}
-    >
+    <Page refresh={refresh} search={search} heading={APP_STRUCTURE.forecast}>
       <DataLoader
         isLoading={isLoading}
         isError={isError}

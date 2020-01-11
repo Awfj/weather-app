@@ -53,8 +53,8 @@ const PageHeader = ({ heading, refresh, search }: Props) => {
         <Typography variant="h1" className={classes.title}>
           {capitalizeFirstChar(heading)}
         </Typography>
-        <ToolbarButtons refresh={refresh} />
         {search}
+        <ToolbarButtons refresh={refresh} />
       </Toolbar>
     </AppBar>
   );

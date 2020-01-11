@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: "flex",
       justifyContent: "flex-end",
-      "& > *": {
+      "& > *:not(:last-child)": {
         marginRight: theme.spacing(0.5)
       }
     }

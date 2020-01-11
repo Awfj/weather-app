@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: 1,
       [theme.breakpoints.up("md")]: {
         position: "static",
-        marginLeft: theme.spacing(1.5),
+        marginRight: theme.spacing(1.5),
         transform: "none",
         zIndex: "auto"
       },

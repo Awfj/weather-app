@@ -14,7 +14,7 @@ import {
 const baseTheme = {
   pallete: {
     secondary: {
-      main: blue[800]
+      main: blue[700]
     }
   },
   props: {

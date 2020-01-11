@@ -53,7 +53,7 @@ export const getLaunchLocation = async () => {
   const launchLocation = await fetchLocation();
   if (!launchLocation) return null;
   localStorage.setItem("launch_location", launchLocation);
-  sessionStorage.setItem("last_location", launchLocation);
+  // sessionStorage.setItem("last_location", launchLocation);
   return launchLocation;
 };
 

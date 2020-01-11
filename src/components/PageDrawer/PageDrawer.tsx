@@ -3,8 +3,11 @@ import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
+
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import SettingsOutlinedIcon from "@material-ui/icons/SettingsOutlined";
+import Divider from "@material-ui/core/Divider";
 
 import ListItemLink from "../ListItemLink/ListItemLink";
 import {
@@ -38,8 +41,14 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowX: "hidden",
       width: drawerIconWidth
     },
-    icon: {
-      color: theme.palette.primary.contrastText
+    list: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      height: `calc(100vh - ${toolbarHeightMin})`,
+      [theme.breakpoints.up("sm")]: {
+        height: `calc(100vh - ${TOOLBAR_HEIGHT})`
+      }
     },
     paper: {
       top: toolbarHeightMin,
@@ -69,25 +78,27 @@ const PageDrawer = () => {
         })
       }}
     >
-      <List disablePadding>
-        <ListItemLink
-          icon={<HomeOutlinedIcon />}
-          primary={capitalizeFirstChar(APP_STRUCTURE.forecast)}
-          to={APP_STRUCTURE.forecast}
-        />
-        <ListItemLink
-          icon={<StarBorderIcon />}
-          primary={capitalizeFirstChar(APP_STRUCTURE.favorites)}
-          to={APP_STRUCTURE.favorites}
-        />
-        {/* {["Forecast", "Maps"].map((text, index) => (
-          // <ListItem button key={text}>
-          //   <ListItemIcon classes={{ root: classes.icon }}>
-          //     {index % 2 === 0 ? <HomeOutlinedIcon /> : <TrackChangesIcon />}
-          //   </ListItemIcon>
-          //   <ListItemText primary={text} />
-          // </ListItem>
-        ))} */}
+      <List disablePadding className={classes.list}>
+        <div>
+          <ListItemLink
+            icon={<HomeOutlinedIcon />}
+            primary={capitalizeFirstChar(APP_STRUCTURE.forecast)}
+            to={APP_STRUCTURE.forecast}
+          />
+          <ListItemLink
+            icon={<StarBorderIcon />}
+            primary={capitalizeFirstChar(APP_STRUCTURE.favorites)}
+            to={APP_STRUCTURE.favorites}
+          />
+        </div>
+        <div>
+          <Divider />
+          <ListItemLink
+            icon={<SettingsOutlinedIcon />}
+            primary={capitalizeFirstChar(APP_STRUCTURE.settings)}
+            to={APP_STRUCTURE.settings}
+          />
+        </div>
       </List>
     </Drawer>
   );

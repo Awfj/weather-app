@@ -8,6 +8,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Forecast from "../Forecast/Forecast";
 import Favorites from "../Favorites/Favorites";
+import Settings from "../Settings/Settings";
 
 import { lightTheme, darkTheme } from "../../theme";
 import { DEFAULT_ROUTE_SLICE, APP_STRUCTURE } from "../../constants";
@@ -21,7 +22,7 @@ const App: React.FC = () => {
     dispatchSettings
   );
 
-  // console.log("app", lastLocation, isDrawerOpen);
+  // console.log("app", settings.lastLocation);
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={settings.isThemeDark ? darkTheme : lightTheme}>
@@ -43,11 +44,18 @@ const App: React.FC = () => {
                   </Route>
                 )}
                 {launchLocation && (
-                  <Route
-                    path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}
-                  >
-                    <Favorites launchLocation={launchLocation} />
-                  </Route>
+                  <>
+                    <Route
+                      path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}
+                    >
+                      <Favorites launchLocation={launchLocation} />
+                    </Route>
+                    <Route
+                      path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.settings}`}
+                    >
+                      <Settings launchLocation={launchLocation} />
+                    </Route>
+                  </>
                 )}
                 {/* <Route path={`${DEFAULT_ROUTE_SLICE}/`}>
                   <Redirect
