@@ -16,15 +16,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type ToolbarButtonsProps = {
   refresh?: JSX.Element;
+  favor?: JSX.Element;
 };
 
 type Props = {} & ToolbarButtonsProps;
 
-const ToolbarButtons = ({ refresh }: Props) => {
+const ToolbarButtons = ({ refresh, favor }: Props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       {refresh}
+      {favor}
       <ThemeToggle />
     </div>
   );

@@ -39,7 +39,7 @@ type Props = {
   heading: string;
 } & PageHeaderProps;
 
-const PageHeader = ({ heading, refresh, search }: Props) => {
+const PageHeader = ({ heading, search, ...other }: Props) => {
   const classes = useStyles();
 
   return (
@@ -54,7 +54,7 @@ const PageHeader = ({ heading, refresh, search }: Props) => {
           {capitalizeFirstChar(heading)}
         </Typography>
         {search}
-        <ToolbarButtons refresh={refresh} />
+        <ToolbarButtons {...other} />
       </Toolbar>
     </AppBar>
   );

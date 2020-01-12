@@ -27,10 +27,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   launchLocation: string;
+  favoriteLocations: string[];
 };
 
-const Favorites = ({ launchLocation }: Props) => {
+const Favorites = ({ launchLocation, favoriteLocations }: Props) => {
   const classes = useStyles();
+  // console.log(favoriteLocations)
   return (
     <Page heading={APP_STRUCTURE.favorites} className={classes.root}>
       <section>
@@ -40,8 +42,8 @@ const Favorites = ({ launchLocation }: Props) => {
       <section>
         <Typography variant="h2">Favorite Places</Typography>
         <div className={classes.favorites}>
-          {["london", "paris"].map(location => (
-            <FavoritePlace key={location} location={location} />
+          {favoriteLocations.map((place, index) => (
+            <FavoritePlace key={place} id={index} location={place} />
           ))}
         </div>
       </section>

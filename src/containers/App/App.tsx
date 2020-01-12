@@ -49,7 +49,7 @@ const App: React.FC = () => {
                     <Route
                       path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}
                     >
-                      <Favorites launchLocation={launchLocation} />
+                      <Favorites launchLocation={launchLocation} favoriteLocations={settings.favorites} />
                     </Route>
                     <Route
                       path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.settings}`}

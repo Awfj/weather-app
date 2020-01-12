@@ -5,6 +5,7 @@ import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Timer from "../../components/Timer/Timer";
 import Search from "../../components/Search/Search";
+import Favor from "../../components/Favor/Favor";
 import useWeatherApi from "../../hooks/useWeatherApi";
 import { getExpirationTimeframe } from "../../utils";
 import { APP_STRUCTURE } from "../../constants";
@@ -20,10 +21,16 @@ const Forecast = ({ lastLocation }: Props) => {
     getForecast(lastLocation)
   );
   const search = <Search lastLocation={lastLocation} getData={getForecast} />;
+  // const favor = <Favor />;
 
   // console.log(data && data.requestTime, isLoading, isError, lastLocation);
   return (
-    <Page refresh={refresh} search={search} heading={APP_STRUCTURE.forecast}>
+    <Page
+      refresh={refresh}
+      search={search}
+      favor={<Favor />}
+      heading={APP_STRUCTURE.forecast}
+    >
       <DataLoader
         isLoading={isLoading}
         isError={isError}

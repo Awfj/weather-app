@@ -47,6 +47,7 @@ export interface IGeoLocationData {
 }
 
 export type ISettings = {
+  favorites: string[];
   isDrawerOpen: boolean;
   isThemeDark: boolean;
   lastLocation: string | null;
