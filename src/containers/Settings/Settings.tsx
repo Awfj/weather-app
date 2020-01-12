@@ -1,11 +1,12 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import EditIcon from "@material-ui/icons/Edit";
 
 import Page from "../../components/Page/Page";
+import Form from "../../components/Form/Form";
+import InputField from "../../components/InputField/InputField";
+import InputButton from "../../components/InputButton/InputButton";
 import { APP_STRUCTURE } from "../../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -31,15 +32,13 @@ const Settings = ({ launchLocation }: Props) => {
       <Typography variant="h2">Options</Typography>
       <section className={classes.optionSection}>
         <Typography variant="h3">Launch Location</Typography>
-        <form>
-          <input type="text" placeholder={launchLocation} />
-        </form>
+        <Form>
+          <InputField placeholder={launchLocation} />
+          <InputButton label="Submit">
+            <EditIcon />
+          </InputButton>
+        </Form>
       </section>
-      {/* <List disablePadding>
-        <ListItem disableGutters>
-          <ListItemText>Launch Location</ListItemText>
-        </ListItem>
-      </List> */}
     </Page>
   );
 };

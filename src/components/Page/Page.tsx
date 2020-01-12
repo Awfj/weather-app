@@ -36,15 +36,6 @@ const useStyles = makeStyles((theme: Theme) =>
           marginTop: TOOLBAR_HEIGHT
         }
       },
-      "& form": {
-        boxShadow: `0 0 0 1px ${theme.palette.primary.contrastText}`,
-        "& input": {
-          color: theme.palette.primary.contrastText,
-          "&:focus": {
-            boxShadow: `0 0 0 .2rem ${theme.palette.action.active}`
-          }
-        }
-      },
       "& h2": {
         marginBottom: theme.spacing(2)
       },

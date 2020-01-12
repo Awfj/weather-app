@@ -60,6 +60,9 @@ export type TSetStringOrNull = (
 
 export type TGetData = (value: string) => Promise<void>;
 
+export type TChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => void;
+export type TSubmitForm = (event: React.FormEvent<HTMLFormElement>) => void;
+
 export type TButton = HTMLButtonElement;
 export type TInput = HTMLInputElement;
 export type TDispatchSettings = Dispatch<SettingsAction>;

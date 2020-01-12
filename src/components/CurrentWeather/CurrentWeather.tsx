@@ -9,7 +9,7 @@ import { ICurrentWeather } from "../../types";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      border: "1px solid #000",
+      // border: "1px solid #000",
       margin: "0 auto",
       textAlign: "center",
       maxWidth: "450px",

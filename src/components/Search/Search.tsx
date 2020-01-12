@@ -1,12 +1,7 @@
-import React, {
-  useState,
-  useRef,
-  useContext,
-  useEffect,
-  FormEvent
-} from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import { TGetData } from "../../types";
 import { WindowWidthCtx, SettingsDispatchCtx } from "../../contexts";
+import Form from "../Form/Form";
 import SearchButton from "../SearchButton/SearchButton";
 import SearchField from "../SearchField/SearchField";
 import {
@@ -15,14 +10,13 @@ import {
   useTheme,
   Theme
 } from "@material-ui/core/styles";
-import { ICON_BUTTON_FONT_SIZE } from "../../constants";
+
 import { SET_LAST_LOCATION } from "../../actions";
+import { TSubmitForm } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      backgroundColor: theme.palette.primary.light,
-      display: "flex",
       position: "absolute",
       top: "50%",
       transform: "translateY(-50%)",
@@ -33,20 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
         marginRight: theme.spacing(1.5),
         transform: "none",
         zIndex: "auto"
-      },
-      "& input": {
-        backgroundColor: "transparent",
-        border: "none",
-        fontSize: "0.9rem",
-        padding: "1em 0.8em",
-        width: "100%"
-      },
-      "& button": {
-        marginLeft: "3px",
-        fontSize: `calc(${ICON_BUTTON_FONT_SIZE} - 0.1rem)`
-      },
-      "& svg": {
-        display: "block"
       }
     }
   })
@@ -69,7 +49,7 @@ const Search = ({ lastLocation, getData }: Props) => {
 
   const breakpointMD = theme.breakpoints.values.md;
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit: TSubmitForm = event => {
     event.preventDefault();
     const query = searchQuery.trim().toLowerCase();
     if (query) {
@@ -95,7 +75,7 @@ const Search = ({ lastLocation, getData }: Props) => {
   }, [breakpointMD, searchIsShown, windowWidth]);
 
   const composeSearch = (onBlur?: () => void) => (
-    <form className={classes.root} onSubmit={handleSubmit}>
+    <Form className={classes.root} onSubmit={handleSubmit}>
       <SearchField
         ref={searchFieldRef}
         value={searchQuery}
@@ -105,7 +85,7 @@ const Search = ({ lastLocation, getData }: Props) => {
       {windowWidth >= breakpointMD && (
         <SearchButton label="Search" type="submit" />
       )}
-    </form>
+    </Form>
   );
 
   return (
