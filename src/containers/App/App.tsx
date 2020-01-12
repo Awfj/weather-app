@@ -18,11 +18,12 @@ import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
 
 const App: React.FC = () => {
   const [settings, dispatchSettings] = useSettings();
-  const { data: launchLocation, isLoading, isError } = useGeoLocationApi(
-    dispatchSettings
-  );
+  const [
+    { data: launchLocation, isLoading, isError },
+    dispatchFetch
+  ] = useGeoLocationApi(dispatchSettings);
 
-  // console.log("app", settings.lastLocation);
+  // console.log("app", settings.lastLocation, launchLocation);
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={settings.isThemeDark ? darkTheme : lightTheme}>
@@ -53,7 +54,10 @@ const App: React.FC = () => {
                     <Route
                       path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.settings}`}
                     >
-                      <Settings launchLocation={launchLocation} />
+                      <Settings
+                        launchLocation={launchLocation}
+                        dispatchFetch={dispatchFetch}
+                      />
                     </Route>
                   </>
                 )}

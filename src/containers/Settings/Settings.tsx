@@ -1,13 +1,12 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import EditIcon from "@material-ui/icons/Edit";
 
 import Page from "../../components/Page/Page";
-import Form from "../../components/Form/Form";
-import InputField from "../../components/InputField/InputField";
-import InputButton from "../../components/InputButton/InputButton";
 import { APP_STRUCTURE } from "../../constants";
+import LaunchLocationSetting, {
+  LaunchLocationSettingProps
+} from "../../components/LaunchLocationSetting/LaunchLocationSetting";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,23 +20,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type Props = {
-  launchLocation: string;
-};
+type Props = {} & LaunchLocationSettingProps;
 
-const Settings = ({ launchLocation }: Props) => {
+const Settings = ({ ...other }: Props) => {
   const classes = useStyles();
+
+  // console.log("settings");
   return (
     <Page heading={APP_STRUCTURE.settings} className={classes.root}>
       <Typography variant="h2">Options</Typography>
       <section className={classes.optionSection}>
         <Typography variant="h3">Launch Location</Typography>
-        <Form>
-          <InputField placeholder={launchLocation} />
-          <InputButton label="Submit">
-            <EditIcon />
-          </InputButton>
-        </Form>
+        <LaunchLocationSetting {...other} />
       </section>
     </Page>
   );

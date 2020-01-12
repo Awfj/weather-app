@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { TSubmitForm } from "../../types";
+import { TFormEvent } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 type Props = {
   children: React.ReactNode;
   className?: string;
-  onSubmit?: TSubmitForm;
+  onSubmit?: TFormEvent;
 };
 
 const Form = ({ children, className, onSubmit }: Props) => {

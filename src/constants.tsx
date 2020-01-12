@@ -12,7 +12,8 @@ export const APP_STRUCTURE = {
 export const LOCAL_STORAGE = {
   isDrawerOpen: "isDrawerOpen",
   isThemeDark: "isThemeDark",
-  weatherForecast: 'weather_forecast_'
+  weatherForecast: "weather_forecast_",
+  launchLocation: "launch_location"
 };
 
 export const INITIAL_SETTINGS: ISettings = {

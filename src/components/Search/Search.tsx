@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core/styles";
 
 import { SET_LAST_LOCATION } from "../../actions";
-import { TSubmitForm } from "../../types";
+import { TFormEvent } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,7 +49,7 @@ const Search = ({ lastLocation, getData }: Props) => {
 
   const breakpointMD = theme.breakpoints.values.md;
 
-  const handleSubmit: TSubmitForm = event => {
+  const handleSubmit: TFormEvent = event => {
     event.preventDefault();
     const query = searchQuery.trim().toLowerCase();
     if (query) {

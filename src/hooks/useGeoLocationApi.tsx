@@ -40,7 +40,7 @@ const useGeoLocationApi = (dispatchSettings: Dispatch<SettingsAction>) => {
       }
     })();
   }, [dispatchFetch, setLocations]);
-  return state;
+  return [state, dispatchFetch] as const;
 };
 
 export default useGeoLocationApi;
