@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       "& h2": {
         marginBottom: theme.spacing(2)
+      },
+      "& h3": {
+        marginBottom: theme.spacing(1.5)
       }
     }
   })

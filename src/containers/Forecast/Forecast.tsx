@@ -1,7 +1,7 @@
 import React from "react";
 
 import Page from "../../components/Page/Page";
-import CurrentWeather from "../CurrentWeather/CurrentWeather";
+import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Timer from "../../components/Timer/Timer";
 import Search from "../../components/Search/Search";

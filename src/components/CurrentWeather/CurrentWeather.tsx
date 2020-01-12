@@ -3,7 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 // import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
-import Temperature from "../../components/Temperature/Temperature";
+import Temperature from "../Temperature/Temperature";
 import { ICurrentWeather } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>

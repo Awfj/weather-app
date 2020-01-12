@@ -4,13 +4,23 @@ import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import Page from "../../components/Page/Page";
-import WeatherBox from "../../components/WeatherBox/WeatherBox";
+import LaunchLocation from "../../components/LaunchLocation/LaunchLocation";
+import FavoritePlace from "../../components/FavoritePlace/FavoritePlace";
 import { APP_STRUCTURE } from "../../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(0, 40)
+      padding: theme.spacing(0, 40),
+      "& section:not(:last-child)": {
+        marginBottom: theme.spacing(4)
+      }
+    },
+    favorites: {
+      display: "flex",
+      "& div:not(:last-child)": {
+        marginRight: theme.spacing(2)
+      }
     }
   })
 );
@@ -23,8 +33,18 @@ const Favorites = ({ launchLocation }: Props) => {
   const classes = useStyles();
   return (
     <Page heading={APP_STRUCTURE.favorites} className={classes.root}>
-      <Typography variant="h2">Launch Location</Typography>
-      <WeatherBox location={launchLocation} />
+      <section>
+        <Typography variant="h2">Launch Location</Typography>
+        <LaunchLocation location={launchLocation} />
+      </section>
+      <section>
+        <Typography variant="h2">Favorite Places</Typography>
+        <div className={classes.favorites}>
+          {["london", "paris"].map(location => (
+            <FavoritePlace key={location} location={location} />
+          ))}
+        </div>
+      </section>
     </Page>
   );
 };
