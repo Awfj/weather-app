@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type InputFieldProps = {
   value?: string;
+  name?: string;
   onBlur?: () => void;
 };
 
@@ -30,7 +31,7 @@ type Props = {
 } & InputFieldProps;
 
 const InputField = forwardRef<TInput, Props>(function InputField(
-  { value, type = "text", onBlur, onChange, placeholder },
+  { value, name, type = "text", onBlur, onChange, placeholder },
   ref
 ) {
   const classes = useStyles();
@@ -38,6 +39,7 @@ const InputField = forwardRef<TInput, Props>(function InputField(
     <input
       ref={ref}
       value={value}
+      name={name}
       onChange={onChange}
       placeholder={placeholder}
       type={type}

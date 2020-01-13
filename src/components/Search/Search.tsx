@@ -41,8 +41,8 @@ const Search = ({ lastLocation, getData }: Props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchIsShown, setSearchIsShown] = useState(false);
   const windowWidth = useContext(WindowWidthCtx);
-  const showSearchBtn = useRef<HTMLButtonElement | null>(null);
-  const searchFieldRef = useRef<HTMLInputElement | null>(null);
+  const showSearchBtn = useRef<HTMLButtonElement>(null);
+  const searchFieldRef = useRef<HTMLInputElement>(null);
   const theme = useTheme();
   const classes = useStyles();
   const dispatchSettings = useContext(SettingsDispatchCtx);
