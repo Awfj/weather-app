@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import DrawerToggle from "../DrawerToggle/DrawerToggle";
 import ToolbarButtons, {
   ToolbarButtonsProps
-} from "../../components/ToolbarButtons/ToolbarButtons";
+} from "../ToolbarButtons/ToolbarButtons";
 
 import { toolbarHeightMin } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
@@ -31,16 +31,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export type PageHeaderProps = {
+type Props = {
   search?: JSX.Element;
   heading?: string;
 } & ToolbarButtonsProps;
 
-type Props = {} & PageHeaderProps;
-
-const PageHeader = ({ heading, search, ...other }: Props) => {
+const AppHeader = ({ heading, search, ...other }: Props) => {
   const classes = useStyles();
-  console.log(heading);
   return (
     <AppBar className={classes.root}>
       <Toolbar
@@ -59,4 +56,4 @@ const PageHeader = ({ heading, search, ...other }: Props) => {
   );
 };
 
-export default PageHeader;
+export default AppHeader;

@@ -1,82 +1,69 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
 
+import {
+  ThemeProvider,
+  createStyles,
+  makeStyles,
+  Theme
+} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
-import { ThemeProvider } from "@material-ui/core/styles";
 
-import DataLoader from "../../components/DataLoader/DataLoader";
-import Forecast from "../Forecast/Forecast";
-import Favorites from "../Favorites/Favorites";
-import Settings from "../Settings/Settings";
-import NoMatch from "../NoMatch/NoMatch";
+import AppDrawer from "../../components/AppDrawer/AppDrawer";
+import AppMain from "../../components/AppMain/AppMain";
 
 import { lightTheme, darkTheme } from "../../theme";
-import { DEFAULT_ROUTE_SLICE, APP_STRUCTURE } from "../../constants";
-import useGeoLocationApi from "../../hooks/useGeoLocationApi";
 import useSettings from "../../hooks/useSettings";
 import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
+import useWindowWidth from "../../hooks/useWindowWidth";
+import { WindowWidthCtx } from "../../contexts";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: "flex",
+      "& h2": {
+        marginBottom: theme.spacing(2)
+      },
+      "& h3": {
+        marginBottom: theme.spacing(1.5)
+      },
+      "& button": {
+        "&:focus": {
+          backgroundColor: theme.palette.action.selected
+        },
+        "&:hover": {
+          backgroundColor: theme.palette.action.hover
+        },
+        "&:active": {
+          backgroundColor: theme.palette.action.active,
+          color: theme.palette.primary.main
+        }
+      }
+    }
+  })
+);
 
 const App: React.FC = () => {
+  const classes = useStyles();
+  const windowWidth = useWindowWidth();
   const [settings, dispatchSettings] = useSettings();
-  const [
-    { data: launchLocation, isLoading, isError },
-    dispatchFetch
-  ] = useGeoLocationApi(dispatchSettings);
 
-  // console.log("app", settings.lastLocation, launchLocation);
+  // console.log("app", settings.lastLocation);
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={settings.isThemeDark ? darkTheme : lightTheme}>
         <CssBaseline />
-        <DataLoader
-          isLoading={isLoading}
-          isError={isError}
-          error={`We couldn't find your city automatically,
-         you can still look for it manually.`}
-        >
+        <WindowWidthCtx.Provider value={windowWidth}>
           <SettingsDispatchCtx.Provider value={dispatchSettings}>
             <SettingsCtx.Provider value={settings}>
-              <Switch>
-                <Route exact path={`${DEFAULT_ROUTE_SLICE}/`}>
-                  <Redirect
-                    to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
-                  />
-                </Route>
-                {settings.lastLocation && (
-                  <Route
-                    path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
-                  >
-                    <Forecast lastLocation={settings.lastLocation} />
-                  </Route>
-                )}
-                {launchLocation && (
-                  <>
-                    <Route
-                      path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}
-                    >
-                      <Favorites
-                        launchLocation={launchLocation}
-                        favoriteLocations={settings.favorites}
-                      />
-                    </Route>
-                    <Route
-                      path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.settings}`}
-                    >
-                      <Settings
-                        launchLocation={launchLocation}
-                        dispatchFetch={dispatchFetch}
-                      />
-                    </Route>
-                  </>
-                )}
-                <Route>
-                  <NoMatch />
-                </Route>
-              </Switch>
+              <div className={classes.root}>
+                <AppDrawer />
+                <AppMain />
+              </div>
             </SettingsCtx.Provider>
           </SettingsDispatchCtx.Provider>
-        </DataLoader>
+        </WindowWidthCtx.Provider>
       </ThemeProvider>
     </StylesProvider>
   );

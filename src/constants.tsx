@@ -6,7 +6,8 @@ export const DEFAULT_ROUTE_SLICE = "/weather-app";
 export const APP_STRUCTURE = {
   forecast: "forecast",
   favorites: "favorites",
-  settings: "settings"
+  settings: "settings",
+  noMatch: "noMatch"
 };
 
 export const LOCAL_STORAGE = {

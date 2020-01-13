@@ -3,7 +3,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import Page from "../../components/Page/Page";
+import AppHeader from "../../components/AppHeader/AppHeader";
 import LaunchLocation from "../../components/LaunchLocation/LaunchLocation";
 import FavoritePlace from "../../components/FavoritePlace/FavoritePlace";
 import { APP_STRUCTURE } from "../../constants";
@@ -33,22 +33,25 @@ type Props = {
 const Favorites = ({ launchLocation, favoriteLocations }: Props) => {
   const classes = useStyles();
   // console.log(favoriteLocations)
-  console.log('favorites')
+  // console.log('favorites')
   return (
-    <Page heading={APP_STRUCTURE.favorites} className={classes.root}>
-      <section>
-        <Typography variant="h2">Launch Location</Typography>
-        <LaunchLocation location={launchLocation} />
-      </section>
-      <section>
-        <Typography variant="h2">Favorite Places</Typography>
-        <div className={classes.favorites}>
-          {favoriteLocations.map((place, index) => (
-            <FavoritePlace key={place} id={index} location={place} />
-          ))}
-        </div>
-      </section>
-    </Page>
+    <>
+      <AppHeader heading={APP_STRUCTURE.favorites} />
+      <div className={classes.root}>
+        <section>
+          <Typography variant="h2">Launch Location</Typography>
+          <LaunchLocation location={launchLocation} />
+        </section>
+        <section>
+          <Typography variant="h2">Favorite Places</Typography>
+          <div className={classes.favorites}>
+            {favoriteLocations.map((place, index) => (
+              <FavoritePlace key={place} id={index} location={place} />
+            ))}
+          </div>
+        </section>
+      </div>
+    </>
   );
 };
 

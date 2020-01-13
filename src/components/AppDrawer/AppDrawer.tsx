@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const PageDrawer = () => {
+const AppDrawer = () => {
   const classes = useStyles();
   const { isDrawerOpen } = useContext(SettingsCtx);
 
@@ -104,4 +104,4 @@ const PageDrawer = () => {
   );
 };
 
-export default PageDrawer;
+export default AppDrawer;

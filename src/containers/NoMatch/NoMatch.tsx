@@ -1,11 +1,14 @@
 import React from "react";
-import Page from "../../components/Page/Page";
+import AppHeader from "../../components/AppHeader/AppHeader";
 
 const NoMatch = () => {
   return (
-    <Page>
-      <p>NoMatch</p>
-    </Page>
+    <>
+      <AppHeader />
+      <div>
+        <p>NoMatch</p>
+      </div>
+    </>
   );
 };
 

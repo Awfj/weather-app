@@ -4,7 +4,9 @@ import IconButton from "@material-ui/core/IconButton";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
-import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from "../../actions";
+import { ADD_TO_FAVORITES, 
+  // REMOVE_FROM_FAVORITES
+ } from "../../actions";
 
 const Favor = () => {
   const [isFavorite, setIsFavorite] = useState(false);
