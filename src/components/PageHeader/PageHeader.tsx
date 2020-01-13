@@ -33,15 +33,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export type PageHeaderProps = {
   search?: JSX.Element;
+  heading?: string;
 } & ToolbarButtonsProps;
 
-type Props = {
-  heading: string;
-} & PageHeaderProps;
+type Props = {} & PageHeaderProps;
 
 const PageHeader = ({ heading, search, ...other }: Props) => {
   const classes = useStyles();
-
+  console.log(heading);
   return (
     <AppBar className={classes.root}>
       <Toolbar
@@ -51,7 +50,7 @@ const PageHeader = ({ heading, search, ...other }: Props) => {
       >
         <DrawerToggle />
         <Typography variant="h1" className={classes.title}>
-          {capitalizeFirstChar(heading)}
+          {heading && capitalizeFirstChar(heading)}
         </Typography>
         {search}
         <ToolbarButtons {...other} />

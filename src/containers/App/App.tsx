@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
@@ -9,6 +9,7 @@ import DataLoader from "../../components/DataLoader/DataLoader";
 import Forecast from "../Forecast/Forecast";
 import Favorites from "../Favorites/Favorites";
 import Settings from "../Settings/Settings";
+import NoMatch from "../NoMatch/NoMatch";
 
 import { lightTheme, darkTheme } from "../../theme";
 import { DEFAULT_ROUTE_SLICE, APP_STRUCTURE } from "../../constants";
@@ -34,9 +35,14 @@ const App: React.FC = () => {
           error={`We couldn't find your city automatically,
          you can still look for it manually.`}
         >
-          <Switch>
-            <SettingsDispatchCtx.Provider value={dispatchSettings}>
-              <SettingsCtx.Provider value={settings}>
+          <SettingsDispatchCtx.Provider value={dispatchSettings}>
+            <SettingsCtx.Provider value={settings}>
+              <Switch>
+                <Route exact path={`${DEFAULT_ROUTE_SLICE}/`}>
+                  <Redirect
+                    to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
+                  />
+                </Route>
                 {settings.lastLocation && (
                   <Route
                     path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
@@ -49,7 +55,10 @@ const App: React.FC = () => {
                     <Route
                       path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}
                     >
-                      <Favorites launchLocation={launchLocation} favoriteLocations={settings.favorites} />
+                      <Favorites
+                        launchLocation={launchLocation}
+                        favoriteLocations={settings.favorites}
+                      />
                     </Route>
                     <Route
                       path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.settings}`}
@@ -61,14 +70,12 @@ const App: React.FC = () => {
                     </Route>
                   </>
                 )}
-                {/* <Route path={`${DEFAULT_ROUTE_SLICE}/`}>
-                  <Redirect
-                    to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}
-                  />
-                </Route> */}
-              </SettingsCtx.Provider>
-            </SettingsDispatchCtx.Provider>
-          </Switch>
+                <Route>
+                  <NoMatch />
+                </Route>
+              </Switch>
+            </SettingsCtx.Provider>
+          </SettingsDispatchCtx.Provider>
         </DataLoader>
       </ThemeProvider>
     </StylesProvider>

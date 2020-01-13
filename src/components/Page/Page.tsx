@@ -49,7 +49,6 @@ const useStyles = makeStyles((theme: Theme) =>
 type Props = {
   children: React.ReactNode;
   className?: string;
-  heading: string;
 } & PageHeaderProps;
 
 const Page = ({ children, className, ...other }: Props) => {

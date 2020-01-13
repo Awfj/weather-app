@@ -33,6 +33,7 @@ type Props = {
 const Favorites = ({ launchLocation, favoriteLocations }: Props) => {
   const classes = useStyles();
   // console.log(favoriteLocations)
+  console.log('favorites')
   return (
     <Page heading={APP_STRUCTURE.favorites} className={classes.root}>
       <section>
