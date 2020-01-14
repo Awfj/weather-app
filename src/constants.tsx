@@ -2,12 +2,12 @@ import { ISettings } from "./types";
 
 // export const EXPIRATION_TIMEFRAME = 10000;
 export const EXPIRATION_TIMEFRAME = 7.2e6;
-export const DEFAULT_ROUTE_SLICE = "/weather-app";
+export const ROUTE_PATH = "/weather-app";
 export const APP_STRUCTURE = {
+  welcome: 'welcome',
   forecast: "forecast",
   favorites: "favorites",
   settings: "settings",
-  noMatch: "noMatch"
 };
 
 export const LOCAL_STORAGE = {

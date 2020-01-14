@@ -10,11 +10,12 @@ import { Action as FetchAction } from "../../hooks/useFetch";
 import { SettingsDispatchCtx } from "../../contexts";
 
 export type LaunchLocationSettingProps = {
-  launchLocation: string;
   dispatchFetch: React.Dispatch<FetchAction<string>>;
 };
 
-type Props = {} & LaunchLocationSettingProps;
+type Props = {
+  launchLocation: string;
+} & LaunchLocationSettingProps;
 
 const LaunchLocationSetting = ({ launchLocation, dispatchFetch }: Props) => {
   const dispatchSettings = useContext(SettingsDispatchCtx);

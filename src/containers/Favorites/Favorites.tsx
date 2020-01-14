@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type Props = {
-  launchLocation: string;
+  launchLocation: string | null;
   favoriteLocations: string[];
 };
 
@@ -38,10 +38,12 @@ const Favorites = ({ launchLocation, favoriteLocations }: Props) => {
     <>
       <AppHeader heading={APP_STRUCTURE.favorites} />
       <div className={classes.root}>
-        <section>
-          <Typography variant="h2">Launch Location</Typography>
-          <LaunchLocation location={launchLocation} />
-        </section>
+        {launchLocation && (
+          <section>
+            <Typography variant="h2">Launch Location</Typography>
+            <LaunchLocation location={launchLocation} />
+          </section>
+        )}
         <section>
           <Typography variant="h2">Favorite Places</Typography>
           <div className={classes.favorites}>

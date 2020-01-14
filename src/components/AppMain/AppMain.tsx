@@ -2,14 +2,13 @@ import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import DataLoader from "../../components/DataLoader/DataLoader";
+import Welcome from "../../containers/Welcome/Welcome";
 import Forecast from "../../containers/Forecast/Forecast";
 import Favorites from "../../containers/Favorites/Favorites";
 import Settings from "../../containers/Settings/Settings";
-// import NoMatch from "../../containers/NoMatch/NoMatch";
 
 import {
-  DEFAULT_ROUTE_SLICE,
+  ROUTE_PATH,
   APP_STRUCTURE,
   TOOLBAR_HEIGHT,
   toolbarHeightMin
@@ -42,44 +41,38 @@ const AppMain = () => {
     dispatchFetch
   ] = useGeoLocationApi(dispatchSettings);
 
+  // console.log('main')
+  // console.log(launchLocation, lastLocation);
   return (
     <main className={classes.root}>
-      <DataLoader
-        isLoading={isLoading}
-        isError={isError}
-        error={`We couldn't find your city automatically,
-         you can still look for it manually.`}
-      >
-        <Switch>
-          <Route exact path={`${DEFAULT_ROUTE_SLICE}/`}>
-            <Redirect to={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`} />
+      <Switch>
+        {!launchLocation && (
+          <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.welcome}`}>
+            <Welcome isLoading={isLoading} isError={isError} />
           </Route>
-          {lastLocation && (
-            <Route path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.forecast}`}>
-              <Forecast lastLocation={lastLocation} />
-            </Route>
+        )}
+        {lastLocation && (
+          <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`}>
+            <Forecast lastLocation={lastLocation} />
+          </Route>
+        )}
+        <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.favorites}`}>
+          <Favorites
+            launchLocation={launchLocation}
+            favoriteLocations={favorites}
+          />
+        </Route>
+        <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.settings}`}>
+          <Settings launchLocation={launchLocation} dispatchFetch={dispatchFetch} />
+        </Route>
+        <Route path={`${ROUTE_PATH}/`}>
+          {launchLocation ? (
+            <Redirect to={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`} />
+          ) : (
+            <Redirect to={`${ROUTE_PATH}/${APP_STRUCTURE.welcome}`} />
           )}
-          {launchLocation && (
-            <Route path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.favorites}`}>
-              <Favorites
-                launchLocation={launchLocation}
-                favoriteLocations={favorites}
-              />
-            </Route>
-          )}
-          {launchLocation && (
-            <Route path={`${DEFAULT_ROUTE_SLICE}/${APP_STRUCTURE.settings}`}>
-              <Settings
-                launchLocation={launchLocation}
-                dispatchFetch={dispatchFetch}
-              />
-            </Route>
-          )}
-          {/* <Route path="*">
-            <NoMatch />
-          </Route> */}
-        </Switch>
-      </DataLoader>
+        </Route>
+      </Switch>
     </main>
   );
 };

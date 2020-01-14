@@ -19,22 +19,26 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type Props = {} & LaunchLocationSettingProps;
+type Props = {
+  launchLocation: string | null;
+} & LaunchLocationSettingProps;
 
-const Settings = ({ ...other }: Props) => {
+const Settings = ({ launchLocation, ...other }: Props) => {
   const classes = useStyles();
 
   // console.log("settings");
   return (
     <>
       <AppHeader heading={APP_STRUCTURE.settings} />
-      <div>
+      <section>
         <Typography variant="h2">Options</Typography>
-        <section className={classes.optionSection}>
-          <Typography variant="h3">Launch Location</Typography>
-          <LaunchLocationSetting {...other} />
-        </section>
-      </div>
+        {launchLocation && (
+          <section className={classes.optionSection}>
+            <Typography variant="h3">Launch Location</Typography>
+            <LaunchLocationSetting launchLocation={launchLocation} {...other} />
+          </section>
+        )}
+      </section>
     </>
   );
 };

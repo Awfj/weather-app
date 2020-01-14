@@ -8,7 +8,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { DEFAULT_ROUTE_SLICE, ACTIVE_LINK_BORDER_SIZE } from "../../constants";
+import { ROUTE_PATH, ACTIVE_LINK_BORDER_SIZE } from "../../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +33,7 @@ const ListItemLink = ({ icon, primary, to }: Props) => {
     () =>
       React.forwardRef<any, Omit<RouterLinkProps, "to">>((itemProps, ref) => (
         <RouterLink
-          to={`${DEFAULT_ROUTE_SLICE}/${to}`}
+          to={`${ROUTE_PATH}/${to}`}
           ref={ref}
           activeClassName={classes.active}
           {...itemProps}
