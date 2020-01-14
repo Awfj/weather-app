@@ -65,7 +65,7 @@ const AppDrawer = () => {
   const { isDrawerOpen } = useContext(SettingsCtx);
   const { pathname } = useLocation();
 
-  console.log("drawer", pathname.includes('forecast'));
+  console.log("drawer", pathname);
   return (
     <Drawer
       variant="permanent"

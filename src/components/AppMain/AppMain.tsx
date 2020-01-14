@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Welcome from "../../containers/Welcome/Welcome";
-import Forecast from "../../containers/Forecast/Forecast";
+
+import FrontPage from "../../containers/FrontPage/FrontPage";
 import Favorites from "../../containers/Favorites/Favorites";
 import Settings from "../../containers/Settings/Settings";
 
@@ -46,16 +46,20 @@ const AppMain = () => {
   return (
     <main className={classes.root}>
       <Switch>
-        {!launchLocation && (
+        {/* {!launchLocation && (
           <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.welcome}`}>
             <Welcome isLoading={isLoading} isError={isError} />
           </Route>
-        )}
-        {lastLocation && (
-          <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`}>
-            <Forecast lastLocation={lastLocation} />
-          </Route>
-        )}
+        )} */}
+        <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`}>
+          <FrontPage
+            lastLocation={lastLocation}
+            isLoading={isLoading}
+            isError={isError}
+          />
+        </Route>
+        {/* {lastLocation && (
+        )} */}
         <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.favorites}`}>
           <Favorites
             launchLocation={launchLocation}
@@ -63,14 +67,17 @@ const AppMain = () => {
           />
         </Route>
         <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.settings}`}>
-          <Settings launchLocation={launchLocation} dispatchFetch={dispatchFetch} />
+          <Settings
+            launchLocation={launchLocation}
+            dispatchFetch={dispatchFetch}
+          />
         </Route>
         <Route path={`${ROUTE_PATH}/`}>
-          {launchLocation ? (
-            <Redirect to={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`} />
+          <Redirect to={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`} />
+          {/* {launchLocation ? (
           ) : (
             <Redirect to={`${ROUTE_PATH}/${APP_STRUCTURE.welcome}`} />
-          )}
+          )} */}
         </Route>
       </Switch>
     </main>

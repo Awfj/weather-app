@@ -3,10 +3,12 @@ import AppHeader from "../../components/AppHeader/AppHeader";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import { APP_STRUCTURE } from "../../constants";
 
-type Props = {
+export type WelcomeProps = {
   isLoading: boolean;
   isError: boolean;
 };
+
+type Props = {} & WelcomeProps;
 
 const Welcome = ({ isLoading, isError }: Props) => {
   return (
