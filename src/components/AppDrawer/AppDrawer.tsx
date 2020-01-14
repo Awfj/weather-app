@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import clsx from "clsx";
-import { useLocation } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -63,9 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const AppDrawer = () => {
   const classes = useStyles();
   const { isDrawerOpen } = useContext(SettingsCtx);
-  const { pathname } = useLocation();
 
-  console.log("drawer", pathname);
   return (
     <Drawer
       variant="permanent"

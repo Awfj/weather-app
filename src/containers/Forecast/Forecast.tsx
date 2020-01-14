@@ -1,29 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import AppHeader from "../../components/AppHeader/AppHeader";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import Timer from "../../components/Timer/Timer";
-import Search from "../../components/Search/Search";
 // import Favor from "../../components/Favor/Favor";
-import useWeatherApi from "../../hooks/useWeatherApi";
 import { getExpirationTimeframe } from "../../utils";
 import useRefresh from "../../hooks/useRefresh";
+import { State as FetchState } from "../../hooks/useFetch";
 import { APP_STRUCTURE } from "../../constants";
+import { TGetData, IForecast } from "../../types";
 
-type Props = { lastLocation: string };
+type Props = {
+  lastLocation: string;
+  getForecast: TGetData;
+  forecast: FetchState<IForecast>;
+  search: JSX.Element;
+};
 
-const Forecast = ({ lastLocation }: Props) => {
-  const [{ data, isLoading, isError }, getForecast] = useWeatherApi(
-    lastLocation
-  );
+const Forecast = ({ lastLocation, search, forecast, getForecast }: Props) => {
   const [refresh, setRefreshIsDisabled] = useRefresh(() =>
     getForecast(lastLocation)
   );
-  const search = <Search lastLocation={lastLocation} getData={getForecast} />;
   // const favor = <Favor />;
+  const { data, isLoading, isError } = forecast;
 
-  // console.log(data && data.requestTime, isLoading, isError, lastLocation);
+  useEffect(() => {
+    getForecast(lastLocation);
+  }, [getForecast, lastLocation]);
+
+  console.log(
+    "forecast",
+    data && data.requestTime,
+    isLoading,
+    isError,
+    lastLocation
+  );
   return (
     <>
       <AppHeader

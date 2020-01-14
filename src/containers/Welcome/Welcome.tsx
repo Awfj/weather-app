@@ -8,19 +8,25 @@ export type WelcomeProps = {
   isError: boolean;
 };
 
-type Props = {} & WelcomeProps;
+type Props = {
+  search: JSX.Element;
+} & WelcomeProps;
 
-const Welcome = ({ isLoading, isError }: Props) => {
+const Welcome = ({ search, isLoading, isError }: Props) => {
+  console.log("welcome");
   return (
     <>
-      <AppHeader heading={APP_STRUCTURE.welcome} />
+      <AppHeader heading={APP_STRUCTURE.forecast} />
       <DataLoader
         isLoading={isLoading}
         isError={isError}
         error={`We couldn't find your city automatically,
          you can still look for it manually.`}
       >
-        <p>Welcome</p>
+        <div>
+          <p>Welcome</p>
+          {search}
+        </div>
       </DataLoader>
     </>
   );

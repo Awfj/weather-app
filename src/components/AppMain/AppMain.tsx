@@ -41,16 +41,10 @@ const AppMain = () => {
     dispatchFetch
   ] = useGeoLocationApi(dispatchSettings);
 
-  // console.log('main')
-  // console.log(launchLocation, lastLocation);
+  // console.log('main', launchLocation, lastLocation, isLoading, isError);
   return (
     <main className={classes.root}>
       <Switch>
-        {/* {!launchLocation && (
-          <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.welcome}`}>
-            <Welcome isLoading={isLoading} isError={isError} />
-          </Route>
-        )} */}
         <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`}>
           <FrontPage
             lastLocation={lastLocation}
@@ -58,8 +52,6 @@ const AppMain = () => {
             isError={isError}
           />
         </Route>
-        {/* {lastLocation && (
-        )} */}
         <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.favorites}`}>
           <Favorites
             launchLocation={launchLocation}
@@ -74,10 +66,6 @@ const AppMain = () => {
         </Route>
         <Route path={`${ROUTE_PATH}/`}>
           <Redirect to={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`} />
-          {/* {launchLocation ? (
-          ) : (
-            <Redirect to={`${ROUTE_PATH}/${APP_STRUCTURE.welcome}`} />
-          )} */}
         </Route>
       </Switch>
     </main>

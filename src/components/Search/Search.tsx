@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   getData: TGetData;
-  lastLocation: string;
+  lastLocation: string | null;
 };
 
 const Search = ({ lastLocation, getData }: Props) => {
