@@ -41,7 +41,7 @@ const AppMain = () => {
     dispatchFetch
   ] = useGeoLocationApi(dispatchSettings);
 
-  // console.log('main', launchLocation, lastLocation, isLoading, isError);
+  // console.log('main', launchLocation, lastLocation);
   return (
     <main className={classes.root}>
       <Switch>
@@ -55,7 +55,7 @@ const AppMain = () => {
         <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.favorites}`}>
           <Favorites
             launchLocation={launchLocation}
-            favoriteLocations={favorites}
+            favorites={favorites}
           />
         </Route>
         <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.settings}`}>

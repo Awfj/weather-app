@@ -49,7 +49,7 @@ const App: React.FC = () => {
   const windowWidth = useWindowWidth();
   const [settings, dispatchSettings] = useSettings();
 
-  // console.log("app", settings.lastLocation);
+  // console.log("app", settings);
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={settings.isThemeDark ? darkTheme : lightTheme}>

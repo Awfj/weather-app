@@ -17,7 +17,7 @@ export type Action =
   | { type: TOGGLE_THEME }
   | { type: SET_LAST_LOCATION; lastLocation: string }
   | { type: ADD_TO_FAVORITES; location: string }
-  | { type: REMOVE_FROM_FAVORITES; id: number };
+  | { type: REMOVE_FROM_FAVORITES; location: string };
 
 const useSettings = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_SETTINGS);
@@ -62,7 +62,9 @@ function reducer(state: ISettings, action: Action): ISettings {
     case REMOVE_FROM_FAVORITES: {
       return {
         ...state,
-        favorites: [...state.favorites.filter((_, id) => action.id !== id)]
+        favorites: [
+          ...state.favorites.filter(location => action.location !== location)
+        ]
       };
     }
     default: {

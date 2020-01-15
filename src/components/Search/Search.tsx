@@ -32,10 +32,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type Props = {
-  getData: TGetData;
+export type SearchProps = {
   lastLocation: string | null;
 };
+
+type Props = {
+  getData: TGetData;
+} & SearchProps;
 
 const Search = ({ lastLocation, getData }: Props) => {
   const [searchQuery, setSearchQuery] = useState("");

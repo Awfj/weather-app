@@ -5,7 +5,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import AppHeader from "../../components/AppHeader/AppHeader";
 import LaunchLocation from "../../components/LaunchLocation/LaunchLocation";
-import FavoritePlace from "../../components/FavoritePlace/FavoritePlace";
+import FavoriteLocation from "../../components/FavoriteLocation/FavoriteLocation";
 import { APP_STRUCTURE } from "../../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,31 +27,30 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   launchLocation: string | null;
-  favoriteLocations: string[];
+  favorites: string[];
 };
 
-const Favorites = ({ launchLocation, favoriteLocations }: Props) => {
+const Favorites = ({ launchLocation, favorites }: Props) => {
   const classes = useStyles();
-  // console.log(favoriteLocations)
-  // console.log('favorites')
+  // console.log("favorites");
   return (
     <>
       <AppHeader heading={APP_STRUCTURE.favorites} />
       <div className={classes.root}>
-        {launchLocation && (
+        <section>
+          <Typography variant="h2">Launch Location</Typography>
+          {launchLocation && <LaunchLocation location={launchLocation} />}
+        </section>
+        {favorites.length > 0 && (
           <section>
-            <Typography variant="h2">Launch Location</Typography>
-            <LaunchLocation location={launchLocation} />
+            <Typography variant="h2">Favorite Places</Typography>
+            <div className={classes.favorites}>
+              {favorites.map(location => (
+                <FavoriteLocation key={location} location={location} />
+              ))}
+            </div>
           </section>
         )}
-        <section>
-          <Typography variant="h2">Favorite Places</Typography>
-          <div className={classes.favorites}>
-            {favoriteLocations.map((place, index) => (
-              <FavoritePlace key={place} id={index} location={place} />
-            ))}
-          </div>
-        </section>
       </div>
     </>
   );

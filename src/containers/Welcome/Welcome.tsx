@@ -13,7 +13,7 @@ type Props = {
 } & WelcomeProps;
 
 const Welcome = ({ search, isLoading, isError }: Props) => {
-  console.log("welcome");
+  // console.log("welcome");
   return (
     <>
       <AppHeader heading={APP_STRUCTURE.forecast} />

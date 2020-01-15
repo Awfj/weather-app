@@ -8,24 +8,21 @@ import WeatherBox, { WeatherBoxProps } from "../WeatherBox/WeatherBox";
 import { REMOVE_FROM_FAVORITES } from "../../actions";
 import { SettingsDispatchCtx } from "../../contexts";
 
-type Props = {
-  id: number;
-} & WeatherBoxProps &
-  typeof defaultProps;
+type Props = {} & WeatherBoxProps & typeof defaultProps;
 
 const defaultProps = {
   label: "Remove from Favorites"
 };
 
-const FavoritePlace = ({ label, id, ...other }: Props) => {
+const FavoritePlace = ({ label, location }: Props) => {
   const dispatchSettings = useContext(SettingsDispatchCtx);
 
   const handleClick = () => {
-    dispatchSettings({ type: REMOVE_FROM_FAVORITES, id });
+    dispatchSettings({ type: REMOVE_FROM_FAVORITES, location });
   };
 
   return (
-    <WeatherBox {...other}>
+    <WeatherBox location={location}>
       <Tooltip title={label}>
         <IconButton aria-label={label} color="inherit" onClick={handleClick}>
           <ClearIcon />
