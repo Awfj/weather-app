@@ -12,6 +12,7 @@ import { APP_STRUCTURE } from "../../constants";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      width: "100%",
       "& > section": {
         marginTop: theme.spacing(3)
       }
@@ -23,7 +24,6 @@ type Props = {} & LaunchLocationSettingProps;
 
 const Settings = ({ ...other }: Props) => {
   const classes = useStyles();
-
   // console.log("settings");
   return (
     <>

@@ -23,12 +23,12 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: "flex",
       "& h2": {
-        marginBottom: theme.spacing(2)
+        marginBottom: "1rem"
       },
       "& h3": {
-        marginBottom: theme.spacing(1.5)
+        marginBottom: "0.75rem"
       },
-      "& button": {
+      "& button, & a": {
         "&:focus": {
           backgroundColor: theme.palette.action.selected
         },
@@ -37,7 +37,12 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         "&:active": {
           backgroundColor: theme.palette.action.active,
-          color: theme.palette.primary.main
+          color: theme.palette.primary.contrastText
+        }
+      },
+      "& a:active": {
+        "& *": {
+          color: theme.palette.primary.contrastText
         }
       }
     }

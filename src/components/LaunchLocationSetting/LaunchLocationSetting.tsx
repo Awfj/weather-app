@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import EditIcon from "@material-ui/icons/Edit";
 
 import Form from "../../components/Form/Form";
@@ -13,6 +14,14 @@ import { Action as FetchAction } from "../../hooks/useFetch";
 import { SettingsDispatchCtx } from "../../contexts";
 import { capitalizeFirstChar } from "../../utils";
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      maxWidth: "16rem"
+    }
+  })
+);
+
 export type LaunchLocationSettingProps = {
   dispatchFetch: React.Dispatch<FetchAction<string>>;
   launchLocation: string | null;
@@ -21,6 +30,7 @@ export type LaunchLocationSettingProps = {
 type Props = {} & LaunchLocationSettingProps;
 
 const LaunchLocationSetting = ({ launchLocation, dispatchFetch }: Props) => {
+  const classes = useStyles();
   const dispatchSettings = useContext(SettingsDispatchCtx);
 
   const handleSubmit: TFormEvent = event => {
@@ -42,7 +52,7 @@ const LaunchLocationSetting = ({ launchLocation, dispatchFetch }: Props) => {
     `: ${capitalizeFirstChar(launchLocation)}`}`;
   return (
     <Setting heading={heading}>
-      <Form onSubmit={event => handleSubmit(event)}>
+      <Form onSubmit={event => handleSubmit(event)} className={classes.root}>
         <InputField name="launchLocation" placeholder="New Launch Location" />
         <InputButton label="Submit" type="submit">
           <EditIcon />

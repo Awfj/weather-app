@@ -22,8 +22,8 @@ const Forecast = ({ lastLocation, search, forecast, getForecast }: Props) => {
   const [refresh, setRefreshIsDisabled] = useRefresh(() =>
     getForecast(lastLocation)
   );
-  const favor = <Favor lastLocation={lastLocation} />;
   const { data, isLoading, isError } = forecast;
+  const favor = data ? <Favor lastLocation={lastLocation} /> : undefined;
 
   useEffect(() => {
     getForecast(lastLocation);

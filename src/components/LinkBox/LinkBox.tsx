@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
         }
       }
     },
+    link: {
+      display: "flex"
+    },
     box: {
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.secondary.contrastText,
@@ -57,7 +60,11 @@ const LinkBox = ({
   return (
     <div className={classes.root}>
       <Tooltip title={tooltip}>
-        <Link to={to} onClick={onClick} className={clsx(linkStyles)}>
+        <Link
+          to={to}
+          onClick={onClick}
+          className={clsx(classes.link, linkStyles)}
+        >
           <div className={clsx(classes.box, boxStyles)}>{children}</div>
         </Link>
       </Tooltip>
