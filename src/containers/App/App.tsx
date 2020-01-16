@@ -10,7 +10,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { StylesProvider } from "@material-ui/styles";
 
 import AppDrawer from "../../components/AppDrawer/AppDrawer";
-import AppMain from "../../components/AppMain/AppMain";
+import AppContent from "../../components/AppContent/AppContent";
 
 import { lightTheme, darkTheme } from "../../theme";
 import useSettings from "../../hooks/useSettings";
@@ -59,7 +59,7 @@ const App: React.FC = () => {
             <SettingsCtx.Provider value={settings}>
               <div className={classes.root}>
                 <AppDrawer />
-                <AppMain />
+                <AppContent />
               </div>
             </SettingsCtx.Provider>
           </SettingsDispatchCtx.Provider>

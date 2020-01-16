@@ -6,38 +6,32 @@ import AppHeader from "../../components/AppHeader/AppHeader";
 import LaunchLocationSetting, {
   LaunchLocationSettingProps
 } from "../../components/LaunchLocationSetting/LaunchLocationSetting";
+// import ThemeSetting from "../../components/ThemeSetting/ThemeSetting";
 import { APP_STRUCTURE } from "../../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    optionSection: {
-      "&:not(:last-child)": {
-        border: "5px solid orange",
-        paddingBottom: theme.spacing(1)
+    root: {
+      "& > section": {
+        marginTop: theme.spacing(3)
       }
     }
   })
 );
 
-type Props = {
-  launchLocation: string | null;
-} & LaunchLocationSettingProps;
+type Props = {} & LaunchLocationSettingProps;
 
-const Settings = ({ launchLocation, ...other }: Props) => {
+const Settings = ({ ...other }: Props) => {
   const classes = useStyles();
 
   // console.log("settings");
   return (
     <>
       <AppHeader heading={APP_STRUCTURE.settings} />
-      <section>
+      <section className={classes.root}>
         <Typography variant="h2">Options</Typography>
-        {launchLocation && (
-          <section className={classes.optionSection}>
-            <Typography variant="h3">Launch Location</Typography>
-            <LaunchLocationSetting launchLocation={launchLocation} {...other} />
-          </section>
-        )}
+        <LaunchLocationSetting {...other} />
+        {/* <ThemeSetting /> */}
       </section>
     </>
   );

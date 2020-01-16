@@ -53,10 +53,7 @@ const AppMain = () => {
           />
         </Route>
         <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.favorites}`}>
-          <Favorites
-            launchLocation={launchLocation}
-            favorites={favorites}
-          />
+          <Favorites launchLocation={launchLocation} favorites={favorites} />
         </Route>
         <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.settings}`}>
           <Settings
