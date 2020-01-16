@@ -5,6 +5,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import AppHeader from "../../components/AppHeader/AppHeader";
 import LaunchLocation from "../../components/LaunchLocation/LaunchLocation";
+import AddLocationBox from "../../components/AddLocationBox/AddLocationBox";
 import FavoriteLocation from "../../components/FavoriteLocation/FavoriteLocation";
 import { APP_STRUCTURE } from "../../constants";
 
@@ -39,7 +40,11 @@ const Favorites = ({ launchLocation, favorites }: Props) => {
       <div className={classes.root}>
         <section>
           <Typography variant="h2">Launch Location</Typography>
-          {launchLocation && <LaunchLocation location={launchLocation} />}
+          {launchLocation ? (
+            <LaunchLocation location={launchLocation} />
+          ) : (
+            <AddLocationBox />
+          )}
         </section>
         {favorites.length > 0 && (
           <section>
