@@ -10,6 +10,7 @@ import useWeatherApi from "../../hooks/useWeatherApi";
 import { SettingsDispatchCtx } from "../../contexts";
 import { APP_STRUCTURE } from "../../constants";
 import { SET_LAST_LOCATION } from "../../actions";
+import { capitalizeFirstChar } from "../../utils";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
     spinner: {
       color: theme.palette.common.white,
       fontSize: "2.2rem"
+    },
+    error: {
+      width: "16rem"
     }
   })
 );
@@ -60,25 +64,30 @@ const WeatherBox = ({ location, children }: Props) => {
       linkStyles={classes.link}
       extra={children}
     >
-      {data && (
-        <DataLoader
-          spinnerStyles={classes.spinner}
-          isLoading={isLoading}
-          isError={isError}
-          error={`Requested city can't be found. Please, check if the name is correct,
-        change service or try again later.`}
-        >
-          <Typography variant="h3">
-            {data.currentWeather.city}, {data.currentWeather.country}
-          </Typography>
-          <div className={classes.group}>
-            <Temperature temperature={data.currentWeather.temperature}>
-              C
-            </Temperature>
-          </div>
-          <p>{data.currentWeather.condition}</p>
-        </DataLoader>
-      )}
+      <DataLoader
+        spinnerStyles={classes.spinner}
+        errorStyles={classes.error}
+        isLoading={isLoading}
+        isError={isError}
+        errorMessage={`We couldn't find ${capitalizeFirstChar(
+          location
+        )}. Please, check if the name is correct or try again later.`}
+        disableErrorBorder
+      >
+        {data && (
+          <>
+            <Typography variant="h3">
+              {data.currentWeather.city}, {data.currentWeather.country}
+            </Typography>
+            <div className={classes.group}>
+              <Temperature temperature={data.currentWeather.temperature}>
+                C
+              </Temperature>
+            </div>
+            <p>{data.currentWeather.condition}</p>
+          </>
+        )}
+      </DataLoader>
     </LinkBox>
   );
 };

@@ -20,7 +20,7 @@ const Welcome = ({ search, isLoading, isError }: Props) => {
       <DataLoader
         isLoading={isLoading}
         isError={isError}
-        error={`We couldn't find your city automatically,
+        errorMessage={`We couldn't find your city automatically,
          you can still look for it manually.`}
       >
         <div>

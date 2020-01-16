@@ -10,6 +10,7 @@ import useRefresh from "../../hooks/useRefresh";
 import { State as SUseFetch } from "../../hooks/useFetch";
 import { APP_STRUCTURE } from "../../constants";
 import { TGetData, IForecast } from "../../types";
+import { capitalizeFirstChar } from "../../utils";
 
 type Props = {
   getForecast: TGetData;
@@ -46,8 +47,9 @@ const Forecast = ({ lastLocation, search, forecast, getForecast }: Props) => {
       <DataLoader
         isLoading={isLoading}
         isError={isError}
-        error={`Requested city can't be found. Please, check if the name is correct,
-        change service or try again later.`}
+        errorMessage={`We couldn't find ${capitalizeFirstChar(
+          lastLocation
+        )}. Please, check if the name is correct or try again later.`}
       >
         {data && (
           <CurrentWeather
