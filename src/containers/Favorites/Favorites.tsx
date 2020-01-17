@@ -12,15 +12,18 @@ import { APP_STRUCTURE } from "../../constants";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(0, 40),
       "& section:not(:last-child)": {
         marginBottom: theme.spacing(4)
       }
     },
     favorites: {
       display: "flex",
-      "& div:not(:last-child)": {
-        marginRight: theme.spacing(2)
+      flexWrap: "wrap",
+      "& > div": {
+        marginBottom: theme.spacing(3)
+      },
+      "& > div:not(:last-child)": {
+        marginRight: theme.spacing(3)
       }
     }
   })

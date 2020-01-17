@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "flex-start",
       flexGrow: 1,
       marginTop: toolbarHeightMin,
-      padding: theme.spacing(3),
+      padding: theme.spacing(4, 6),
       [theme.breakpoints.up("sm")]: {
         marginTop: TOOLBAR_HEIGHT
       }
