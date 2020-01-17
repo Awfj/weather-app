@@ -5,21 +5,17 @@ import Typography from "@material-ui/core/Typography";
 
 import Temperature from "../Temperature/Temperature";
 import { ICurrentWeather } from "../../types";
-import {getReadableRequestTime} from '../../utils'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       margin: "0 auto",
       textAlign: "center",
-      maxWidth: "450px",
-      "& p": {
-        fontWeight: "lighter",
-        marginBottom: theme.spacing(0.5)
-      },
+      maxWidth: "28rem",
       "& > div": {
         display: "flex",
         justifyContent: "center",
+        marginBottom: theme.spacing(0.5),
         "& > p": {
           fontSize: "5rem",
           lineHeight: "0.85em"
@@ -34,13 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
           }
         }
       },
-      "& > p": {
-        fontSize: "1.5rem"
-      },
-      "& > p:last-of-type": {
-        fontSize: "0.9rem",
-        fontWeight: "500",
-        marginBottom: theme.spacing(1.5)
+      "& > p:first-of-type": {
+        fontWeight: "lighter",
+        fontSize: "1.5rem",
+        marginBottom: theme.spacing(0.5)
       },
       "& ul": {
         display: "flex",
@@ -66,14 +59,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   data: ICurrentWeather;
-  requestTime: number;
-  timer: React.ReactNode;
+  timer: JSX.Element;
 };
 
-const CurrentWeather = ({ data, requestTime, timer }: Props) => {
+const CurrentWeather = ({ data, timer }: Props) => {
   const classes = useStyles();
-
-  
 
   return (
     <section className={classes.root}>
@@ -92,7 +82,7 @@ const CurrentWeather = ({ data, requestTime, timer }: Props) => {
             </div> */}
       </div>
       <p>{data.condition}</p>
-      <p>Updated as of {getReadableRequestTime(requestTime)}</p>
+      {timer}
       <ul>
         <li>Cloudiness: {data.cloudiness}%</li>
         <li>Wind: {data.windSpeed} m/s</li>
@@ -100,8 +90,6 @@ const CurrentWeather = ({ data, requestTime, timer }: Props) => {
         <li>Pressure: {data.pressure} mb</li>
         <li>Humidity: {data.humidity}%</li>
       </ul>
-
-      {timer}
     </section>
   );
 };

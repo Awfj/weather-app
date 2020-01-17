@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 import AppHeader from "../../components/AppHeader/AppHeader";
 import DataLoader from "../../components/DataLoader/DataLoader";
-import Timer from "../../components/Timer/Timer";
 import Favor, { FavorProps } from "../../components/Favor/Favor";
+import Timer from "../../components/Timer/Timer";
 import { getExpirationTimeframe } from "../../utils";
 import useRefresh from "../../hooks/useRefresh";
 import { State as SUseFetch } from "../../hooks/useFetch";
@@ -19,10 +19,10 @@ type Props = {
 } & FavorProps;
 
 const Forecast = ({ lastLocation, search, forecast, getForecast }: Props) => {
-  const [refresh, setRefreshIsDisabled] = useRefresh(() =>
+  const { data, isLoading, isError } = forecast;
+  const [setRefreshIsDisabled, refresh] = useRefresh(!!data, () =>
     getForecast(lastLocation)
   );
-  const { data, isLoading, isError } = forecast;
   const favor = data ? <Favor lastLocation={lastLocation} /> : undefined;
 
   useEffect(() => {
@@ -54,11 +54,11 @@ const Forecast = ({ lastLocation, search, forecast, getForecast }: Props) => {
         {data && (
           <CurrentWeather
             data={data.currentWeather}
-            requestTime={data.requestTime}
             timer={
               <Timer
                 expirationTimeframe={getExpirationTimeframe(data.requestTime)}
                 setRefreshIsDisabled={setRefreshIsDisabled}
+                requestTime={data.requestTime}
               />
             }
           />

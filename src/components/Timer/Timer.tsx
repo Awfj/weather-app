@@ -1,48 +1,42 @@
 import React from "react";
-import styles from "./Timer.module.scss";
-// import { getRemainingTime } from "../../utils";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { getRemainingTime, getReadableRequestTime } from "../../utils";
 import { TSetBoolean } from "../../types";
+import useTimer from "../../hooks/useTimer";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      fontSize: "0.9rem",
+      marginBottom: theme.spacing(1.5),
+      "&": {
+        fontWeight: "500"
+      }
+    }
+  })
+);
 
 type Props = {
   expirationTimeframe: number;
   setRefreshIsDisabled: TSetBoolean;
+  requestTime: number;
 };
 
-const Timer = ({ expirationTimeframe, setRefreshIsDisabled }: Props) => {
-  // const [timer, setTimer] = React.useState(expirationTimeframe);
+const Timer = ({
+  expirationTimeframe,
+  setRefreshIsDisabled,
+  requestTime
+}: Props) => {
+  const classes = useStyles();
+  const timer = useTimer(expirationTimeframe, setRefreshIsDisabled);
 
-  // React.useEffect(() => {
-  //   if (expirationTimeframe >= 1000) {
-  //     console.log("test");
-  //     setTimer(expirationTimeframe);
-  //     setRefreshIsDisabled(true);
-  //   }
-  // }, [expirationTimeframe, setRefreshIsDisabled]);
-
-  // React.useEffect(() => {
-  //   const timerTimeout = setTimeout(() => {
-  //     if (timer >= 1000) {
-  //       setTimer(timer => timer - 1000);
-  //       // console.log('count')
-  //     } else {
-  //       setRefreshIsDisabled(false);
-  //       console.log("end");
-  //     }
-  //     console.log("timer");
-  //   }, 1000);
-  //   return () => clearTimeout(timerTimeout);
-  // }, [timer, setRefreshIsDisabled]);
-
-  // console.log(expirationTimeframe, timer);
   return (
-    <div className={styles.root}>
-      {/* <p>
-        Refresh{" "}
-        {timer >= 1000
-          ? `will be available in: ${getRemainingTime(timer)}`
-          : "is available!"}
-      </p> */}
-    </div>
+    <p className={classes.root}>
+      Updated as of {getReadableRequestTime(requestTime)}. Refresh{" "}
+      {timer >= 1000
+        ? `will be available in: ${getRemainingTime(timer)}`
+        : "is available!"}
+    </p>
   );
 };
 

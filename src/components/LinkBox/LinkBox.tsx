@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.secondary.contrastText,
       padding: theme.spacing(1),
-      minHeight: "7.5rem",
+      minHeight: "8.5rem",
       minWidth: "13rem"
     }
   })
