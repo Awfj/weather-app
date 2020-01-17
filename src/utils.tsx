@@ -53,8 +53,34 @@ export const getLaunchLocation = async () => {
   const launchLocation = await fetchLocation();
   if (!launchLocation) return null;
   localStorage.setItem("launch_location", launchLocation);
-  // sessionStorage.setItem("last_location", launchLocation);
   return launchLocation;
+};
+
+export const getReadableRequestTime = (requestTime: number) => {
+  const currentYear = new Date().getFullYear();
+  const requestYear = new Date(requestTime).getFullYear();
+  const time = sliceSplittedString(
+    new Date(requestTime).toTimeString(),
+    " ",
+    0,
+    1
+  ).slice(0, 5);
+  const date = new Date(requestTime).toDateString();
+
+  if (currentYear === requestYear) {
+    const currentDay = new Date().getDate();
+    const requestDay = new Date(requestTime).getDate();
+
+    if (currentDay === requestDay) {
+      return time;
+    } else if (currentDay - 1 === requestDay) {
+      return `Yesterday, ${time}`;
+    } else {
+      return `${sliceSplittedString(date, " ", 1, 3)}, ${time}`;
+    }
+  } else {
+    return `${sliceSplittedString(date, " ", 1)}, ${time}`;
+  }
 };
 
 export const getRemainingTime = (milliseconds: number) => {
@@ -64,7 +90,6 @@ export const getRemainingTime = (milliseconds: number) => {
   return `${hours}h ${minutes}m ${seconds}s`;
 };
 
-// use hasOwnProperty for object
 export const removeExpiredWeather = (city: string) => {
   for (let key in localStorage) {
     if (key.includes("weather") && !key.includes(city)) {
@@ -74,6 +99,18 @@ export const removeExpiredWeather = (city: string) => {
       }
     }
   }
+};
+
+export const sliceSplittedString = (
+  string: string,
+  separator: string,
+  beginIndex: number,
+  endIndex?: number
+) => {
+  return string
+    .split(separator)
+    .slice(beginIndex, endIndex)
+    .join(separator);
 };
 
 export const storeWeather = (city: string, weather: object) => {

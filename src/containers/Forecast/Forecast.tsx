@@ -54,6 +54,7 @@ const Forecast = ({ lastLocation, search, forecast, getForecast }: Props) => {
         {data && (
           <CurrentWeather
             data={data.currentWeather}
+            requestTime={data.requestTime}
             timer={
               <Timer
                 expirationTimeframe={getExpirationTimeframe(data.requestTime)}

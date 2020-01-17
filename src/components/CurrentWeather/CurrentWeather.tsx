@@ -5,16 +5,17 @@ import Typography from "@material-ui/core/Typography";
 
 import Temperature from "../Temperature/Temperature";
 import { ICurrentWeather } from "../../types";
+import {getReadableRequestTime} from '../../utils'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      // border: "1px solid #000",
       margin: "0 auto",
       textAlign: "center",
       maxWidth: "450px",
       "& p": {
-        fontWeight: "lighter"
+        fontWeight: "lighter",
+        marginBottom: theme.spacing(0.5)
       },
       "& > div": {
         display: "flex",
@@ -36,11 +37,15 @@ const useStyles = makeStyles((theme: Theme) =>
       "& > p": {
         fontSize: "1.5rem"
       },
+      "& > p:last-of-type": {
+        fontSize: "0.9rem",
+        fontWeight: "500",
+        marginBottom: theme.spacing(1.5)
+      },
       "& ul": {
         display: "flex",
         justifyContent: "center",
         flexWrap: "wrap",
-        marginTop: theme.spacing(1),
         "& li:not(:last-child)": {
           marginRight: "1em"
         }
@@ -61,11 +66,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   data: ICurrentWeather;
+  requestTime: number;
   timer: React.ReactNode;
 };
 
-const CurrentWeather = ({ data, timer }: Props) => {
+const CurrentWeather = ({ data, requestTime, timer }: Props) => {
   const classes = useStyles();
+
+  
+
   return (
     <section className={classes.root}>
       <Typography variant="h2">
@@ -83,6 +92,7 @@ const CurrentWeather = ({ data, timer }: Props) => {
             </div> */}
       </div>
       <p>{data.condition}</p>
+      <p>Updated as of {getReadableRequestTime(requestTime)}</p>
       <ul>
         <li>Cloudiness: {data.cloudiness}%</li>
         <li>Wind: {data.windSpeed} m/s</li>
