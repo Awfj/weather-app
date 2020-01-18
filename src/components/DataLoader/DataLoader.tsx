@@ -8,6 +8,7 @@ type Props = {
   errorMessage: string;
   isLoading: boolean;
   isError: boolean;
+  displayContent?: boolean;
 } & ErrorProps;
 
 const DataLoader = ({
@@ -16,13 +17,21 @@ const DataLoader = ({
   isLoading,
   errorMessage,
   isError,
+  displayContent = false,
   ...other
 }: Props) => {
   let rendered: React.ReactNode;
   if (isLoading) {
     rendered = <Spinner className={spinnerStyles} />;
   } else {
-    if (isError) {
+    if (displayContent && isError) {
+      rendered = (
+        <>
+          <Error {...other}>{errorMessage}</Error>
+          {children}
+        </>
+      );
+    } else if (isError) {
       rendered = <Error {...other}>{errorMessage}</Error>;
     } else {
       rendered = children;

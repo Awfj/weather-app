@@ -12,38 +12,47 @@ export const checkIfExpired = (requestTime: number) => {
 };
 
 export const fetchLocation = async () => {
-  const response = await fetch(`https://ipapi.co/json/ `);
-  console.log(response)
-  if (!response.ok) return null;
-  const data: IGeoLocationData = await response.json();
-  const city = data.city.toLowerCase();
-  return city;
+  try {
+    const response = await fetch(`https://get.geojs.io/v1/ip/geo.json`);
+    if (!response.ok) return null;
+    const data: IGeoLocationData = await response.json();
+    const city = data.city.toLowerCase();
+    return city;
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+    return null;
+  }
 };
 
 export const fetchForecast = async (queriedCity: string) => {
-  const OPENWEATHERMAP_KEY = process.env.REACT_APP_OPENWEATHERMAP_KEY;
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${queriedCity}`;
-  const updatedUrl = `${url}&appid=${OPENWEATHERMAP_KEY}&units=metric`;
-  const response = await fetch(updatedUrl);
-  if (!response.ok) return null;
-  const data: ICurrentWeatherData = await response.json();
+  try {
+    const OPENWEATHERMAP_KEY = process.env.REACT_APP_OPENWEATHERMAP_KEY;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${queriedCity}`;
+    const updatedUrl = `${url}&appid=${OPENWEATHERMAP_KEY}&units=metric`;
+    const response = await fetch(updatedUrl);
+    if (!response.ok) return null;
+    const data: ICurrentWeatherData = await response.json();
 
-  const forecast: IForecast = {
-    currentWeather: {
-      city: data.name,
-      condition: data.weather[0].main,
-      country: data.sys.country,
-      temperature: Math.round(data.main.temp),
-      cloudiness: data.clouds.all,
-      windSpeed: data.wind.speed,
-      visibility: data.visibility / 1000,
-      pressure: data.main.pressure,
-      humidity: data.main.humidity
-    },
-    requestTime: new Date().getTime()
-  };
-  storeWeather(queriedCity, forecast);
-  return forecast;
+    const forecast: IForecast = {
+      currentWeather: {
+        city: data.name,
+        condition: data.weather[0].main,
+        country: data.sys.country,
+        temperature: Math.round(data.main.temp),
+        cloudiness: data.clouds.all,
+        windSpeed: data.wind.speed,
+        visibility: data.visibility / 1000,
+        pressure: data.main.pressure,
+        humidity: data.main.humidity
+      },
+      requestTime: new Date().getTime()
+    };
+    storeWeather(queriedCity, forecast);
+    return forecast;
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+    return null;
+  }
 };
 
 export const getExpirationTimeframe = (requestTime: number) => {
