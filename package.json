@@ -2,7 +2,7 @@
   "name": "weather-app",
   "version": "0.5.0",
   "private": true,
-  "homepage": "https://awfj.github.io/weather-app",
+  "homepage": "https://awfj.github.io/weather-app/forecast",
   "dependencies": {
     "@material-ui/core": "^4.7.1",
     "@material-ui/icons": "^4.5.1",
