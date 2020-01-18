@@ -48,8 +48,8 @@ const LaunchLocationSetting = ({ launchLocation, dispatchFetch }: Props) => {
     }
   };
 
-  const heading = `Launch Location ${launchLocation &&
-    `: ${capitalizeFirstChar(launchLocation)}`}`;
+  let heading = `Launch Location`;
+  if (launchLocation) heading += `: ${capitalizeFirstChar(launchLocation)}`;
   return (
     <Setting heading={heading}>
       <Form onSubmit={event => handleSubmit(event)} className={classes.root}>

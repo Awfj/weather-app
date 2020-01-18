@@ -29,13 +29,7 @@ const Forecast = ({ lastLocation, search, forecast, getForecast }: Props) => {
     getForecast(lastLocation);
   }, [getForecast, lastLocation]);
 
-  // console.log(
-  //   "forecast",
-  //   data && data.requestTime,
-  //   isLoading,
-  //   isError,
-  //   lastLocation
-  // );
+  // console.log("forecast");
   return (
     <>
       <AppHeader

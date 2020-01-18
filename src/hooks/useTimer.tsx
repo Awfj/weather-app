@@ -9,7 +9,7 @@ const useTimer = (
 
   React.useEffect(() => {
     if (expirationTimeframe >= 1000) {
-      console.log("test");
+      // console.log("test");
       setTimer(expirationTimeframe);
       setRefreshIsDisabled(true);
     }
@@ -19,17 +19,17 @@ const useTimer = (
     const timerTimeout = setTimeout(() => {
       if (timer >= 1000) {
         setTimer(timer => timer - 1000);
-        console.log("count");
+        // console.log("count");
       } else {
         setRefreshIsDisabled(false);
-        console.log("end");
+        // console.log("end");
       }
-      console.log("timer");
+      // console.log("timer");
     }, 1000);
     return () => clearTimeout(timerTimeout);
   }, [timer, setRefreshIsDisabled]);
 
-  console.log(expirationTimeframe, timer);
+  // console.log(expirationTimeframe, timer);
   return timer;
 };
 

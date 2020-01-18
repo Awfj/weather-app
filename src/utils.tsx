@@ -12,7 +12,7 @@ export const checkIfExpired = (requestTime: number) => {
 };
 
 export const fetchLocation = async () => {
-  const response = await fetch(`https://get.geojs.io/v1/ip/geo.json`);
+  const response = await fetch(`http://ip-api.com/json/`);
   if (!response.ok) return null;
   const data: IGeoLocationData = await response.json();
   const city = data.city.toLowerCase();
@@ -84,13 +84,14 @@ export const getReadableRequestTime = (requestTime: number) => {
 };
 
 export const getRemainingTime = (milliseconds: number) => {
+  milliseconds += 60000;
   const hours = Math.floor((milliseconds / 3600000) % 60);
   const minutes = Math.floor((milliseconds / 60000) % 60);
   // const seconds = Math.floor((milliseconds / 1000) % 60);
   if (hours > 0) {
     return `${hours}h ${minutes}m`;
   } else {
-    return `${minutes + 1}m`;
+    return `${minutes}m`;
   }
 };
 
