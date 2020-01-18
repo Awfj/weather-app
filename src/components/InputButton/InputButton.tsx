@@ -4,13 +4,11 @@ import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 
 import { TButton } from "../../types";
-import { ICON_BUTTON_FONT_SIZE } from "../../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      marginLeft: "3px",
-      fontSize: `calc(${ICON_BUTTON_FONT_SIZE} - 0.1rem)`
+      marginLeft: "3px"
     }
   })
 );

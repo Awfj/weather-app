@@ -13,17 +13,26 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       "& section:not(:last-child)": {
-        marginBottom: theme.spacing(4)
+        marginBottom: theme.spacing(2),
+        [theme.breakpoints.up("sm")]: {
+          marginBottom: theme.spacing(4)
+        }
       }
     },
     favorites: {
       display: "flex",
       flexWrap: "wrap",
       "& > div": {
-        marginBottom: theme.spacing(3)
+        marginBottom: theme.spacing(2),
+        [theme.breakpoints.up("sm")]: {
+          marginBottom: theme.spacing(3)
+        }
       },
       "& > div:not(:last-child)": {
-        marginRight: theme.spacing(3)
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.up("sm")]: {
+          marginBottom: theme.spacing(3)
+        }
       }
     }
   })

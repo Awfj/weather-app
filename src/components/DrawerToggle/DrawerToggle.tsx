@@ -22,8 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       alignSelf: "stretch",
       display: "flex",
-      marginRight: theme.spacing(2),
-      width: drawerIconWidth
+      marginRight: theme.spacing(1),
+      width: drawerIconWidth,
+      [theme.breakpoints.up("sm")]: {
+        marginRight: theme.spacing(2)
+      }
     },
     button: {
       width: "100%"

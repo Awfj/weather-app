@@ -17,12 +17,25 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       backgroundColor: theme.palette.background.paper,
-      zIndex: theme.zIndex.drawer + 1
+      zIndex: theme.zIndex.drawer + 1,
+      "& h1": {
+        [theme.breakpoints.up("sm")]: {
+          fontSize: "2rem"
+        }
+      },
+      "& .MuiIconButton-root": {
+        [theme.breakpoints.up("sm")]: {
+          fontSize: "1.5rem"
+        }
+      }
     },
     toolbar: {
-      paddingRight: theme.spacing(2),
+      paddingRight: theme.spacing(1),
       [theme.breakpoints.down("xs")]: {
         minHeight: toolbarHeightMin
+      },
+      [theme.breakpoints.up("sm")]: {
+        paddingRight: theme.spacing(2)
       }
     },
     title: {

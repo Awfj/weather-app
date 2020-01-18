@@ -7,10 +7,13 @@ import useTimer from "../../hooks/useTimer";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      fontSize: "0.9rem",
+      fontSize: "0.8rem",
       marginBottom: theme.spacing(1.5),
       "&": {
         fontWeight: "500"
+      },
+      [theme.breakpoints.up("sm")]: {
+        fontSize: "0.9rem"
       }
     }
   })

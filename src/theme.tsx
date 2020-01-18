@@ -4,7 +4,6 @@ import blue from "@material-ui/core/colors/blue";
 import {
   LIST_ITEM_GUTTER_SIZE,
   TOOLBAR_HEIGHT,
-  ICON_BUTTON_FONT_SIZE,
   SVG_ICON_FONT_SIZE,
   listItemIconMinWidth,
   listItemLeftGutterSize,
@@ -34,7 +33,7 @@ const baseTheme = {
     MuiIconButton: {
       root: {
         borderRadius: "0",
-        fontSize: ICON_BUTTON_FONT_SIZE,
+        fontSize: "1rem",
         padding: "0.5em"
       }
     },
@@ -67,13 +66,13 @@ const baseTheme = {
   },
   typography: {
     h1: {
-      fontSize: "2rem"
+      fontSize: "1.5rem"
     },
     h2: {
-      fontSize: "2rem"
+      fontSize: "1.3rem"
     },
     h3: {
-      fontSize: "1.5rem",
+      fontSize: "1rem",
       fontWeight: 300
     }
   },

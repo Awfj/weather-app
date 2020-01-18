@@ -15,25 +15,15 @@ const useStyles = makeStyles((theme: Theme) =>
       "& > div": {
         display: "flex",
         justifyContent: "center",
-        marginBottom: theme.spacing(0.5),
-        "& > p": {
-          fontSize: "5rem",
-          lineHeight: "0.85em"
-        },
-        "& > p:first-child": {
-          letterSpacing: "0px",
-          // paddingRight: theme.spacing(2.5),
-          paddingRight: theme.spacing(7.5),
-          "& span": {
-            fontSize: "0.7em",
-            lineHeight: "0.9em"
-          }
-        }
+        marginBottom: theme.spacing(0.5)
       },
       "& > p:first-of-type": {
         fontWeight: "lighter",
-        fontSize: "1.5rem",
-        marginBottom: theme.spacing(0.5)
+        fontSize: "1rem",
+        marginBottom: theme.spacing(0.5),
+        [theme.breakpoints.up("sm")]: {
+          fontSize: "1.5rem"
+        }
       },
       "& ul": {
         display: "flex",

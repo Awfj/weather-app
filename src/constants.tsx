@@ -5,10 +5,10 @@ export const EXPIRATION_TIMEFRAME = 10000;
 // export const EXPIRATION_TIMEFRAME = 7.2e6;
 export const ROUTE_PATH = "/weather-app";
 export const APP_STRUCTURE = {
-  welcome: 'welcome',
+  welcome: "welcome",
   forecast: "forecast",
   favorites: "favorites",
-  settings: "settings",
+  settings: "settings"
 };
 
 export const LOCAL_STORAGE = {
@@ -19,7 +19,7 @@ export const LOCAL_STORAGE = {
 };
 
 export const INITIAL_SETTINGS: ISettings = {
-  favorites: ["london", 'brest', 'minsk', 'paris', 'moscow', 'berlin'],
+  favorites: ["london", "brest", "minsk", "paris", "moscow", "berlin"],
   isDrawerOpen: false,
   isThemeDark: false,
   lastLocation: null
@@ -34,7 +34,6 @@ export const ACTIVE_LINK_BORDER_SIZE = "0.375rem";
 export const TOOLBAR_HEIGHT = "4rem";
 
 export const SCALING_FACTOR = 0.5;
-export const ICON_BUTTON_FONT_SIZE = "1.5rem";
 
 export const drawerIconWidth = `calc(${LIST_ITEM_GUTTER_SIZE} * 2 + ${SVG_ICON_FONT_SIZE})`;
 export const toolbarHeightMin = `calc(${TOOLBAR_HEIGHT} - ${SCALING_FACTOR}rem)`;

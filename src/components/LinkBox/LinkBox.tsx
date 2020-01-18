@@ -30,8 +30,12 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.secondary.main,
       color: theme.palette.secondary.contrastText,
       padding: theme.spacing(1),
-      minHeight: "8.5rem",
-      minWidth: "13rem"
+      minHeight: "6.5rem",
+      minWidth: "8rem",
+      [theme.breakpoints.up("sm")]: {
+        minHeight: "8.5rem",
+        minWidth: "13rem"
+      }
     }
   })
 );

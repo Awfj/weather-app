@@ -7,10 +7,21 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       fontWeight: "lighter",
       position: "relative",
+      letterSpacing: "0px",
+      // paddingRight: theme.spacing(2.5),
+      paddingRight: theme.spacing(4.5),
+      fontSize: "3rem",
+      lineHeight: "0.85em",
+      [theme.breakpoints.up("sm")]: {
+        fontSize: "5rem",
+        paddingRight: theme.spacing(7.5)
+      },
       "& span": {
         position: "absolute",
         top: "0",
-        right: "0"
+        right: "0",
+        fontSize: "0.7em",
+        lineHeight: "0.9em"
       }
     }
   })

@@ -14,24 +14,42 @@ import {
   TOOLBAR_HEIGHT,
   toolbarHeightMin,
   drawerIconWidth,
-  APP_STRUCTURE
+  APP_STRUCTURE,
+  listItemIconMinWidth
 } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
 import { SettingsCtx } from "../../contexts";
 
+const DRAWER_MIN_WIDTH = "8.5rem";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "13rem",
+      width: DRAWER_MIN_WIDTH,
       flexShrink: 0,
-      whiteSpace: "nowrap"
+      whiteSpace: "nowrap",
+      [theme.breakpoints.up("sm")]: {
+        width: "13rem"
+      },
+      "& .MuiListItemIcon-root": {
+        [theme.breakpoints.down("xs")]: {
+          minWidth: `calc(${listItemIconMinWidth} - 0.5rem)`
+        }
+      },
+      "& .MuiTypography-body1": {
+        [theme.breakpoints.down("xs")]: {
+          fontSize: "0.9rem"
+        }
+      }
     },
     isOpen: {
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       }),
-      width: "13rem"
+      width: DRAWER_MIN_WIDTH,
+      [theme.breakpoints.up("sm")]: {
+        width: "13rem"
+      }
     },
     isClosed: {
       transition: theme.transitions.create("width", {

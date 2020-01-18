@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: "2.5rem",
         fontWeight: "lighter",
         paddingRight: theme.spacing(2.5),
+        paddingBottom: theme.spacing(1),
         "& span": {
           fontSize: "0.4em",
           lineHeight: "2.6em"

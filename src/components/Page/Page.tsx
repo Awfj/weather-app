@@ -8,10 +8,16 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: "flex",
       "& h2": {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        [theme.breakpoints.up("sm")]: {
+          fontSize: "2rem"
+        }
       },
       "& h3": {
-        marginBottom: theme.spacing(1.5)
+        marginBottom: theme.spacing(1.5),
+        [theme.breakpoints.up("sm")]: {
+          fontSize: "1.5rem"
+        }
       },
       "& button": {
         "&:focus": {
