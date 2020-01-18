@@ -8,7 +8,6 @@ import Favorites from "../../containers/Favorites/Favorites";
 import Settings from "../../containers/Settings/Settings";
 
 import {
-  ROUTE_PATH,
   APP_STRUCTURE,
   TOOLBAR_HEIGHT,
   toolbarHeightMin
@@ -46,24 +45,24 @@ const AppMain = () => {
   return (
     <main className={classes.root}>
       <Switch>
-        <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`}>
+        <Route path={`/${APP_STRUCTURE.forecast}`}>
           <FrontPage
             lastLocation={lastLocation}
             isLoading={isLoading}
             isError={isError}
           />
         </Route>
-        <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.favorites}`}>
+        <Route path={`/${APP_STRUCTURE.favorites}`}>
           <Favorites launchLocation={launchLocation} favorites={favorites} />
         </Route>
-        <Route path={`${ROUTE_PATH}/${APP_STRUCTURE.settings}`}>
+        <Route path={`/${APP_STRUCTURE.settings}`}>
           <Settings
             launchLocation={launchLocation}
             dispatchFetch={dispatchFetch}
           />
         </Route>
-        <Route path={`${ROUTE_PATH}/`}>
-          <Redirect to={`${ROUTE_PATH}/${APP_STRUCTURE.forecast}`} />
+        <Route path={`/`}>
+          <Redirect to={`/${APP_STRUCTURE.forecast}`} />
         </Route>
       </Switch>
     </main>

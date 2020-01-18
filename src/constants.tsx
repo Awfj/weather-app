@@ -2,7 +2,6 @@ import { ISettings } from "./types";
 
 // export const EXPIRATION_TIMEFRAME = 3660000;
 export const EXPIRATION_TIMEFRAME = 7.2e6;
-export const ROUTE_PATH = "/weather-app";
 export const APP_STRUCTURE = {
   welcome: "welcome",
   forecast: "forecast",
