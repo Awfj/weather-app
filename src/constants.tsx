@@ -18,7 +18,7 @@ export const LOCAL_STORAGE = {
 };
 
 export const INITIAL_SETTINGS: ISettings = {
-  favorites: ["london", "brest", "minsk", "paris", "moscow", "berlin"],
+  favorites: [],
   isDrawerOpen: false,
   isThemeDark: false,
   lastLocation: null
