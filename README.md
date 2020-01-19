@@ -1,3 +1,5 @@
+https://awfj.github.io/weather-app
+
 Всё ещё разрабатывается. Особенности:
 
 1. Разработано с React (hooks), TypeScript и Material-UI.
