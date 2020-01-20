@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
 import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from "../../actions";
+import { useSettings } from "../../providers/SettingsProvider";
 
 export type FavorProps = {
   lastLocation: string;
@@ -14,15 +14,14 @@ type Props = {} & FavorProps;
 
 const Favor = ({ lastLocation }: Props) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const dispatchSettings = useContext(SettingsDispatchCtx);
-  const { favorites } = useContext(SettingsCtx);
+  const [{ favorites }, dispatch] = useSettings();
 
   const addToFavorites = () => {
-    dispatchSettings({ type: ADD_TO_FAVORITES, location: lastLocation });
+    dispatch({ type: ADD_TO_FAVORITES, location: lastLocation });
   };
 
   const removeFromFavorites = () => {
-    dispatchSettings({ type: REMOVE_FROM_FAVORITES, location: lastLocation });
+    dispatch({ type: REMOVE_FROM_FAVORITES, location: lastLocation });
   };
 
   useEffect(() => {

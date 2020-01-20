@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -10,6 +10,8 @@ import SettingsOutlinedIcon from "@material-ui/icons/SettingsOutlined";
 import Divider from "@material-ui/core/Divider";
 
 import ListItemLink from "../ListItemLink/ListItemLink";
+import { useSettings } from "../../providers/SettingsProvider";
+
 import {
   TOOLBAR_HEIGHT,
   toolbarHeightMin,
@@ -18,7 +20,6 @@ import {
   listItemIconMinWidth
 } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
-import { SettingsCtx } from "../../contexts";
 
 const DRAWER_MIN_WIDTH = "8.5rem";
 const useStyles = makeStyles((theme: Theme) =>
@@ -79,8 +80,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const AppDrawer = () => {
   const classes = useStyles();
-  const { isDrawerOpen } = useContext(SettingsCtx);
-
+  const [{ isDrawerOpen }] = useSettings();
+  // console.log("drawer");
   return (
     <Drawer
       variant="permanent"

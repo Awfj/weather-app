@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -7,10 +7,10 @@ import Temperature from "../../components/Temperature/Temperature";
 import DataLoader from "../../components/DataLoader/DataLoader";
 import LinkBox from "../LinkBox/LinkBox";
 import useWeatherApi from "../../hooks/useWeatherApi";
-import { SettingsDispatchCtx } from "../../contexts";
 import { APP_STRUCTURE } from "../../constants";
 import { SET_LAST_LOCATION } from "../../actions";
 import { capitalizeFirstChar } from "../../utils";
+import { useSettings } from "../../providers/SettingsProvider";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,10 +51,10 @@ type Props = {
 const WeatherBox = ({ location, children }: Props) => {
   const classes = useStyles();
   const [{ data, isLoading, isError }] = useWeatherApi(location);
-  const dispatchSettings = useContext(SettingsDispatchCtx);
+  const [, dispatch] = useSettings();
 
   const setLastLocation = () => {
-    dispatchSettings({ type: SET_LAST_LOCATION, lastLocation: location });
+    dispatch({ type: SET_LAST_LOCATION, lastLocation: location });
   };
 
   return (

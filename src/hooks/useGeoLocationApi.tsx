@@ -7,9 +7,9 @@ import {
 } from "../actions";
 import useFetch from "./useFetch";
 import { getLaunchLocation } from "../utils";
-import { Action as SettingsAction } from "../hooks/useSettings";
+import { Action } from "../reducers/reduceSettings";
 
-const useGeoLocationApi = (dispatchSettings: Dispatch<SettingsAction>) => {
+const useGeoLocationApi = (dispatchSettings: Dispatch<Action>) => {
   const [state, dispatchFetch] = useFetch<string>();
   // console.log(state)
 

@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { Action as SettingsAction } from "./hooks/useSettings";
+import { Action as SettingsAction } from "./reducers/reduceSettings";
 
 export interface IForecast {
   currentWeather: ICurrentWeather;

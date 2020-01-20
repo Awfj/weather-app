@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -13,7 +13,7 @@ import {
   toolbarHeightMin
 } from "../../constants";
 import useGeoLocationApi from "../../hooks/useGeoLocationApi";
-import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
+import { useSettings } from "../../providers/SettingsProvider";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,8 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const AppMain = () => {
   const classes = useStyles();
-  const dispatchSettings = useContext(SettingsDispatchCtx);
-  const { lastLocation, favorites } = useContext(SettingsCtx);
+  const [{ lastLocation, favorites }, dispatchSettings] = useSettings();
   const [
     { data: launchLocation, isLoading, isError },
     dispatchFetch

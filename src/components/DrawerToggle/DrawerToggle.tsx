@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
@@ -6,7 +6,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import { drawerIconWidth } from "../../constants";
 import { TOGGLE_DRAWER } from "../../actions";
-import { SettingsDispatchCtx } from "../../contexts";
+import { useSettings } from "../../providers/SettingsProvider";
 
 type Props = {
   className?: string;
@@ -36,10 +36,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SidebarToggle = ({ label, ...other }: Props) => {
   const classes = useStyles();
-  const dispatchSettings = useContext(SettingsDispatchCtx);
+  const [, dispatch] = useSettings();
 
   const toggleDrawer = () => {
-    dispatchSettings({ type: TOGGLE_DRAWER });
+    dispatch({ type: TOGGLE_DRAWER });
   };
 
   return (

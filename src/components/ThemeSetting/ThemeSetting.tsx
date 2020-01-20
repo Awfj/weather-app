@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
 import Setting from "../../components/Setting/Setting";
 import { TOGGLE_THEME } from "../../actions";
-import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
+import {useSettings} from '../../providers/SettingsProvider'
 
 const ThemeSetting = () => {
-  const dispatchSettings = useContext(SettingsDispatchCtx);
-  const { isThemeDark } = useContext(SettingsCtx);
+  const [{ isThemeDark }, dispatch] = useSettings()
   return (
     <Setting heading={`Theme: ${isThemeDark ? "Dark" : "Light"}`}>
       <FormControlLabel
