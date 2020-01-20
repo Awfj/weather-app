@@ -1,9 +1,5 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
-import { TGetData } from "../../types";
-import { WindowWidthCtx, SettingsDispatchCtx } from "../../contexts";
-import Form from "../Form/Form";
-import SearchButton from "../SearchButton/SearchButton";
-import SearchField from "../SearchField/SearchField";
+import React, { useState, useRef, useEffect } from "react";
+
 import {
   createStyles,
   makeStyles,
@@ -11,8 +7,14 @@ import {
   Theme
 } from "@material-ui/core/styles";
 
+import Form from "../Form/Form";
+import SearchButton from "../SearchButton/SearchButton";
+import SearchField from "../SearchField/SearchField";
+
 import { SET_LAST_LOCATION } from "../../actions";
-import { TFormEvent } from "../../types";
+import { TFormEvent, TGetData } from "../../types";
+import { useSettings } from "../../providers/SettingsProvider";
+import { useWindowWidth } from "../../providers/WindowWidthProvider";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,12 +45,12 @@ type Props = {
 const Search = ({ lastLocation, getData }: Props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchIsShown, setSearchIsShown] = useState(false);
-  const windowWidth = useContext(WindowWidthCtx);
+  const windowWidth = useWindowWidth();
   const showSearchBtn = useRef<HTMLButtonElement>(null);
   const searchFieldRef = useRef<HTMLInputElement>(null);
   const theme = useTheme();
   const classes = useStyles();
-  const dispatchSettings = useContext(SettingsDispatchCtx);
+  const [, dispatch] = useSettings();
 
   const breakpointMD = theme.breakpoints.values.md;
 
@@ -60,7 +62,7 @@ const Search = ({ lastLocation, getData }: Props) => {
       if (query === lastLocation) {
         getData(query);
       } else {
-        dispatchSettings({ type: SET_LAST_LOCATION, lastLocation: query });
+        dispatch({ type: SET_LAST_LOCATION, lastLocation: query });
       }
     }
     if (windowWidth < breakpointMD && showSearchBtn.current) {

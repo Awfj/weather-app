@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import WindowWidthProvider from "./providers/WindowWidthProvider";
+import SettingsProvider from "./providers/SettingsProvider";
 import { HashRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./containers/App/App";
@@ -7,7 +9,11 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <Router>
-    <App />
+    <WindowWidthProvider>
+      <SettingsProvider>
+        <App />
+      </SettingsProvider>
+    </WindowWidthProvider>
   </Router>,
   document.getElementById("root")
 );

@@ -1,5 +1,3 @@
-import { useReducer } from "react";
-
 import {
   TOGGLE_DRAWER,
   TOGGLE_THEME,
@@ -7,10 +5,8 @@ import {
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES
 } from "../actions";
-import useTheme from "../hooks/useTheme";
-import useDrawer from "../hooks/useDrawer";
 import { ISettings } from "../types";
-import { INITIAL_SETTINGS, LOCAL_STORAGE } from "../constants";
+import { LOCAL_STORAGE } from "../constants";
 
 export type Action =
   | { type: TOGGLE_DRAWER }
@@ -19,17 +15,7 @@ export type Action =
   | { type: ADD_TO_FAVORITES; location: string }
   | { type: REMOVE_FROM_FAVORITES; location: string };
 
-const useSettings = () => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_SETTINGS);
-  const { isDrawerOpen, isThemeDark } = state;
-
-  useTheme(dispatch, isThemeDark);
-  useDrawer(dispatch, isDrawerOpen);
-
-  return [state, dispatch] as const;
-};
-
-function reducer(state: ISettings, action: Action): ISettings {
+function reduceSettings(state: ISettings, action: Action): ISettings {
   switch (action.type) {
     case TOGGLE_DRAWER: {
       const { isDrawerOpen } = state;
@@ -73,4 +59,4 @@ function reducer(state: ISettings, action: Action): ISettings {
   }
 }
 
-export default useSettings;
+export default reduceSettings;

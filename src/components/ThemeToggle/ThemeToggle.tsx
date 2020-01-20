@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 
-import { SettingsDispatchCtx, SettingsCtx } from "../../contexts";
 import { TOGGLE_THEME } from "../../actions";
+import { useSettings } from "../../providers/SettingsProvider";
 
 type Props = {} & typeof defaultProps;
 
@@ -15,10 +15,9 @@ const defaultProps = {
 };
 
 const ThemeToggle = ({ label }: Props) => {
-  const dispatchSettings = useContext(SettingsDispatchCtx);
-  const { isThemeDark } = useContext(SettingsCtx);
+  const [{ isThemeDark }, dispatch] = useSettings();
 
-  const handleClick = () => dispatchSettings({ type: TOGGLE_THEME });
+  const handleClick = () => dispatch({ type: TOGGLE_THEME });
   return (
     <Tooltip title={label}>
       <IconButton aria-label={label} color="inherit" onClick={handleClick}>

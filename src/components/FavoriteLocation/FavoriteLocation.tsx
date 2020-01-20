@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
@@ -6,7 +6,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 
 import WeatherBox, { WeatherBoxProps } from "../WeatherBox/WeatherBox";
 import { REMOVE_FROM_FAVORITES } from "../../actions";
-import { SettingsDispatchCtx } from "../../contexts";
+import { useSettings } from "../../providers/SettingsProvider";
 
 type Props = {} & WeatherBoxProps & typeof defaultProps;
 
@@ -15,10 +15,10 @@ const defaultProps = {
 };
 
 const FavoritePlace = ({ label, location }: Props) => {
-  const dispatchSettings = useContext(SettingsDispatchCtx);
+  const [, dispatch] = useSettings();
 
   const handleClick = () => {
-    dispatchSettings({ type: REMOVE_FROM_FAVORITES, location });
+    dispatch({ type: REMOVE_FROM_FAVORITES, location });
   };
 
   return (
