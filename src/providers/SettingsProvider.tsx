@@ -1,5 +1,5 @@
-import React, { useReducer, useContext, createContext, Dispatch } from "react";
-import { INITIAL_SETTINGS } from "../constants";
+import React, { useReducer, createContext, Dispatch } from "react";
+import { SETTINGS } from "../constants";
 import reduceSettings, { Action } from "../reducers/reduceSettings";
 import useTheme from "../hooks/useTheme";
 import useDrawer from "../hooks/useDrawer";
@@ -8,17 +8,13 @@ type Props = {
   children: React.ReactNode;
 };
 
-const SettingsContext = createContext(INITIAL_SETTINGS);
-const SettingsDispatchContext = createContext<Dispatch<Action>>(() => {});
-
-export const useSettings = () => {
-  const settings = useContext(SettingsContext);
-  const dispatch = useContext(SettingsDispatchContext);
-  return [settings, dispatch] as const;
-};
+export const SettingsContext = createContext(SETTINGS);
+export const SettingsDispatchContext = createContext<Dispatch<Action>>(
+  () => {}
+);
 
 const SettingsProvider = ({ children }: Props) => {
-  const [settings, dispatch] = useReducer(reduceSettings, INITIAL_SETTINGS);
+  const [settings, dispatch] = useReducer(reduceSettings, SETTINGS);
   const { isDrawerOpen, isThemeDark } = settings;
 
   useTheme(dispatch, isThemeDark);

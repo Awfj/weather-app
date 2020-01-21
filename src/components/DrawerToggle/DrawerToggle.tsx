@@ -6,7 +6,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import { drawerIconWidth } from "../../constants";
 import { TOGGLE_DRAWER } from "../../actions";
-import { useSettings } from "../../providers/SettingsProvider";
+import useSettings from "../../hooks/useSettings";
 
 type Props = {
   className?: string;

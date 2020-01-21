@@ -5,7 +5,7 @@ import Switch from "@material-ui/core/Switch";
 
 import Setting from "../../components/Setting/Setting";
 import { TOGGLE_THEME } from "../../actions";
-import {useSettings} from '../../providers/SettingsProvider'
+import useSettings from "../../hooks/useSettings";
 
 const ThemeSetting = () => {
   const [{ isThemeDark }, dispatch] = useSettings()

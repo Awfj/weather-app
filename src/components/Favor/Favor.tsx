@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from "../../actions";
-import { useSettings } from "../../providers/SettingsProvider";
+import useSettings from "../../hooks/useSettings";
 
 export type FavorProps = {
   lastLocation: string;

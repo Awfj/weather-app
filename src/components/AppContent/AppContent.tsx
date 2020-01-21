@@ -13,7 +13,7 @@ import {
   toolbarHeightMin
 } from "../../constants";
 import useGeoLocationApi from "../../hooks/useGeoLocationApi";
-import { useSettings } from "../../providers/SettingsProvider";
+import useSettings from "../../hooks/useSettings";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

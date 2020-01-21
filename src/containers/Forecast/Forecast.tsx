@@ -7,14 +7,14 @@ import Favor, { FavorProps } from "../../components/Favor/Favor";
 import Timer from "../../components/Timer/Timer";
 import { getExpirationTimeframe } from "../../utils";
 import useRefresh from "../../hooks/useRefresh";
-import { State as SUseFetch } from "../../hooks/useFetch";
+import { State } from "../../reducers/reduceFetch";
 import { APP_STRUCTURE } from "../../constants";
 import { TGetData, IForecast } from "../../types";
 import { capitalizeFirstChar } from "../../utils";
 
 type Props = {
   getForecast: TGetData;
-  forecast: SUseFetch<IForecast>;
+  forecast: State<IForecast>;
   search: JSX.Element;
 } & FavorProps;
 

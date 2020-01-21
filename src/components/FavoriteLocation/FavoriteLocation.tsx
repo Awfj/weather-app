@@ -6,7 +6,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 
 import WeatherBox, { WeatherBoxProps } from "../WeatherBox/WeatherBox";
 import { REMOVE_FROM_FAVORITES } from "../../actions";
-import { useSettings } from "../../providers/SettingsProvider";
+import useSettings from "../../hooks/useSettings";
 
 type Props = {} & WeatherBoxProps & typeof defaultProps;
 

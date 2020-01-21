@@ -1,11 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import {
-  createStyles,
-  makeStyles,
-  useTheme,
-  Theme
-} from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import Form from "../Form/Form";
 import SearchButton from "../SearchButton/SearchButton";
@@ -13,8 +8,8 @@ import SearchField from "../SearchField/SearchField";
 
 import { SET_LAST_LOCATION } from "../../actions";
 import { TFormEvent, TGetData } from "../../types";
-import { useSettings } from "../../providers/SettingsProvider";
-import { useWindowWidth } from "../../providers/WindowWidthProvider";
+import useSettings from "../../hooks/useSettings";
+import useBreakpoints from "../../hooks/useBreakpoints";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,14 +40,11 @@ type Props = {
 const Search = ({ lastLocation, getData }: Props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchIsShown, setSearchIsShown] = useState(false);
-  const windowWidth = useWindowWidth();
   const showSearchBtn = useRef<HTMLButtonElement>(null);
   const searchFieldRef = useRef<HTMLInputElement>(null);
-  const theme = useTheme();
   const classes = useStyles();
+  const [{ md }, windowWidth] = useBreakpoints();
   const [, dispatch] = useSettings();
-
-  const breakpointMD = theme.breakpoints.values.md;
 
   const handleSubmit: TFormEvent = event => {
     event.preventDefault();
@@ -65,7 +57,7 @@ const Search = ({ lastLocation, getData }: Props) => {
         dispatch({ type: SET_LAST_LOCATION, lastLocation: query });
       }
     }
-    if (windowWidth < breakpointMD && showSearchBtn.current) {
+    if (windowWidth < md && showSearchBtn.current) {
       setSearchIsShown(false);
       showSearchBtn.current.focus();
     }
@@ -74,10 +66,10 @@ const Search = ({ lastLocation, getData }: Props) => {
   const handleBlur = () => setSearchIsShown(false);
 
   useEffect(() => {
-    if (windowWidth < breakpointMD && searchFieldRef.current) {
+    if (windowWidth < md && searchFieldRef.current) {
       searchFieldRef.current.focus();
     }
-  }, [breakpointMD, searchIsShown, windowWidth]);
+  }, [md, searchIsShown, windowWidth]);
 
   const composeSearch = (onBlur?: () => void) => (
     <Form className={classes.root} onSubmit={handleSubmit}>
@@ -87,15 +79,13 @@ const Search = ({ lastLocation, getData }: Props) => {
         onBlur={onBlur}
         setSearchQuery={setSearchQuery}
       />
-      {windowWidth >= breakpointMD && (
-        <SearchButton label="Search" type="submit" />
-      )}
+      {windowWidth >= md && <SearchButton label="Search" type="submit" />}
     </Form>
   );
 
   return (
     <>
-      {windowWidth >= breakpointMD ? (
+      {windowWidth >= md ? (
         composeSearch()
       ) : (
         <>

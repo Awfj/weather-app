@@ -16,7 +16,7 @@ export const LOCAL_STORAGE = {
   launchLocation: "launch_location"
 };
 
-export const INITIAL_SETTINGS: ISettings = {
+export const SETTINGS: ISettings = {
   favorites: [],
   isDrawerOpen: false,
   isThemeDark: false,

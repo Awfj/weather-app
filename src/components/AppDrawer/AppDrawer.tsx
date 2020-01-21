@@ -10,7 +10,8 @@ import SettingsOutlinedIcon from "@material-ui/icons/SettingsOutlined";
 import Divider from "@material-ui/core/Divider";
 
 import ListItemLink from "../ListItemLink/ListItemLink";
-import { useSettings } from "../../providers/SettingsProvider";
+import useSettings from "../../hooks/useSettings";
+// import useBreakpoints from "../../hooks/useBreakpoints";
 
 import {
   TOOLBAR_HEIGHT,
@@ -81,10 +82,24 @@ const useStyles = makeStyles((theme: Theme) =>
 const AppDrawer = () => {
   const classes = useStyles();
   const [{ isDrawerOpen }] = useSettings();
-  // console.log("drawer");
+  // const [breakpoints, windowWidth] = useBreakpoints();
+
+  // const handleToggle = () => {
+  //   console.log("test");
+  // };
+
+  // let drawerToggle: (() => void) | undefined = handleToggle;
+  // let drawerVariant: "temporary" | "permanent" = "temporary";
+  // if (windowWidth >= breakpoints.lg) {
+  //   drawerToggle = undefined;
+  //   drawerVariant = "permanent";
+  // }
+
+  // console.log("drawer", windowWidth, breakpoints);
   return (
     <Drawer
-      variant="permanent"
+      // onClick={drawerToggle}
+      variant={"permanent"}
       open={isDrawerOpen}
       className={clsx(classes.root, {
         [classes.isOpen]: isDrawerOpen,

@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider, StylesProvider } from "@material-ui/core/styles";
 
 import Page from "../../components/Page/Page";
-import { useSettings } from "../../providers/SettingsProvider";
+import useSettings from "../../hooks/useSettings";
 import { lightTheme, darkTheme } from "../../theme";
 
 const App: React.FC = () => {

@@ -10,7 +10,7 @@ import useWeatherApi from "../../hooks/useWeatherApi";
 import { APP_STRUCTURE } from "../../constants";
 import { SET_LAST_LOCATION } from "../../actions";
 import { capitalizeFirstChar } from "../../utils";
-import { useSettings } from "../../providers/SettingsProvider";
+import useSettings from "../../hooks/useSettings";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

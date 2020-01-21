@@ -6,7 +6,7 @@ import Brightness2Icon from "@material-ui/icons/Brightness2";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 
 import { TOGGLE_THEME } from "../../actions";
-import { useSettings } from "../../providers/SettingsProvider";
+import useSettings from "../../hooks/useSettings";
 
 type Props = {} & typeof defaultProps;
 

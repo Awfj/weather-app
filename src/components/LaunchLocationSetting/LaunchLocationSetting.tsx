@@ -10,9 +10,9 @@ import Setting from "../../components/Setting/Setting";
 import { TFormEvent } from "../../types";
 import { FETCH_SUCCESS, SET_LAST_LOCATION } from "../../actions";
 import { LOCAL_STORAGE } from "../../constants";
-import { Action as FetchAction } from "../../hooks/useFetch";
+import { Action } from "../../reducers/reduceFetch";
 import { capitalizeFirstChar } from "../../utils";
-import { useSettings } from "../../providers/SettingsProvider";
+import useSettings from "../../hooks/useSettings";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export type LaunchLocationSettingProps = {
-  dispatchFetch: React.Dispatch<FetchAction<string>>;
+  dispatchFetch: React.Dispatch<Action<string>>;
   launchLocation: string | null;
 };
 
