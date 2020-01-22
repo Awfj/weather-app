@@ -10,6 +10,9 @@ export type FETCH_FAILURE = typeof FETCH_FAILURE;
 export const TOGGLE_DRAWER = "TOGGLE_DRAWER";
 export type TOGGLE_DRAWER = typeof TOGGLE_DRAWER;
 
+export const CLOSE_DRAWER = "CLOSE_DRAWER";
+export type CLOSE_DRAWER = typeof CLOSE_DRAWER;
+
 export const TOGGLE_THEME = "TOGGLE_THEME";
 export type TOGGLE_THEME = typeof TOGGLE_THEME;
 

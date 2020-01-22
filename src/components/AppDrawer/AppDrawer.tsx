@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -10,8 +10,8 @@ import SettingsOutlinedIcon from "@material-ui/icons/SettingsOutlined";
 import Divider from "@material-ui/core/Divider";
 
 import ListItemLink from "../ListItemLink/ListItemLink";
-import useSettings from "../../hooks/useSettings";
-// import useBreakpoints from "../../hooks/useBreakpoints";
+import useDrawer from "../../hooks/useDrawer";
+import { LOCAL_STORAGE, SETTINGS } from "../../constants";
 
 import {
   TOOLBAR_HEIGHT,
@@ -81,25 +81,46 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const AppDrawer = () => {
   const classes = useStyles();
-  const [{ isDrawerOpen }] = useSettings();
-  // const [breakpoints, windowWidth] = useBreakpoints();
+  const {
+    doesDrawerFit,
+    toggleDrawer,
+    closeDrawer,
+    isDrawerOpen
+  } = useDrawer();
 
-  // const handleToggle = () => {
-  //   console.log("test");
-  // };
+  let drawerToggle: (() => void) | undefined = toggleDrawer;
+  let drawerVariant: "temporary" | "permanent" = "temporary";
+  if (doesDrawerFit) {
+    drawerToggle = undefined;
+    drawerVariant = "permanent";
+  }
 
-  // let drawerToggle: (() => void) | undefined = handleToggle;
-  // let drawerVariant: "temporary" | "permanent" = "temporary";
-  // if (windowWidth >= breakpoints.lg) {
-  //   drawerToggle = undefined;
-  //   drawerVariant = "permanent";
-  // }
+  useEffect(() => {
+    console.log("effect");
+    if (doesDrawerFit) {
+      const storedState = localStorage.getItem(LOCAL_STORAGE.isDrawerOpen);
+      if (storedState) {
+        const isDrawerOpen: boolean = JSON.parse(storedState);
+        if (isDrawerOpen !== SETTINGS.isDrawerOpen) {
+          console.log("2");
+          toggleDrawer();
+        }
+      } else {
+        localStorage.setItem(
+          LOCAL_STORAGE.isDrawerOpen,
+          String(SETTINGS.isDrawerOpen)
+        );
+      }
+    } else {
+      closeDrawer();
+    }
+  }, [toggleDrawer, closeDrawer, doesDrawerFit]);
 
-  // console.log("drawer", windowWidth, breakpoints);
+  console.log("drawer", isDrawerOpen);
   return (
     <Drawer
-      // onClick={drawerToggle}
-      variant={"permanent"}
+      onClick={drawerToggle}
+      variant={drawerVariant}
       open={isDrawerOpen}
       className={clsx(classes.root, {
         [classes.isOpen]: isDrawerOpen,

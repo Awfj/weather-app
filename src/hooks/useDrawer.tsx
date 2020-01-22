@@ -1,21 +1,21 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
+import { TOGGLE_DRAWER, CLOSE_DRAWER } from "../actions";
+import useBreakpoints from "../hooks/useBreakpoints";
+import useSettings from "../hooks/useSettings";
 
-import { TOGGLE_DRAWER } from "../actions";
-import { TDispatchSettings } from "../types";
-import { LOCAL_STORAGE } from "../constants";
+const useDrawer = () => {
+  const doesDrawerFit = useBreakpoints("sm");
+  const [{ isDrawerOpen }, dispatch] = useSettings();
 
-const useDrawer = (dispatch: TDispatchSettings, isDrawerOpen: boolean) => {
-  useEffect(() => {
-    const storedDrawer = localStorage.getItem(LOCAL_STORAGE.isDrawerOpen);
-    if (storedDrawer) {
-      const settings: boolean = JSON.parse(storedDrawer);
-      if (settings !== isDrawerOpen) {
-        dispatch({ type: TOGGLE_DRAWER });
-      }
-    } else {
-      localStorage.setItem(LOCAL_STORAGE.isDrawerOpen, String(isDrawerOpen));
-    }
-  }, [dispatch, isDrawerOpen]);
+  const toggleDrawer = useCallback(() => {
+    dispatch({ type: TOGGLE_DRAWER });
+  }, [dispatch]);
+
+  const closeDrawer = useCallback(() => {
+    dispatch({ type: CLOSE_DRAWER });
+  }, [dispatch]);
+
+  return { doesDrawerFit, isDrawerOpen, toggleDrawer, closeDrawer };
 };
 
 export default useDrawer;
