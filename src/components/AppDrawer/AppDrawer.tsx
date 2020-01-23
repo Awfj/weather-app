@@ -83,9 +83,10 @@ const AppDrawer = () => {
   const classes = useStyles();
   const {
     doesDrawerFit,
+    isDrawerOpen,
     toggleDrawer,
-    closeDrawer,
-    isDrawerOpen
+    openDrawer,
+    closeDrawer
   } = useDrawer();
 
   let drawerToggle: (() => void) | undefined = toggleDrawer;
@@ -101,20 +102,16 @@ const AppDrawer = () => {
       const storedState = localStorage.getItem(LOCAL_STORAGE.isDrawerOpen);
       if (storedState) {
         const isDrawerOpen: boolean = JSON.parse(storedState);
-        if (isDrawerOpen !== SETTINGS.isDrawerOpen) {
-          console.log("2");
-          toggleDrawer();
-        }
+        isDrawerOpen ? openDrawer() : closeDrawer();
       } else {
         localStorage.setItem(
           LOCAL_STORAGE.isDrawerOpen,
           String(SETTINGS.isDrawerOpen)
         );
+        SETTINGS.isDrawerOpen ? openDrawer() : closeDrawer();
       }
-    } else {
-      closeDrawer();
-    }
-  }, [toggleDrawer, closeDrawer, doesDrawerFit]);
+    } else closeDrawer();
+  }, [openDrawer, closeDrawer, doesDrawerFit]);
 
   console.log("drawer", isDrawerOpen);
   return (

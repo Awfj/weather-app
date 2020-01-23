@@ -1,5 +1,6 @@
 import {
   TOGGLE_DRAWER,
+  OPEN_DRAWER,
   CLOSE_DRAWER,
   TOGGLE_THEME,
   SET_LAST_LOCATION,
@@ -11,6 +12,7 @@ import { LOCAL_STORAGE } from "../constants";
 
 export type Action =
   | { type: TOGGLE_DRAWER }
+  | { type: OPEN_DRAWER }
   | { type: CLOSE_DRAWER }
   | { type: TOGGLE_THEME }
   | { type: SET_LAST_LOCATION; lastLocation: string }
@@ -23,6 +25,12 @@ function reduceSettings(state: ISettings, action: Action): ISettings {
       return {
         ...state,
         isDrawerOpen: !state.isDrawerOpen
+      };
+    }
+    case OPEN_DRAWER: {
+      return {
+        ...state,
+        isDrawerOpen: true
       };
     }
     case CLOSE_DRAWER: {
