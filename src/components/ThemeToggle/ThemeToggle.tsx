@@ -8,16 +8,12 @@ import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import { TOGGLE_THEME } from "../../actions";
 import useSettings from "../../hooks/useSettings";
 
-type Props = {} & typeof defaultProps;
-
-const defaultProps = {
-  label: "Toggle theme"
-};
-
-const ThemeToggle = ({ label }: Props) => {
+const ThemeToggle = () => {
   const [{ isThemeDark }, dispatch] = useSettings();
 
   const handleClick = () => dispatch({ type: TOGGLE_THEME });
+  const label = `Turn ${isThemeDark ? "Off" : "On"} Dark Theme`;
+
   return (
     <Tooltip title={label}>
       <IconButton aria-label={label} color="inherit" onClick={handleClick}>
@@ -27,5 +23,4 @@ const ThemeToggle = ({ label }: Props) => {
   );
 };
 
-ThemeToggle.defaultProps = defaultProps;
 export default ThemeToggle;

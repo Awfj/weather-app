@@ -7,9 +7,6 @@ export type FETCH_SUCCESS = typeof FETCH_SUCCESS;
 export const FETCH_FAILURE = "FETCH_FAILURE";
 export type FETCH_FAILURE = typeof FETCH_FAILURE;
 
-export const TOGGLE_DRAWER = "TOGGLE_DRAWER";
-export type TOGGLE_DRAWER = typeof TOGGLE_DRAWER;
-
 export const OPEN_DRAWER = "OPEN_DRAWER";
 export type OPEN_DRAWER = typeof OPEN_DRAWER;
 

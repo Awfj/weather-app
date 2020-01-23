@@ -1,5 +1,4 @@
 import {
-  TOGGLE_DRAWER,
   OPEN_DRAWER,
   CLOSE_DRAWER,
   TOGGLE_THEME,
@@ -11,7 +10,6 @@ import { ISettings } from "../types";
 import { LOCAL_STORAGE } from "../constants";
 
 export type Action =
-  | { type: TOGGLE_DRAWER }
   | { type: OPEN_DRAWER }
   | { type: CLOSE_DRAWER }
   | { type: TOGGLE_THEME }
@@ -21,12 +19,6 @@ export type Action =
 
 function reduceSettings(state: ISettings, action: Action): ISettings {
   switch (action.type) {
-    case TOGGLE_DRAWER: {
-      return {
-        ...state,
-        isDrawerOpen: !state.isDrawerOpen
-      };
-    }
     case OPEN_DRAWER: {
       return {
         ...state,

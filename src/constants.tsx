@@ -1,15 +1,26 @@
-import { ISettings } from "./types";
+import {
+  ISettings,
+  IAppStructure,
+  IInteractiveActions,
+  ILocalStorage
+} from "./types";
 
 // export const EXPIRATION_TIMEFRAME = 3660000;
 export const EXPIRATION_TIMEFRAME = 7.2e6;
-export const APP_STRUCTURE = {
+export const APP_STRUCTURE: IAppStructure = {
   welcome: "welcome",
   forecast: "forecast",
   favorites: "favorites",
   settings: "settings"
 };
 
-export const LOCAL_STORAGE = {
+export const INTERACTIVE_ACTIONS: IInteractiveActions = {
+  open: "open",
+  close: "close",
+  toggle: "toggle"
+};
+
+export const LOCAL_STORAGE: ILocalStorage = {
   isDrawerOpen: "isDrawerOpen",
   isThemeDark: "isThemeDark",
   weatherForecast: "weather_forecast_",

@@ -1,7 +1,8 @@
 import { useCallback } from "react";
-import { TOGGLE_DRAWER, OPEN_DRAWER, CLOSE_DRAWER } from "../actions";
+import { OPEN_DRAWER, CLOSE_DRAWER } from "../actions";
 import useBreakpoints from "../hooks/useBreakpoints";
 import useSettings from "../hooks/useSettings";
+import { LOCAL_STORAGE } from "../constants";
 
 const useDrawer = () => {
   const doesDrawerFit = useBreakpoints("sm");
@@ -17,9 +18,26 @@ const useDrawer = () => {
 
   const toggleDrawer = useCallback(() => {
     isDrawerOpen ? closeDrawer() : openDrawer();
-  }, [isDrawerOpen, openDrawer, closeDrawer]);
+    if (doesDrawerFit) {
+      localStorage.setItem(LOCAL_STORAGE.isDrawerOpen, String(!isDrawerOpen));
+    }
+  }, [isDrawerOpen, doesDrawerFit, openDrawer, closeDrawer]);
 
-  return { doesDrawerFit, isDrawerOpen, toggleDrawer, openDrawer, closeDrawer };
+  const adjustDrawer = useCallback(
+    (isDrawerOpen: boolean) => {
+      isDrawerOpen ? openDrawer() : closeDrawer();
+    },
+    [openDrawer, closeDrawer]
+  );
+
+  return {
+    doesDrawerFit,
+    isDrawerOpen,
+    adjustDrawer,
+    toggleDrawer,
+    openDrawer,
+    closeDrawer
+  };
 };
 
 export default useDrawer;
