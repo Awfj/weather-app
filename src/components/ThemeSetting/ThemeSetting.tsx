@@ -4,11 +4,11 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
 import Setting from "../../components/Setting/Setting";
-import { TOGGLE_THEME } from "../../actions";
-import useSettings from "../../hooks/useSettings";
+import useTheme from "../../hooks/useTheme";
 
 const ThemeSetting = () => {
-  const [{ isThemeDark }, dispatch] = useSettings()
+  const { isThemeDark, toggleTheme } = useTheme();
+
   return (
     <Setting heading={`Theme: ${isThemeDark ? "Dark" : "Light"}`}>
       <FormControlLabel

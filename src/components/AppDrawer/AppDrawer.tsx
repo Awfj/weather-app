@@ -103,10 +103,9 @@ const AppDrawer = () => {
 
   useEffect(() => {
     if (doesDrawerFit) {
-      const storedState = localStorage.getItem(LOCAL_STORAGE.isDrawerOpen);
-      if (storedState) {
-        const isDrawerOpen: boolean = JSON.parse(storedState);
-        adjustDrawer(isDrawerOpen);
+      const storedDrawer = localStorage.getItem(LOCAL_STORAGE.isDrawerOpen);
+      if (storedDrawer) {
+        adjustDrawer(JSON.parse(storedDrawer));
       } else {
         localStorage.setItem(
           LOCAL_STORAGE.isDrawerOpen,
@@ -117,7 +116,7 @@ const AppDrawer = () => {
     } else closeDrawer();
   }, [adjustDrawer, openDrawer, closeDrawer, doesDrawerFit]);
 
-  console.log("drawer");
+  // console.log("drawer");
   return (
     <Drawer
       onClick={drawerClose}

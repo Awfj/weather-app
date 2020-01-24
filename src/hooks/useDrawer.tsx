@@ -17,10 +17,10 @@ const useDrawer = () => {
   }, [dispatch]);
 
   const toggleDrawer = useCallback(() => {
-    isDrawerOpen ? closeDrawer() : openDrawer();
     if (doesDrawerFit) {
       localStorage.setItem(LOCAL_STORAGE.isDrawerOpen, String(!isDrawerOpen));
     }
+    isDrawerOpen ? closeDrawer() : openDrawer();
   }, [isDrawerOpen, doesDrawerFit, openDrawer, closeDrawer]);
 
   const adjustDrawer = useCallback(

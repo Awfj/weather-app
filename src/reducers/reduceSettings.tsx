@@ -1,18 +1,19 @@
 import {
   OPEN_DRAWER,
   CLOSE_DRAWER,
-  TOGGLE_THEME,
+  TURN_ON_DARK_THEME,
+  TURN_OFF_DARK_THEME,
   SET_LAST_LOCATION,
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES
 } from "../actions";
 import { ISettings } from "../types";
-import { LOCAL_STORAGE } from "../constants";
 
 export type Action =
   | { type: OPEN_DRAWER }
   | { type: CLOSE_DRAWER }
-  | { type: TOGGLE_THEME }
+  | { type: TURN_ON_DARK_THEME }
+  | { type: TURN_OFF_DARK_THEME }
   | { type: SET_LAST_LOCATION; lastLocation: string }
   | { type: ADD_TO_FAVORITES; location: string }
   | { type: REMOVE_FROM_FAVORITES; location: string };
@@ -31,12 +32,16 @@ function reduceSettings(state: ISettings, action: Action): ISettings {
         isDrawerOpen: false
       };
     }
-    case TOGGLE_THEME: {
-      const { isThemeDark } = state;
-      localStorage.setItem(LOCAL_STORAGE.isThemeDark, String(!isThemeDark));
+    case TURN_ON_DARK_THEME: {
       return {
         ...state,
-        isThemeDark: !isThemeDark
+        isThemeDark: true
+      };
+    }
+    case TURN_OFF_DARK_THEME: {
+      return {
+        ...state,
+        isThemeDark: false
       };
     }
     case SET_LAST_LOCATION: {
