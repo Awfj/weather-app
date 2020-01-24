@@ -26,9 +26,9 @@ const useTheme = () => {
 
   const adjustTheme = useCallback(
     (isThemeDark: boolean) => {
-      if (isThemeDark) {
-        dispatch({ type: TURN_ON_DARK_THEME });
-      } else dispatch({ type: TURN_OFF_DARK_THEME });
+      isThemeDark
+        ? dispatch({ type: TURN_ON_DARK_THEME })
+        : dispatch({ type: TURN_OFF_DARK_THEME });
     },
     [dispatch]
   );

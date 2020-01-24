@@ -34,6 +34,8 @@ export const SETTINGS: ISettings = {
   lastLocation: null
 };
 
+export const DRAWER_BREAKPOINT = "sm";
+
 // Styles -------------------------------------
 export const LIST_ITEM_GUTTER_SIZE = "1rem";
 export const SVG_ICON_FONT_SIZE = "1.5rem";
@@ -47,4 +49,3 @@ export const SCALING_FACTOR = 0.5;
 export const drawerIconWidth = `calc(${LIST_ITEM_GUTTER_SIZE} * 2 + ${SVG_ICON_FONT_SIZE})`;
 export const toolbarHeightMin = `calc(${TOOLBAR_HEIGHT} - ${SCALING_FACTOR}rem)`;
 export const listItemIconMinWidth = `calc(${SVG_ICON_FONT_SIZE} * 2)`;
-export const listItemLeftGutterSize = `calc(${LIST_ITEM_GUTTER_SIZE} - ${ACTIVE_LINK_BORDER_SIZE})`;

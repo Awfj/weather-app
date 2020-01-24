@@ -12,14 +12,15 @@ import Divider from "@material-ui/core/Divider";
 import ListItemLink from "../ListItemLink/ListItemLink";
 import DrawerButton from "../DrawerButton/DrawerButton";
 import useDrawer from "../../hooks/useDrawer";
-import { LOCAL_STORAGE, SETTINGS } from "../../constants";
+import { LOCAL_STORAGE, SETTINGS, DRAWER_BREAKPOINT } from "../../constants";
 
 import {
   TOOLBAR_HEIGHT,
-  toolbarHeightMin,
   drawerIconWidth,
   APP_STRUCTURE,
-  listItemIconMinWidth
+  listItemIconMinWidth,
+  ACTIVE_LINK_BORDER_SIZE,
+  LIST_ITEM_GUTTER_SIZE
 } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
 
@@ -29,30 +30,25 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: DRAWER_WIDTH,
       flexShrink: 0,
-      whiteSpace: "nowrap"
-      // [theme.breakpoints.up("sm")]: {
-      //   width: "13rem"
-      // },
-      // "& .MuiListItemIcon-root": {
-      //   [theme.breakpoints.down("xs")]: {
-      //     minWidth: `calc(${listItemIconMinWidth} - 0.5rem)`
-      //   }
-      // },
-      // "& .MuiTypography-body1": {
-      //   [theme.breakpoints.down("xs")]: {
-      //     fontSize: "0.9rem"
-      //   }
-      // }
+      whiteSpace: "nowrap",
+      "& .MuiListItemIcon-root": {
+        [theme.breakpoints.down("xs")]: {
+          minWidth: `calc(${listItemIconMinWidth} - 0.5rem)`
+        }
+      },
+      "& .MuiListItem-gutters": {
+        paddingLeft: `calc(${LIST_ITEM_GUTTER_SIZE} - ${ACTIVE_LINK_BORDER_SIZE})`,
+        paddingRight: `calc(${LIST_ITEM_GUTTER_SIZE} + 2rem)`
+      }
     },
     isOpen: {
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen
-      }),
-      width: DRAWER_WIDTH
-      // [theme.breakpoints.up("sm")]: {
-      //   width: "13rem"
-      // }
+      [theme.breakpoints.up(DRAWER_BREAKPOINT)]: {
+        transition: theme.transitions.create("width", {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.enteringScreen
+        }),
+        width: DRAWER_WIDTH
+      }
     },
     isClosed: {
       transition: theme.transitions.create("width", {
@@ -76,10 +72,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     paper: {
-      top: 0,
-      [theme.breakpoints.up("sm")]: {
-        top: TOOLBAR_HEIGHT
-      }
+      top: TOOLBAR_HEIGHT
     }
   })
 );
@@ -93,13 +86,6 @@ const AppDrawer = () => {
     openDrawer,
     closeDrawer
   } = useDrawer();
-
-  let drawerClose: (() => void) | undefined = closeDrawer;
-  let drawerVariant: "temporary" | "permanent" = "temporary";
-  if (doesDrawerFit) {
-    drawerClose = undefined;
-    drawerVariant = "permanent";
-  }
 
   useEffect(() => {
     if (doesDrawerFit) {
@@ -116,21 +102,35 @@ const AppDrawer = () => {
     } else closeDrawer();
   }, [adjustDrawer, openDrawer, closeDrawer, doesDrawerFit]);
 
+  let handleClose: (() => void) | undefined = closeDrawer;
+  let drawerVariant: "temporary" | "permanent" = "temporary";
+  if (doesDrawerFit) {
+    handleClose = undefined;
+    drawerVariant = "permanent";
+  }
+
+  let styledDrawer = clsx(classes.root, classes.isOpen);
+  let styledPaper = classes.isOpen;
+  if (doesDrawerFit) {
+    styledDrawer = clsx(classes.root, {
+      [classes.isOpen]: isDrawerOpen,
+      [classes.isClosed]: !isDrawerOpen
+    });
+    styledPaper = clsx(classes.paper, {
+      [classes.isOpen]: isDrawerOpen,
+      [classes.isClosed]: !isDrawerOpen
+    });
+  }
+
   // console.log("drawer");
   return (
     <Drawer
-      onClick={drawerClose}
+      onClose={handleClose}
       variant={drawerVariant}
       open={isDrawerOpen}
-      className={clsx(classes.root, {
-        [classes.isOpen]: isDrawerOpen,
-        [classes.isClosed]: !isDrawerOpen
-      })}
+      className={styledDrawer}
       classes={{
-        paper: clsx(classes.paper, {
-          [classes.isOpen]: isDrawerOpen,
-          [classes.isClosed]: !isDrawerOpen
-        })
+        paper: styledPaper
       }}
     >
       {!doesDrawerFit && (
@@ -141,7 +141,7 @@ const AppDrawer = () => {
           <Divider />
         </>
       )}
-      <List disablePadding className={classes.list}>
+      <List disablePadding className={classes.list} onClick={handleClose}>
         <div>
           <ListItemLink
             icon={<HomeOutlinedIcon />}
