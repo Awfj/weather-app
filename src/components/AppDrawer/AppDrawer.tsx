@@ -12,7 +12,6 @@ import Divider from "@material-ui/core/Divider";
 import ListItemLink from "../ListItemLink/ListItemLink";
 import DrawerButton from "../DrawerButton/DrawerButton";
 import useDrawer from "../../hooks/useDrawer";
-import { LOCAL_STORAGE, SETTINGS, DRAWER_BREAKPOINT } from "../../constants";
 
 import {
   TOOLBAR_HEIGHT,
@@ -20,7 +19,10 @@ import {
   APP_STRUCTURE,
   listItemIconMinWidth,
   ACTIVE_LINK_BORDER_SIZE,
-  LIST_ITEM_GUTTER_SIZE
+  LIST_ITEM_GUTTER_SIZE,
+  LOCAL_STORAGE,
+  SETTINGS,
+  DRAWER_BREAKPOINT
 } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
 
@@ -60,14 +62,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     toolbar: {
       display: "flex",
-      justifyContent: "end"
+      justifyContent: "flex-end"
     },
     list: {
-      display: "flex",
-      flexDirection: "column",
-      height: `100vh`,
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up(DRAWER_BREAKPOINT)]: {
         height: `calc(100vh - ${TOOLBAR_HEIGHT})`,
+        display: "flex",
+        flexDirection: "column",
         justifyContent: "space-between"
       }
     },
