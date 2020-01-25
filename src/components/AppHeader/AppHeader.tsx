@@ -5,7 +5,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import DrawerToggle from "../DrawerToggle/DrawerToggle";
+import DrawerButton from "../DrawerButton/DrawerButton";
 import ToolbarButtons, {
   ToolbarButtonsProps
 } from "../ToolbarButtons/ToolbarButtons";
@@ -39,7 +39,11 @@ const useStyles = makeStyles((theme: Theme) =>
       }
     },
     title: {
-      flexGrow: 1
+      flexGrow: 1,
+      marginLeft: theme.spacing(1),
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing(2)
+      }
     }
   })
 );
@@ -58,7 +62,7 @@ const AppHeader = ({ heading, search, ...other }: Props) => {
         variant="dense"
         classes={{ root: classes.toolbar }}
       >
-        <DrawerToggle />
+        <DrawerButton />
         <Typography variant="h1" className={classes.title}>
           {heading && capitalizeFirstChar(heading)}
         </Typography>

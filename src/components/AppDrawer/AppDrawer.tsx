@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -10,47 +10,44 @@ import SettingsOutlinedIcon from "@material-ui/icons/SettingsOutlined";
 import Divider from "@material-ui/core/Divider";
 
 import ListItemLink from "../ListItemLink/ListItemLink";
-import useSettings from "../../hooks/useSettings";
-// import useBreakpoints from "../../hooks/useBreakpoints";
+import DrawerButton from "../DrawerButton/DrawerButton";
+import useDrawer from "../../hooks/useDrawer";
+import { LOCAL_STORAGE, SETTINGS, DRAWER_BREAKPOINT } from "../../constants";
 
 import {
   TOOLBAR_HEIGHT,
-  toolbarHeightMin,
   drawerIconWidth,
   APP_STRUCTURE,
-  listItemIconMinWidth
+  listItemIconMinWidth,
+  ACTIVE_LINK_BORDER_SIZE,
+  LIST_ITEM_GUTTER_SIZE
 } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
 
-const DRAWER_MIN_WIDTH = "8.5rem";
+const DRAWER_WIDTH = "13rem";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: DRAWER_MIN_WIDTH,
+      width: DRAWER_WIDTH,
       flexShrink: 0,
       whiteSpace: "nowrap",
-      [theme.breakpoints.up("sm")]: {
-        width: "13rem"
-      },
       "& .MuiListItemIcon-root": {
         [theme.breakpoints.down("xs")]: {
           minWidth: `calc(${listItemIconMinWidth} - 0.5rem)`
         }
       },
-      "& .MuiTypography-body1": {
-        [theme.breakpoints.down("xs")]: {
-          fontSize: "0.9rem"
-        }
+      "& .MuiListItem-gutters": {
+        paddingLeft: `calc(${LIST_ITEM_GUTTER_SIZE} - ${ACTIVE_LINK_BORDER_SIZE})`,
+        paddingRight: `calc(${LIST_ITEM_GUTTER_SIZE} + 2rem)`
       }
     },
     isOpen: {
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen
-      }),
-      width: DRAWER_MIN_WIDTH,
-      [theme.breakpoints.up("sm")]: {
-        width: "13rem"
+      [theme.breakpoints.up(DRAWER_BREAKPOINT)]: {
+        transition: theme.transitions.create("width", {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.enteringScreen
+        }),
+        width: DRAWER_WIDTH
       }
     },
     isClosed: {
@@ -61,58 +58,90 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowX: "hidden",
       width: drawerIconWidth
     },
+    toolbar: {
+      display: "flex",
+      justifyContent: "end"
+    },
     list: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "space-between",
-      height: `calc(100vh - ${toolbarHeightMin})`,
+      height: `100vh`,
       [theme.breakpoints.up("sm")]: {
-        height: `calc(100vh - ${TOOLBAR_HEIGHT})`
+        height: `calc(100vh - ${TOOLBAR_HEIGHT})`,
+        justifyContent: "space-between"
       }
     },
     paper: {
-      top: toolbarHeightMin,
-      [theme.breakpoints.up("sm")]: {
-        top: TOOLBAR_HEIGHT
-      }
+      top: TOOLBAR_HEIGHT
     }
   })
 );
 
 const AppDrawer = () => {
   const classes = useStyles();
-  const [{ isDrawerOpen }] = useSettings();
-  // const [breakpoints, windowWidth] = useBreakpoints();
+  const {
+    doesDrawerFit,
+    isDrawerOpen,
+    adjustDrawer,
+    openDrawer,
+    closeDrawer
+  } = useDrawer();
 
-  // const handleToggle = () => {
-  //   console.log("test");
-  // };
+  useEffect(() => {
+    if (doesDrawerFit) {
+      const storedDrawer = localStorage.getItem(LOCAL_STORAGE.isDrawerOpen);
+      if (storedDrawer) {
+        adjustDrawer(JSON.parse(storedDrawer));
+      } else {
+        localStorage.setItem(
+          LOCAL_STORAGE.isDrawerOpen,
+          String(SETTINGS.isDrawerOpen)
+        );
+        adjustDrawer(SETTINGS.isDrawerOpen);
+      }
+    } else closeDrawer();
+  }, [adjustDrawer, openDrawer, closeDrawer, doesDrawerFit]);
 
-  // let drawerToggle: (() => void) | undefined = handleToggle;
-  // let drawerVariant: "temporary" | "permanent" = "temporary";
-  // if (windowWidth >= breakpoints.lg) {
-  //   drawerToggle = undefined;
-  //   drawerVariant = "permanent";
-  // }
+  let handleClose: (() => void) | undefined = closeDrawer;
+  let drawerVariant: "temporary" | "permanent" = "temporary";
+  if (doesDrawerFit) {
+    handleClose = undefined;
+    drawerVariant = "permanent";
+  }
 
-  // console.log("drawer", windowWidth, breakpoints);
+  let styledDrawer = clsx(classes.root, classes.isOpen);
+  let styledPaper = classes.isOpen;
+  if (doesDrawerFit) {
+    styledDrawer = clsx(classes.root, {
+      [classes.isOpen]: isDrawerOpen,
+      [classes.isClosed]: !isDrawerOpen
+    });
+    styledPaper = clsx(classes.paper, {
+      [classes.isOpen]: isDrawerOpen,
+      [classes.isClosed]: !isDrawerOpen
+    });
+  }
+
+  // console.log("drawer");
   return (
     <Drawer
-      // onClick={drawerToggle}
-      variant={"permanent"}
+      onClose={handleClose}
+      variant={drawerVariant}
       open={isDrawerOpen}
-      className={clsx(classes.root, {
-        [classes.isOpen]: isDrawerOpen,
-        [classes.isClosed]: !isDrawerOpen
-      })}
+      className={styledDrawer}
       classes={{
-        paper: clsx(classes.paper, {
-          [classes.isOpen]: isDrawerOpen,
-          [classes.isClosed]: !isDrawerOpen
-        })
+        paper: styledPaper
       }}
     >
-      <List disablePadding className={classes.list}>
+      {!doesDrawerFit && (
+        <>
+          <div className={classes.toolbar}>
+            <DrawerButton action="close" />
+          </div>
+          <Divider />
+        </>
+      )}
+      <List disablePadding className={classes.list} onClick={handleClose}>
         <div>
           <ListItemLink
             icon={<HomeOutlinedIcon />}

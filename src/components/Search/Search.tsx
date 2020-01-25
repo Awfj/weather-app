@@ -43,7 +43,7 @@ const Search = ({ lastLocation, getData }: Props) => {
   const showSearchBtn = useRef<HTMLButtonElement>(null);
   const searchFieldRef = useRef<HTMLInputElement>(null);
   const classes = useStyles();
-  const [{ md }, windowWidth] = useBreakpoints();
+  const isUIMd = useBreakpoints("md");
   const [, dispatch] = useSettings();
 
   const handleSubmit: TFormEvent = event => {
@@ -57,7 +57,7 @@ const Search = ({ lastLocation, getData }: Props) => {
         dispatch({ type: SET_LAST_LOCATION, lastLocation: query });
       }
     }
-    if (windowWidth < md && showSearchBtn.current) {
+    if (!isUIMd && showSearchBtn.current) {
       setSearchIsShown(false);
       showSearchBtn.current.focus();
     }
@@ -66,10 +66,10 @@ const Search = ({ lastLocation, getData }: Props) => {
   const handleBlur = () => setSearchIsShown(false);
 
   useEffect(() => {
-    if (windowWidth < md && searchFieldRef.current) {
+    if (!isUIMd && searchFieldRef.current) {
       searchFieldRef.current.focus();
     }
-  }, [md, searchIsShown, windowWidth]);
+  }, [searchIsShown, isUIMd]);
 
   const composeSearch = (onBlur?: () => void) => (
     <Form className={classes.root} onSubmit={handleSubmit}>
@@ -79,13 +79,13 @@ const Search = ({ lastLocation, getData }: Props) => {
         onBlur={onBlur}
         setSearchQuery={setSearchQuery}
       />
-      {windowWidth >= md && <SearchButton label="Search" type="submit" />}
+      {isUIMd && <SearchButton label="Search" type="submit" />}
     </Form>
   );
 
   return (
     <>
-      {windowWidth >= md ? (
+      {isUIMd ? (
         composeSearch()
       ) : (
         <>

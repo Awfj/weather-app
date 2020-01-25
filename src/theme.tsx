@@ -6,7 +6,6 @@ import {
   TOOLBAR_HEIGHT,
   SVG_ICON_FONT_SIZE,
   listItemIconMinWidth,
-  listItemLeftGutterSize,
   SCALING_FACTOR
 } from "./constants";
 
@@ -39,7 +38,7 @@ const baseTheme = {
     },
     MuiListItem: {
       gutters: {
-        paddingLeft: listItemLeftGutterSize,
+        paddingLeft: LIST_ITEM_GUTTER_SIZE,
         paddingRight: LIST_ITEM_GUTTER_SIZE
       }
     },
@@ -69,10 +68,10 @@ const baseTheme = {
       fontSize: "1.5rem"
     },
     h2: {
-      fontSize: "1.3rem"
+      fontSize: "1.5rem"
     },
     h3: {
-      fontSize: "1rem",
+      fontSize: "1.3rem",
       fontWeight: 300
     }
   },

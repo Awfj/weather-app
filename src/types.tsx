@@ -46,6 +46,26 @@ export interface IGeoLocationData {
   city: string;
 }
 
+export interface IInteractiveActions {
+  open: "open";
+  close: "close";
+  toggle: "toggle";
+}
+
+export interface ILocalStorage {
+  isDrawerOpen: "isDrawerOpen";
+  isThemeDark: "isThemeDark";
+  weatherForecast: "weather_forecast_";
+  launchLocation: "launch_location";
+}
+
+export interface IAppStructure {
+  welcome: "welcome";
+  forecast: "forecast";
+  favorites: "favorites";
+  settings: "settings";
+}
+
 export type ISettings = {
   favorites: string[];
   isDrawerOpen: boolean;
