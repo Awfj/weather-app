@@ -41,7 +41,6 @@ export const fetchForecast = async (queriedCity: string) => {
         temperature: Math.round(data.main.temp),
         cloudiness: data.clouds.all,
         windSpeed: data.wind.speed,
-        visibility: data.visibility / 1000,
         pressure: data.main.pressure,
         humidity: data.main.humidity
       },

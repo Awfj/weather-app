@@ -71,11 +71,10 @@ const CurrentWeather = ({ data, timer }: Props) => {
       <p>{data.condition}</p>
       {timer}
       <ul>
-        {data.cloudiness && <li>Cloudiness: {data.cloudiness}%</li>}
-        {data.windSpeed && <li>Wind: {data.windSpeed} m/s</li>}
-        {data.visibility && <li>Visibility: {data.visibility} km</li>}
-        {data.pressure && <li>Pressure: {data.pressure} mb</li>}
-        {data.humidity && <li>Humidity: {data.humidity}%</li>}
+        <li>Cloudiness: {data.cloudiness}%</li>
+        <li>Wind: {data.windSpeed} m/s</li>
+        <li>Pressure: {data.pressure} mb</li>
+        <li>Humidity: {data.humidity}%</li>
       </ul>
     </section>
   );

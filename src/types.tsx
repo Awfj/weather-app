@@ -13,7 +13,6 @@ export interface ICurrentWeather {
   temperature: number;
   cloudiness: number;
   windSpeed: number;
-  visibility: number;
   pressure: number;
   humidity: number;
 }
@@ -31,7 +30,6 @@ export interface ICurrentWeatherData {
   sys: {
     country: string;
   };
-  visibility: number;
   weather: [
     {
       main: string;
