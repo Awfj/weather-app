@@ -7,13 +7,13 @@ import useTimer from "../../hooks/useTimer";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      fontSize: "0.8rem",
       marginBottom: theme.spacing(1.5),
-      "&": {
-        fontWeight: "500"
-      },
-      [theme.breakpoints.up("sm")]: {
-        fontSize: "0.9rem"
+      "& > p": {
+        fontSize: "0.9rem",
+        marginBottom: theme.spacing(0.5),
+        "&": {
+          fontWeight: "500"
+        }
       }
     }
   })
@@ -34,12 +34,15 @@ const Timer = ({
   const timer = useTimer(expirationTimeframe, setRefreshIsDisabled);
 
   return (
-    <p className={classes.root}>
-      Updated as of {getReadableRequestTime(requestTime)}. Refresh{" "}
-      {timer >= 1000
-        ? `will be available in: ${getRemainingTime(timer)}`
-        : "is available!"}
-    </p>
+    <div className={classes.root}>
+      <p>Updated as of {getReadableRequestTime(requestTime)}.</p>
+      <p>
+        Refresh{" "}
+        {timer >= 1000
+          ? `will be available in: ${getRemainingTime(timer)}.`
+          : "is available!"}
+      </p>
+    </div>
   );
 };
 

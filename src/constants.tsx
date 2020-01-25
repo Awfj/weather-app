@@ -34,7 +34,7 @@ export const SETTINGS: ISettings = {
   lastLocation: null
 };
 
-export const DRAWER_BREAKPOINT = "sm";
+export const DRAWER_BREAKPOINT = "md";
 
 // Styles -------------------------------------
 export const LIST_ITEM_GUTTER_SIZE = "1rem";

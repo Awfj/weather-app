@@ -11,19 +11,16 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       margin: "0 auto",
       textAlign: "center",
-      maxWidth: "28rem",
-      "& > div": {
+      maxWidth: "24rem",
+      "& > div:first-of-type": {
         display: "flex",
         justifyContent: "center",
         marginBottom: theme.spacing(0.5)
       },
       "& > p:first-of-type": {
         fontWeight: "lighter",
-        fontSize: "1rem",
-        marginBottom: theme.spacing(0.5),
-        [theme.breakpoints.up("sm")]: {
-          fontSize: "1.5rem"
-        }
+        fontSize: "1.5rem",
+        marginBottom: theme.spacing(0.5)
       },
       "& ul": {
         display: "flex",

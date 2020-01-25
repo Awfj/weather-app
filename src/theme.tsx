@@ -68,10 +68,10 @@ const baseTheme = {
       fontSize: "1.5rem"
     },
     h2: {
-      fontSize: "1.3rem"
+      fontSize: "1.5rem"
     },
     h3: {
-      fontSize: "1rem",
+      fontSize: "1.3rem",
       fontWeight: 300
     }
   },
