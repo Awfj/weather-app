@@ -5,7 +5,6 @@ import {
   ILocalStorage
 } from "./types";
 
-// export const EXPIRATION_TIMEFRAME = 3660000;
 export const EXPIRATION_TIMEFRAME = 7.2e6;
 export const APP_STRUCTURE: IAppStructure = {
   welcome: "welcome",

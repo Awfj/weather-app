@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { HashRouter as Router } from "react-router-dom";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {
@@ -62,13 +63,15 @@ const App: React.FC = () => {
 
   // console.log('app')
   return (
-    <StylesProvider injectFirst>
-      <ThemeProvider theme={isThemeDark ? darkTheme : lightTheme}>
-        <CssBaseline />
-        <GlobalCss />
-        <Page />
-      </ThemeProvider>
-    </StylesProvider>
+    <Router>
+      <StylesProvider injectFirst>
+        <ThemeProvider theme={isThemeDark ? darkTheme : lightTheme}>
+          <CssBaseline />
+          <GlobalCss />
+          <Page />
+        </ThemeProvider>
+      </StylesProvider>
+    </Router>
   );
 };
 

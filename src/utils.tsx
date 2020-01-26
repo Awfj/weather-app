@@ -5,9 +5,12 @@ export const capitalizeFirstChar = (string: string) => {
   return `${string[0].toUpperCase()}${string.slice(1)}`;
 };
 
-export const checkIfExpired = (requestTime: number) => {
+export const checkIfExpired = (
+  requestTime: number,
+  timeframe = EXPIRATION_TIMEFRAME
+) => {
   const currentDate = new Date().getTime();
-  const isExpired = currentDate - requestTime > EXPIRATION_TIMEFRAME;
+  const isExpired = currentDate - requestTime > timeframe;
   return isExpired;
 };
 
