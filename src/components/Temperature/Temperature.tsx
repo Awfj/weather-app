@@ -6,18 +6,18 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       fontWeight: "lighter",
-      position: "relative",
+      // position: "relative",
       letterSpacing: "0px",
       fontSize: "5rem",
-      paddingRight: theme.spacing(7.5),
+      // paddingRight: theme.spacing(7.5),
       lineHeight: "0.85em",
-      "& span": {
-        position: "absolute",
-        top: "0",
-        right: "0",
-        fontSize: "0.7em",
-        lineHeight: "0.9em"
-      }
+      // "& span": {
+      //   position: "absolute",
+      //   top: "0",
+      //   right: "0",
+      //   fontSize: "0.7em",
+      //   lineHeight: "0.9em"
+      // }
     }
   })
 );
