@@ -34,7 +34,7 @@ const useWeatherApi = (lastLocation?: string) => {
     [dispatch]
   );
   useEffect(() => {
-    lastLocation && getForecast(lastLocation);
+    if (lastLocation) getForecast(lastLocation);
   }, [dispatch, getForecast, lastLocation]);
 
   return [state, getForecast] as const;
