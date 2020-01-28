@@ -1,14 +1,20 @@
 import { useEffect, useCallback } from "react";
 import { fetchForecast, checkIfExpired, removeExpiredWeather } from "../utils";
 import { FETCH_INIT, FETCH_SUCCESS, FETCH_FAILURE } from "../actions";
-import { IForecast } from "../types";
+import { IForecast, TMeasurementUnits } from "../types";
 import useFetch from "./useFetch";
+import useTemperature from "./useTemperature";
 
 const useWeatherApi = (lastLocation?: string) => {
   const [state, dispatch] = useFetch<IForecast>();
+  const { measurementUnits } = useTemperature();
 
   const getForecast = useCallback(
-    async (location: string) => {
+    async (
+      location: string,
+      measurementUnits: TMeasurementUnits = "metric"
+    ) => {
+      console.log("run");
       dispatch({ type: FETCH_INIT });
       removeExpiredWeather(location);
       const storedForecast = localStorage.getItem(
@@ -18,12 +24,12 @@ const useWeatherApi = (lastLocation?: string) => {
       if (storedForecast) {
         const { requestTime } = JSON.parse(storedForecast);
         if (checkIfExpired(requestTime)) {
-          forecast = await fetchForecast(location);
+          forecast = await fetchForecast(location, measurementUnits);
         } else {
           forecast = JSON.parse(storedForecast);
         }
       } else {
-        forecast = await fetchForecast(location);
+        forecast = await fetchForecast(location, measurementUnits);
       }
       if (forecast) {
         dispatch({ type: FETCH_SUCCESS, data: forecast });
@@ -33,9 +39,10 @@ const useWeatherApi = (lastLocation?: string) => {
     },
     [dispatch]
   );
+
   useEffect(() => {
-    if (lastLocation) getForecast(lastLocation);
-  }, [dispatch, getForecast, lastLocation]);
+    if (lastLocation) getForecast(lastLocation, measurementUnits);
+  }, [dispatch, getForecast, lastLocation, measurementUnits]);
 
   return [state, getForecast] as const;
 };

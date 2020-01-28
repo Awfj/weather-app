@@ -1,4 +1,9 @@
-import { IForecast, ICurrentWeatherData, IGeoLocationData } from "./types";
+import {
+  IForecast,
+  ICurrentWeatherData,
+  IGeoLocationData,
+  TMeasurementUnits
+} from "./types";
 import { EXPIRATION_TIMEFRAME } from "./constants";
 
 export const capitalizeFirstChar = (string: string) => {
@@ -27,11 +32,14 @@ export const fetchLocation = async () => {
   }
 };
 
-export const fetchForecast = async (queriedCity: string) => {
+export const fetchForecast = async (
+  queriedCity: string,
+  measurementUnits: TMeasurementUnits
+) => {
   try {
     const OPENWEATHERMAP_KEY = process.env.REACT_APP_OPENWEATHERMAP_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${queriedCity}`;
-    const updatedUrl = `${url}&appid=${OPENWEATHERMAP_KEY}&units=metric`;
+    const updatedUrl = `${url}&appid=${OPENWEATHERMAP_KEY}&units=${measurementUnits}`;
     const response = await fetch(updatedUrl);
     if (!response.ok) return null;
     const data: ICurrentWeatherData = await response.json();

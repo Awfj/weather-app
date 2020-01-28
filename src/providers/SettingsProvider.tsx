@@ -1,18 +1,26 @@
 import React, { useReducer, createContext, Dispatch } from "react";
-import { SETTINGS } from "../constants";
 import reduceSettings, { Action } from "../reducers/reduceSettings";
+import { ISettings } from "../types";
+
+export const initialSettings: ISettings = {
+  favorites: [],
+  isDrawerOpen: false,
+  isThemeDark: false,
+  lastLocation: null,
+  temperatureScale: "celsius"
+};
+
+export const SettingsContext = createContext(initialSettings);
+export const SettingsDispatchContext = createContext<Dispatch<Action>>(
+  () => {}
+);
 
 type Props = {
   children: React.ReactNode;
 };
 
-export const SettingsContext = createContext(SETTINGS);
-export const SettingsDispatchContext = createContext<Dispatch<Action>>(
-  () => {}
-);
-
 const SettingsProvider = ({ children }: Props) => {
-  const [settings, dispatch] = useReducer(reduceSettings, SETTINGS);
+  const [settings, dispatch] = useReducer(reduceSettings, initialSettings);
 
   return (
     <SettingsDispatchContext.Provider value={dispatch}>

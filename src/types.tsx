@@ -64,12 +64,15 @@ export interface IAppStructure {
   settings: "settings";
 }
 
-export type ISettings = {
+export type TMeasurementUnits = "metric" | "imperial";
+
+export interface ISettings {
   favorites: string[];
   isDrawerOpen: boolean;
   isThemeDark: boolean;
   lastLocation: string | null;
-};
+  temperatureScale: "celsius" | "fahrenheit";
+}
 
 export type TSetString = (value: React.SetStateAction<string>) => void;
 export type TSetBoolean = (value: React.SetStateAction<boolean>) => void;

@@ -12,6 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItemLink from "../ListItemLink/ListItemLink";
 import DrawerButton from "../DrawerButton/DrawerButton";
 import useDrawer from "../../hooks/useDrawer";
+import { initialSettings } from "../../providers/SettingsProvider";
 
 import {
   TOOLBAR_HEIGHT,
@@ -21,7 +22,6 @@ import {
   ACTIVE_LINK_BORDER_SIZE,
   LIST_ITEM_GUTTER_SIZE,
   LOCAL_STORAGE,
-  SETTINGS,
   DRAWER_BREAKPOINT
 } from "../../constants";
 import { capitalizeFirstChar } from "../../utils";
@@ -96,9 +96,9 @@ const AppDrawer = () => {
       } else {
         localStorage.setItem(
           LOCAL_STORAGE.isDrawerOpen,
-          String(SETTINGS.isDrawerOpen)
+          String(initialSettings.isDrawerOpen)
         );
-        adjustDrawer(SETTINGS.isDrawerOpen);
+        adjustDrawer(initialSettings.isDrawerOpen);
       }
     } else closeDrawer();
   }, [adjustDrawer, openDrawer, closeDrawer, doesDrawerFit]);

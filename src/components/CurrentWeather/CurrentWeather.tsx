@@ -1,6 +1,5 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-// import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
 import Temperature from "../Temperature/Temperature";
@@ -30,16 +29,6 @@ const useStyles = makeStyles((theme: Theme) =>
           marginRight: "1em"
         }
       }
-    },
-    scales: {
-      display: "flex",
-      flexDirection: "column",
-      marginLeft: "1em",
-      "& button": {
-        border: "1px solid orange",
-        fontSize: "1.2rem",
-        padding: "0.3em"
-      }
     }
   })
 );
@@ -57,17 +46,7 @@ const CurrentWeather = ({ data, timer }: Props) => {
       <Typography variant="h2">
         {data.city}, {data.country}
       </Typography>
-      <div>
-        <Temperature temperature={data.temperature}>C</Temperature>
-        {/* <div className={classes.scales}>
-              <IconButton aria-label="Convert to celsius" color="inherit">
-                C
-              </IconButton>
-              <IconButton aria-label="Convert to fahrenheit" color="inherit">
-                F
-              </IconButton>
-            </div> */}
-      </div>
+      <Temperature temperature={data.temperature}></Temperature>
       <p>{data.condition}</p>
       {timer}
       <ul>

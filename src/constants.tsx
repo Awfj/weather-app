@@ -1,9 +1,4 @@
-import {
-  ISettings,
-  IAppStructure,
-  IInteractiveActions,
-  ILocalStorage
-} from "./types";
+import { IAppStructure, IInteractiveActions, ILocalStorage } from "./types";
 
 export const EXPIRATION_TIMEFRAME = 7.2e6;
 export const APP_STRUCTURE: IAppStructure = {
@@ -24,13 +19,6 @@ export const LOCAL_STORAGE: ILocalStorage = {
   isThemeDark: "isThemeDark",
   weatherForecast: "weather_forecast_",
   launchLocation: "launch_location"
-};
-
-export const SETTINGS: ISettings = {
-  favorites: [],
-  isDrawerOpen: false,
-  isThemeDark: false,
-  lastLocation: null
 };
 
 export const DRAWER_BREAKPOINT = "md";
