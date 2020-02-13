@@ -6,18 +6,19 @@ import {
   SET_LAST_LOCATION,
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVORITES,
-  SWITCH_TO_CELSIUS,
-  SWITCH_TO_FAHRENHEIT
+  CHANGE_TEMPERATURE_SCALE
 } from "../actions";
-import { ISettings } from "../types";
+import { ISettings, TTemperatureScale } from "../types";
 
 export type Action =
   | { type: OPEN_DRAWER }
   | { type: CLOSE_DRAWER }
   | { type: TURN_ON_DARK_THEME }
   | { type: TURN_OFF_DARK_THEME }
-  | { type: SWITCH_TO_CELSIUS }
-  | { type: SWITCH_TO_FAHRENHEIT }
+  | {
+      type: CHANGE_TEMPERATURE_SCALE;
+      temperatureScale: TTemperatureScale;
+    }
   | { type: SET_LAST_LOCATION; lastLocation: string }
   | { type: ADD_TO_FAVORITES; location: string }
   | { type: REMOVE_FROM_FAVORITES; location: string };
@@ -48,16 +49,11 @@ function reduceSettings(state: ISettings, action: Action): ISettings {
         isThemeDark: false
       };
     }
-    case SWITCH_TO_CELSIUS: {
+    case CHANGE_TEMPERATURE_SCALE: {
+      const { temperatureScale } = action;
       return {
         ...state,
-        temperatureScale: "celsius"
-      };
-    }
-    case SWITCH_TO_FAHRENHEIT: {
-      return {
-        ...state,
-        temperatureScale: "fahrenheit"
+        temperatureScale
       };
     }
     case SET_LAST_LOCATION: {

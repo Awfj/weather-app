@@ -65,13 +65,15 @@ export interface IAppStructure {
 }
 
 export type TMeasurementUnits = "metric" | "imperial";
+export type TTemperatureScales = ["celsius", "fahrenheit"];
+export type TTemperatureScale = "celsius" | "fahrenheit";
 
 export interface ISettings {
   favorites: string[];
   isDrawerOpen: boolean;
   isThemeDark: boolean;
   lastLocation: string | null;
-  temperatureScale: "celsius" | "fahrenheit";
+  temperatureScale: TTemperatureScale;
 }
 
 export type TSetString = (value: React.SetStateAction<string>) => void;

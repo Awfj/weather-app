@@ -1,6 +1,6 @@
 import useSettings from "./useSettings";
-import { SWITCH_TO_CELSIUS, SWITCH_TO_FAHRENHEIT } from "../actions";
-import { TMeasurementUnits } from "../types";
+import { CHANGE_TEMPERATURE_SCALE } from "../actions";
+import { TMeasurementUnits, TTemperatureScales } from "../types";
 
 const useTemperature = () => {
   const [{ temperatureScale }, dispatch] = useSettings();
@@ -8,25 +8,27 @@ const useTemperature = () => {
   const measurementUnits: TMeasurementUnits =
     temperatureScale === "celsius" ? "metric" : "imperial";
 
-  const convertCelsiusToFahrenheit = (temperature: number) => {
-    if (temperatureScale === "celsius") {
-      dispatch({ type: SWITCH_TO_FAHRENHEIT });
-      return temperature * 1.8 + 32;
-    }
-  };
+  const temperatureScales: TTemperatureScales = ["celsius", "fahrenheit"];
 
-  const convertFahrenheitToCelsius = (temperature: number) => {
-    if (temperatureScale === "fahrenheit") {
-      dispatch({ type: SWITCH_TO_CELSIUS });
-      return (temperature - 32) / 1.8;
-    }
+  const isCelsius = temperatureScale === "celsius";
+
+  const convertTemperatureScale = (temperature: number) => {
+    dispatch({
+      type: CHANGE_TEMPERATURE_SCALE,
+      temperatureScale: isCelsius ? "fahrenheit" : "celsius"
+    });
+    const convertedTemperature = isCelsius
+      ? temperature * 1.8 + 32
+      : (temperature - 32) / 1.8;
+    return convertedTemperature;
   };
 
   return {
     temperatureScale,
     measurementUnits,
-    convertCelsiusToFahrenheit,
-    convertFahrenheitToCelsius
+    isCelsius,
+    temperatureScales,
+    convertTemperatureScale
   };
 };
 

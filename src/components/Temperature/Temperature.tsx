@@ -2,7 +2,9 @@ import React from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
+
 import useTemperature from "../../hooks/useTemperature";
+import { TTemperatureScale } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: "1.2rem",
         padding: "0.3em"
       }
+    },
+    active: {
+      backgroundColor: "orange"
     }
   })
 );
@@ -44,11 +49,15 @@ const Temperature = ({ children, className, temperature }: Props) => {
   const classes = useStyles();
   const {
     temperatureScale,
-    convertCelsiusToFahrenheit,
-    convertFahrenheitToCelsius
+    temperatureScales,
+    convertTemperatureScale
   } = useTemperature();
 
-  console.log(temperatureScale)
+  const handleClick = (currentTemperatureScale: TTemperatureScale) => {
+    if (temperatureScale !== currentTemperatureScale)
+      convertTemperatureScale(temperature);
+  };
+
   return (
     <div>
       <p className={clsx(classes.root, className)}>
@@ -56,20 +65,16 @@ const Temperature = ({ children, className, temperature }: Props) => {
         <span>&deg;{children}</span>
       </p>
       <div className={classes.scales}>
-        <IconButton
-          aria-label="Convert to celsius"
-          color="inherit"
-          onClick={() => convertFahrenheitToCelsius(temperature)}
-        >
-          C
-        </IconButton>
-        <IconButton
-          aria-label="Convert to fahrenheit"
-          color="inherit"
-          onClick={() => convertCelsiusToFahrenheit(temperature)}
-        >
-          F
-        </IconButton>
+        {temperatureScales.map(temperatureScale => (
+          <IconButton
+            key={temperatureScale}
+            aria-label={`Convert to ${temperatureScale}`}
+            color="inherit"
+            onClick={() => handleClick(temperatureScale)}
+          >
+            {temperatureScale[0].toUpperCase()}
+          </IconButton>
+        ))}
       </div>
     </div>
   );
