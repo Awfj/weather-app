@@ -38,7 +38,8 @@ type Props = {
   timer: JSX.Element;
 };
 
-const CurrentWeather = ({ data, timer }: Props) => {
+const CurrentWeather = (props: Props) => {
+  const { data, timer } = props;
   const classes = useStyles();
 
   return (
@@ -46,7 +47,7 @@ const CurrentWeather = ({ data, timer }: Props) => {
       <Typography variant="h2">
         {data.city}, {data.country}
       </Typography>
-      <Temperature temperature={data.temperature}></Temperature>
+      <Temperature temperature={data.temperature} />
       <p>{data.condition}</p>
       {timer}
       <ul>

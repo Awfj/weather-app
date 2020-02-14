@@ -7,7 +7,8 @@ import useTemperature from "../../hooks/useTemperature";
 
 type Props = {} & WelcomeProps & SearchProps;
 
-const FrontPage = ({ lastLocation, ...other }: Props) => {
+const FrontPage = (props: Props) => {
+  const { lastLocation, ...other } = props;
   const [forecast, getForecast] = useWeatherApi();
   const { measurementUnits } = useTemperature();
 

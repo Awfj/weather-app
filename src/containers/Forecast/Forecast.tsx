@@ -18,7 +18,8 @@ type Props = {
   search: JSX.Element;
 } & FavorProps;
 
-const Forecast = ({ lastLocation, search, forecast, getForecast }: Props) => {
+const Forecast = (props: Props) => {
+  const { lastLocation, search, forecast, getForecast } = props;
   const { data, isLoading, isError } = forecast;
   const [setRefreshIsDisabled, refresh] = useRefresh(!!data, () =>
     getForecast(lastLocation)

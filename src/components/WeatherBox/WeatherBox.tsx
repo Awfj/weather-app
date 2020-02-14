@@ -3,9 +3,10 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import Temperature from "../../components/Temperature/Temperature";
-import DataLoader from "../../components/DataLoader/DataLoader";
+import Temperature from "../Temperature/Temperature";
+import DataLoader from "../DataLoader/DataLoader";
 import LinkBox from "../LinkBox/LinkBox";
+
 import useWeatherApi from "../../hooks/useWeatherApi";
 import { APP_STRUCTURE } from "../../constants";
 import { SET_LAST_LOCATION } from "../../actions";
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: "2.5rem",
         fontWeight: "lighter",
         paddingRight: theme.spacing(2.5),
-        paddingBottom: theme.spacing(1),
+        paddingBottom: theme.spacing(1)
         // "& span": {
         //   fontSize: "0.4em",
         //   lineHeight: "2.6em"
@@ -48,7 +49,8 @@ type Props = {
   children: React.ReactNode;
 } & WeatherBoxProps;
 
-const WeatherBox = ({ location, children }: Props) => {
+const WeatherBox = (props: Props) => {
+  const { location, children } = props;
   const classes = useStyles();
   const [{ data, isLoading, isError }] = useWeatherApi(location);
   const [, dispatch] = useSettings();

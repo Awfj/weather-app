@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 
 import useTemperature from "../../hooks/useTemperature";
-import { TTemperatureScale } from "../../types";
+import { TTemperatureScale, ITemperature } from "../../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,22 +42,31 @@ const useStyles = makeStyles((theme: Theme) =>
 type Props = {
   children?: React.ReactNode;
   className?: string;
-  temperature: number;
+  temperature: ITemperature;
 };
 
-const Temperature = ({ children, className, temperature }: Props) => {
+const Temperature = (props: Props) => {
+  const { children, className, temperature } = props;
   const classes = useStyles();
   const {
     temperatureScale,
     temperatureScales,
-    convertTemperatureScale
+    changeTemperatureScale,
+    convertTemperature
   } = useTemperature();
 
-  const handleClick = (currentTemperatureScale: TTemperatureScale) => {
-    if (temperatureScale !== currentTemperatureScale)
-      convertTemperatureScale(temperature);
+  const handleClick = (newTemperatureScale: TTemperatureScale) => {
+    if (temperatureScale !== newTemperatureScale) {
+      changeTemperatureScale();
+      // convertTemperature(temperature);
+    }
   };
 
+  // useEffect(() => {
+
+  // }, [])
+
+  console.log(temperatureScale);
   return (
     <div>
       <p className={clsx(classes.root, className)}>

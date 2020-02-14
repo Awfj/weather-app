@@ -37,7 +37,8 @@ type Props = {
   getData: TGetData;
 } & SearchProps;
 
-const Search = ({ lastLocation, getData }: Props) => {
+const Search = (props: Props) => {
+  const { lastLocation, getData } = props;
   const [searchQuery, setSearchQuery] = useState("");
   const [searchIsShown, setSearchIsShown] = useState(false);
   const showSearchBtn = useRef<HTMLButtonElement>(null);

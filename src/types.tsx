@@ -10,11 +10,16 @@ export interface ICurrentWeather {
   city: string;
   country: string;
   condition: string;
-  temperature: number;
+  temperature: ITemperature;
   cloudiness: number;
   windSpeed: number;
   pressure: number;
   humidity: number;
+}
+
+export interface ITemperature {
+  value: number;
+  scale: TTemperatureScale;
 }
 
 export interface ICurrentWeatherData {

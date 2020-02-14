@@ -44,12 +44,16 @@ export const fetchForecast = async (
     if (!response.ok) return null;
     const data: ICurrentWeatherData = await response.json();
 
+    const isMetric = measurementUnits === "metric";
     const forecast: IForecast = {
       currentWeather: {
         city: data.name,
         condition: data.weather[0].main,
         country: data.sys.country,
-        temperature: Math.round(data.main.temp),
+        temperature: {
+          value: Math.round(data.main.temp),
+          scale: isMetric ? "celsius" : "fahrenheit"
+        },
         cloudiness: data.clouds.all,
         windSpeed: data.wind.speed,
         pressure: data.main.pressure,
